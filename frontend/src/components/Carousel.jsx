@@ -10,17 +10,32 @@ const slider = [
     {
         title: "BackGround 1",
         description: "BackGround1",
-       imgBg
+       url: imgBg
     },
     {
         title: "BackGround 2",
         Description: "BackGround2",
-        url:"/uploads/football.bg2.jpg",
+        url: imgBg
     },
     {
-        title: "BackGround 2",
-        Description: "BackGround2",
-        url:"/uploads/logo.epicode.png",
+        title: "BackGround 3",
+        Description: "BackGround3",
+        url: imgBg
+    },
+    {
+        title: "BackGround 4",
+        Description: "BackGround4",
+        url: imgBg
+    },
+    {
+        title: "BackGround 5",
+        Description: "BackGround5",
+        url: imgBg
+    },
+    {
+        title: "BackGround 6",
+        Description: "BackGround5",
+        url: imgBg
     },
 ]
 
@@ -47,14 +62,14 @@ const Carousel = ()=>{
                     rotate: 0,
                     stretch: 0,
                     depth: 100,
-                    modifier: 4,
+                    modifier: 3,
                     slideShadows: true
                 }}
                 loop={true}
                 pagination={{clickable: true}}
                 slidesPerView={2}
                 autoplay={{
-                    delay: 5000,
+                    delay: 4000,
                     disableOnInteraction:false
                 }}
                 breakpoints={{

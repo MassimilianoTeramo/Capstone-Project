@@ -7,9 +7,10 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Products from "./components/Products";
+import Products from "./pages/Products";
 import './App.css';
 import CreateProduct from "./pages/CreateProduct";
+import ProductsCard from "./components/ProductsCard";
 
 function App() {
   return (
@@ -23,9 +24,9 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/products" element={<Products />} />
             <Route path="/products/create" element={<CreateProduct />} />
+            <Route path="/productsCard" element={<ProductsCard />} /> 
             {/* <Route path="/profile" element={<Profile />} />
-           
-            <Route path="products/create" element={<CreateProduct />} />
+
             <Route path="/myproducts" element={<MyProduct />} />
             <Route path="/productElement" element={<ProductElement />} />
             <Route path="/products/:id" element={<ProductDetails />} /> */}

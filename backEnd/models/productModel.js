@@ -27,10 +27,10 @@ const productSchema = new mongoose.Schema({
     ref: "User",
     required: true
   },
-  rate: {
-    type: Number,
-    required: false,
-    enum:[0, 1, 2, 3, 4, 5],
+  condition: {
+    type: String,
+    required: true,
+    enum:["poor", "decent", "good", "perfect"],
   }
 
 

@@ -1,39 +1,12 @@
 import { useState, useEffect } from "react";    
 import { Container, Row, Col, Pagination } from "react-bootstrap";  
 import axios from "axios";
-import Products from "../components/Products";
+import Products from "./Products";
 import Carousel from "../components/Carousel";
 import { useAuth } from "../context/AuthContext";
 
 const Home = () => {
-    const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(0);
-    const {user} = useAuth();
-
-    useEffect(() => {
-        const fetchProducts = async () => {
-          try {
-            setLoading(true);
-            const response = await axios.get(`http://localhost:3002/products?page=${currentPage}`);
-            setProducts(response.data.products);
-            setTotalPages(response.data.totalPages);
-            setError(null);
-          } catch (error) {
-            setError(error);
-            setProducts([]);
-            console.error('Error fetching posts:', error);
-          } finally {
-            setLoading (false);
-          }
-          
-        };
-      
-        fetchProducts();
-    
-     }, [user, currentPage]);
+  
 
     return (
       <>

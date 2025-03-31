@@ -2,6 +2,7 @@ import { v2 as cloudinary } from 'cloudinary';
 import { CloudinaryStorage } from 'multer-storage-cloudinary';
 import multer from 'multer';
 import dotenv from 'dotenv';
+import express from "express";
 
 dotenv.config();
 
@@ -14,11 +15,9 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
     cloudinary,
     params: {
-        folder: 'blog',
+        folder: 'footballShop',
         allowed_formats :['jpg', 'png', 'jpeg', 'webp', 'heic']
     }
 })
 
-const upload = multer({ storage: storage});
-
-export { cloudinary, upload };
+export const upload = multer({ storage: storage});

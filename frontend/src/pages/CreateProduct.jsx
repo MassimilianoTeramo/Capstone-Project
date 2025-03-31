@@ -49,7 +49,7 @@ const CreateProduct = ()=> {
             sentForm.append('price', formData.price);
             sentForm.append('category', formData.category);
             sentForm.append('author', user._id);
-            sentForm.append('rate', formData.rate);
+            sentForm.append('condition', formData.condition);
             sentForm.append('image', productImg);
 
             const response = await axios.post(
@@ -119,14 +119,29 @@ return (
                     />
                 </Form.Group>
                 <Form.Group className="mb-3">
-                    <Form.Label>Rate</Form.Label>
-                    <Form.Select aria-label="Default select example">
+                    <Form.Label>Price</Form.Label>
+                    <Form.Control
+                        size="sm"
+                        rows={5}
+                        value={formData.price}
+                        onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+                        placeholder="£"
+                        required
+                    />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                    <Form.Label>Conditions</Form.Label>
+                    <Form.Control 
+                        as="select"
+                        value={formData.condition}
+                        onChange={e => setFormData({ ...formData, condition: e.target.value })}
+                    >
                         <option>choose</option>
-                        <option value="0">1</option>
-                        <option value="1">2</option>
-                        <option value="2">3</option>
-                        <option value="3">4</option>
-                    </Form.Select>
+                        <option value="poor">Poor</option>
+                        <option value="decent">Decent</option>
+                        <option value="good">Good</option>
+                        <option value="perfect">Perfect</option>
+                    </Form.Control>
                 </Form.Group>
                 <Button className="submit-button" variant="primary" type="submit">
                     Publish it!
