@@ -1,0 +1,19 @@
+@baseUrl = http://localhost:3002
+
+###
+POST {{baseUrl}}/login
+    {
+        "email": "asdf@asdf.asdf",
+        "password": "asdf"
+    }
+
+###
+POST {{baseUrl}}/register
+
+{
+    "firstName": "Max",
+    "lastName": "Tera",
+    "email":"ciao@ciao.ciao",
+    "password":"123456"
+
+}
