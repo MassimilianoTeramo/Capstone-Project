@@ -290,6 +290,7 @@ body::after {
 }
 .card_img:hover{
   transition: .8s;
+  z-index: 2;
 }
 .card_data{
   transform: translateY(13.2rem);
@@ -349,10 +350,13 @@ body::after {
          
         }
 
-
-
 /* Hover card effect */
+.card:hover{
+  overflow-y: visible;
+}
+
 .card:hover .card_img {
+ 
   transform: translate(-1.5rem, -9.5rem) rotate(-20deg);
 }
 

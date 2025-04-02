@@ -84,7 +84,9 @@ const CustomNavbar = () => {
                 className="dropdown_custom"
                 as={Link} to="/products/create"
                 >My Profile</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2" className="dropdown_custom">
+              <NavDropdown.Item 
+              as={Link} to="products/create"
+              className="dropdown_custom">
                 Sell Product
               </NavDropdown.Item>
               <NavDropdown.Item href="#action/3.3" className="dropdown_custom">Something</NavDropdown.Item>

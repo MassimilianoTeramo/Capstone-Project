@@ -11,6 +11,8 @@ import Products from "./pages/Products";
 import './App.css';
 import CreateProduct from "./pages/CreateProduct";
 import ProductsCard from "./components/ProductsCard";
+import MyProducts from "./pages/MyProducts";
+import ProductDetails from "./pages/ProductDetails";
 
 function App() {
   return (
@@ -25,11 +27,13 @@ function App() {
             <Route path="/products" element={<Products />} />
             <Route path="/products/create" element={<CreateProduct />} />
             <Route path="/productsCard" element={<ProductsCard />} /> 
+            <Route path="/myproducts" element={<MyProducts />} />
+            <Route path="/products/:id" element={<ProductDetails />} /> 
             {/* <Route path="/profile" element={<Profile />} />
 
-            <Route path="/myproducts" element={<MyProduct />} />
+            
             <Route path="/productElement" element={<ProductElement />} />
-            <Route path="/products/:id" element={<ProductDetails />} /> */}
+            */}
           </Routes>
         </Container>
         <Footer />

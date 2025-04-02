@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { Schema, model } from "mongoose";
 
 const productSchema = new mongoose.Schema({
-  name: {
+  title: {
     type: String,
     required: true,
   },
@@ -27,12 +27,6 @@ const productSchema = new mongoose.Schema({
     ref: "User",
     required: true
   },
-  condition: {
-    type: String,
-    required: true,
-    enum:["poor", "decent", "good", "perfect"],
-  }
-
 
 }, {timestamps: true});
 
