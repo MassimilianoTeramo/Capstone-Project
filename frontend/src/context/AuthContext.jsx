@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
     return savedUser ? JSON.parse(savedUser) : null;
   });
   const [token, setToken] = useState(()=> {
-    return localStorage.getItem("token") || null;
+    return localStorage.getItem("token");
   });
 
  const login = async (userData, userToken) => {

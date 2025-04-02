@@ -22,6 +22,7 @@ const handleSubmit = async (e) => {
         
         const { user, token } = response.data;
         await login(user, token);
+        alert(`Hi ${user.firstName}! You are in!`);
         navigate('/');
     } catch (err) {
         console.error('Errore dettagliato:', {
@@ -43,7 +44,8 @@ const handleSubmit = async (e) => {
                     headers: { Authorization: `Bearer ${token}` }
                 }).then(response => {
                     login(response.data.user, token);
-                    navigate('/');
+                    console.log(response.data.user);
+                    alert("hi there");
                 }).catch(error => {
                     setError(error.response?.data?.message || 'Errore di autenticazione con Google');
                 });
@@ -53,9 +55,9 @@ const handleSubmit = async (e) => {
         }
     }, [login, navigate]);
 
-    const handleGoogleLogin = () => {
-        window.location.href = 'http://localhost:3001/auth/google';
-    }
+    // const handleGoogleLogin = () => {
+    //     window.location.href = 'http://localhost:3001/auth/google';
+    // }
 
     return (
         <Container className='mt-5'>
@@ -103,7 +105,7 @@ const handleSubmit = async (e) => {
                                 Login
                             </Button>
                             
-                            <Button 
+                            {/* <Button 
                                 onClick={handleGoogleLogin} 
                                 style={{ 
                                     background: 'linear-gradient(to right, blue, red)', 
@@ -115,7 +117,7 @@ const handleSubmit = async (e) => {
                                 className='mb-4'
                             >
                                 Login with Google 
-                            </Button>
+                            </Button> */}
                         </div>
                     </Form>
                 </Col>

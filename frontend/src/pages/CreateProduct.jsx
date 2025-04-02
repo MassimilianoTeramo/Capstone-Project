@@ -53,7 +53,7 @@ const CreateProduct = ()=> {
             sentForm.append('image', productImg);
 
             const response = await axios.post(
-                "http://localhost:3002/products", sentForm, 
+                "http://localhost:3000/products", sentForm, 
                 {
                     headers: {
                         'Content-Type': 'multipart/form-data'

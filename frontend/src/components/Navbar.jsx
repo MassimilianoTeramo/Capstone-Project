@@ -23,7 +23,7 @@ const CustomNavbar = () => {
   }, [user]);
 
   return (
-    <Navbar bg="dark" expand="lg" className=".custom-navbar">
+    <Navbar bg="dark" expand="lg" className="custom-navbar">
       <Container>
         <Navbar.Brand as={Link} to="/" className="brand-text">
           FootShop
@@ -35,13 +35,17 @@ const CustomNavbar = () => {
               <Nav.Link as={Link} to="/" className="nav-link-custom">
                 Home
               </Nav.Link>
-
               <Nav.Link as={Link} to="/products" className="nav-link-custom">
                 Products
               </Nav.Link>
+             
+               {user && (
+                 <>
               <Nav.Link as={Link} to="/myproducts" className="nav-link-custom">
                 My Products
               </Nav.Link>
+              </>
+              )}
             </div>
           </Nav>
           <Nav className="ml-auto justify-content-end align-items-center">
@@ -61,23 +65,45 @@ const CustomNavbar = () => {
             </Form>
           </Nav>
           <Nav>
-            <NavDropdown title="Link" id="navbarScrollingDropdown">
-              <Nav.Link as={Link} to="/login">
-                Login
-              </Nav.Link>
-
-              <Nav.Link as={Link} to="/register">
-                Register
-              </Nav.Link>
-
-              <Nav.Link as={Link} to="/products/create">
-                Sell product 
-              </Nav.Link>
-
+          {user ? (
+              <>
+               <NavDropdown
+                 title={
+                   <span style={{ 
+                    color: "rgb(255, 255, 255)",
+                    fontWeight: "500",
+                    }}>
+                     {user?.firstName ? user.firstName : "Guest"}
+                   </span>
+                 }
+                 id="basic-nav-dropdown"
+                 className="navbar_dropdown"
+                 data-bs-theme="dark"
+               >
+              <NavDropdown.Item 
+                className="dropdown_custom"
+                as={Link} to="/products/create"
+                >My Profile</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2" className="dropdown_custom">
+                Sell Product
+              </NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3" className="dropdown_custom">Something</NavDropdown.Item>
               <NavDropdown.Divider />
-
-              <Nav.Link onClick={handleLogout}>Log out</Nav.Link>
+              <NavDropdown.Item onClick={handleLogout} style={{}}>
+                Log Out
+              </NavDropdown.Item>
             </NavDropdown>
+                <Nav.Link as={Link} to="/profile" className="dropdown_custom">
+                  
+                </Nav.Link>
+    
+              </>
+            ) : (
+              <>
+                <Nav.Link as={Link} to="/login" className="nav-link-custom">Login</Nav.Link>
+                <Nav.Link as={Link} to="/register" className="nav-link-custom">Register</Nav.Link>
+              </>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

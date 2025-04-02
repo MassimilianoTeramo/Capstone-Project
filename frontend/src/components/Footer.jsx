@@ -8,7 +8,7 @@ const Footer = () => {
       <Container>
         <Row className="py-4">
           <Col md={4} className="footer-section">
-            <h5 className="footer-title">EpicBlog</h5>
+            <h5 className="footer-title">FootballShop</h5>
             <p className="footer-text">
            
             </p>
@@ -17,8 +17,8 @@ const Footer = () => {
             <h5 className="footer-title">Link Utili</h5>
             <ul className="footer-links">
               <li><Link to="/">Home</Link></li>
-              <li><Link to="/posts/create">Nuovo Post</Link></li>
-              <li><Link to="/myposts">I Miei Post</Link></li>
+              <li><Link to="/posts/create">Sell Product</Link></li>
+              <li><Link to="/myposts">My Products</Link></li>
             </ul>
           </Col>
           <Col md={4} className="footer-section">
@@ -34,7 +34,7 @@ const Footer = () => {
         </Row>
         <Row>
           <Col className="text-center py-3 footer-bottom">
-            <p className="mb-0"> © Strive School | Developed for homework projects.</p>
+            <p className="mb-0"> © Capstone Project Epicode</p>
           </Col>
         </Row>
       </Container>

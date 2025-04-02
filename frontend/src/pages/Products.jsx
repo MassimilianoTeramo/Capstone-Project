@@ -41,7 +41,7 @@ const Products = () => {
     }, [user, currentPage]);
 
 return (
-    <Container className="mt-5 max_container">
+    <Container className="mt-5">
     {loading && <p>Loading products...</p>}
     {error && <p>An error occurred: {error.message}</p>}
     <Row>
