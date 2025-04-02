@@ -3,18 +3,21 @@ import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 import ProductsCard from '../components/ProductsCard';
 import { Container, Alert, Row, Col, Button } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 
 const MyProducts = ()=>{
     const [products, setProducts] = useState([]);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
     const {user} = useAuth();
+    const {id} = useParams();
 
     const getMyProducts = async()=>{
 
         try{
             setLoading(true)
-            const res = await axios.get(process.env.REACT_APP_API_URL+`/products?author=${user._id}`);
+            const res = await axios.get(`http://localhost:3002/product/filtered`);
+            console.log(user._id);
             setProducts(res.data.products);
             
         } catch(err){

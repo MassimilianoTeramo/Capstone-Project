@@ -65,6 +65,13 @@ router.post("/", upload.single('image'), async (req, res) => {
     }
 });
 
+// Product by Author
+router.get("/filtered", async (req,res) =>{
+    const products = await Product.find({ author: req.user._id });
+    if(products.length === 0) return res.status(404).json({message:"No product found"})
+    res.json(products);
+});
+
 
 // Get product by ID
 router.get('/:id', async (req, res) => {
@@ -127,5 +134,8 @@ router.delete('/:id', async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
+
+
+
 
 export default router;

@@ -14,29 +14,32 @@ const generateToken = (user) => {
 
 // Login user
 router.post('/login', async (req, res, next) => {
-    const { email, password } = req.body;
+    try {
+        const { email, password } = req.body;
 
-    const user = await User.findOne({email:email})
-            if (!user) {
-                return res.status(401).json({ message: 'Wrong Credential' });
-            }
-            // Compare password
-            const isMatch = await bcrypt.compare(password, user.password);
-            if (!isMatch) {
-                return res.status(401).json({ message: 'Invalid credentials' });
-              }
-             // Generate token
-            const token = generateToken(user);
-            const userToSend = {
-                _id: user._id,
-                email: user.email,
-                role: user.role,
-                firstName: user.firstName,
-                lastName: user.lastName,
-            };
-            res.json({ user: userToSend, token });
-        (req, res, next);
-        });
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(401).json({ message: 'Wrong Credential' });
+        }
+        // Compare password
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(401).json({ message: 'Invalid credentials' });
+        }
+        // Generate token
+        const token = generateToken(user);
+        const userToSend = {
+            _id: user._id,
+            email: user.email,
+            role: user.role,
+            firstName: user.firstName,
+            lastName: user.lastName,
+        };
+        res.json({ user: userToSend, token });
+    } catch (err) {
+        next(err);
+    }
+});
 
 // Register a new user
 router.post('/register', async (request, response) => {
