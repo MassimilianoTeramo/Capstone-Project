@@ -19,9 +19,10 @@ const handleSubmit = async (e) => {
         console.log('Tentativo di login con:', { email });
         const response = await api.post('/auth/login', { email, password });
         console.log('Risposta dal server:', response.data);
-        
+        console.log('Risposta dal server:', response.data.user);
+        console.log('Risposta dal server:', response.data.token);
         const { user, token } = response.data;
-        await login(user, token);
+        login(user, token);
         alert(`Hi ${user.firstName}! You are in!`);
         navigate('/');
     } catch (err) {
@@ -45,6 +46,7 @@ const handleSubmit = async (e) => {
                 }).then(response => {
                     login(response.data.user, token);
                     console.log(response.data.user);
+                    console.log(token);
                     alert("hi there");
                 }).catch(error => {
                     setError(error.response?.data?.message || 'Errore di autenticazione con Google');

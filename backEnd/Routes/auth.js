@@ -2,32 +2,29 @@ import Router from "express";
 import bcrypt from 'bcrypt';
 import User from '../models/userModel.js';
 import jwt from 'jsonwebtoken';
+import generateToken from "../helpers/token.js";
 
 
 
 const router = Router();
 
-//generate token
-const generateToken = (user) => {
-    return jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '24h' });
-};
 
-// Login user
+  // Login user
 router.post('/login', async (req, res, next) => {
     try {
         const { email, password } = req.body;
 
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(401).json({ message: 'Wrong Credential' });
+            return res.status(401).json({ message: 'Credenziali non valide' });
         }
         // Compare password
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(401).json({ message: 'Invalid credentials' });
+            return res.status(401).json({ message: 'Credenziali non valide' });
         }
         // Generate token
-        const token = generateToken(user);
+        const token = await generateToken(user);
         const userToSend = {
             _id: user._id,
             email: user.email,
@@ -35,8 +32,10 @@ router.post('/login', async (req, res, next) => {
             firstName: user.firstName,
             lastName: user.lastName,
         };
+
         res.json({ user: userToSend, token });
     } catch (err) {
+        console.error('Login error:', err);
         next(err);
     }
 });
@@ -45,9 +44,9 @@ router.post('/login', async (req, res, next) => {
 router.post('/register', async (request, response) => {
     try {
         const { firstName, lastName, email, password, role } = request.body;
-        const existingUser = await User.findOne({email}); // cerca nel db se la mail esiste gia
+        const existingUser = await User.findOne({email});
         if (existingUser) {
-            return response.status(400).json({message: ' User already registered'}); 
+            return response.status(400).json({message: 'Utente già registrato'}); 
         }
         const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -65,11 +64,15 @@ router.post('/register', async (request, response) => {
             lastName: newUser.lastName,
         };
 
-        const token = generateToken(newUser);
-        response.status(201).json({user:userToSend, token});
+        const token = await generateToken(newUser);
+        response.status(201).json({
+            user: userToSend, 
+            token
+        });
 
        
     } catch (err) {
+        console.error('Registration error:', err);
         response.status(500).json({ error: err.message });
     }
 });
@@ -81,7 +84,7 @@ router.post('/register', async (request, response) => {
 //endpoint for login
 router.get('/me', async (request, response) => {
     try {
-        // getting the tokem from the head of Authorization
+        // getting the token from the head of Authorization
         const authHeader = request.headers.authorization;
         if (!authHeader || !authHeader.startsWith('Bearer ')) {
             return response.status(401).json({ message: 'Token non fornito' });
@@ -93,7 +96,7 @@ router.get('/me', async (request, response) => {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         
         // Trova l'utente
-        const user = await User.findById(decoded.id).select('-password');
+        const user = await User.findById(decoded._id).select('-password');
         if (!user) {
             return response.status(404).json({ message: 'Utente non trovato' });
         }
@@ -101,13 +104,13 @@ router.get('/me', async (request, response) => {
         response.json({ user });
     } catch (err) {
         if (err.name === 'JsonWebTokenError' || err.name === 'TokenExpiredError') {
-            return response.status(401).json({ message: 'Token not valid or expired' });
+            return response.status(401).json({ message: 'Token non valido o scaduto' });
         }
         response.status(500).json({ error: err.message });
     }
 });
-        
- export default router;
+
+export default router;
 
 
 

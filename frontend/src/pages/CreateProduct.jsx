@@ -3,6 +3,8 @@ import {useNavigate} from 'react-router-dom';
 import { useAuth } from "../context/AuthContext";
 import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
 import axios from "axios";
+import api from "../utils/api"; // Assicurati di avere il percorso corretto per l'API
+
 
 const CreateProduct = ()=> {
     const { user } = useAuth(); // Retrieve the logged-in user from AuthContext
@@ -60,7 +62,7 @@ const CreateProduct = ()=> {
                 image: productImg
             });
 
-            const response = await axios.post(
+            const response = await api.post(
                 "http://localhost:3002/products", 
                 sentForm, 
                 {

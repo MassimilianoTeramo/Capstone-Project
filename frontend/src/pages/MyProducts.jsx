@@ -4,35 +4,47 @@ import axios from 'axios';
 import ProductsCard from '../components/ProductsCard';
 import { Container, Alert, Row, Col, Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
+import api from '../utils/api' // Assicurati di avere il percorso corretto per l'API
 
-const MyProducts = ()=>{
+const MyProducts =  ()=>{
     const [products, setProducts] = useState([]);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
     const {user} = useAuth();
+    const {token} = useAuth();
     const {id} = useParams();
 
-    const getMyProducts = async()=>{
-
-        try{
-            setLoading(true)
-            const res = await axios.get(`http://localhost:3002/product/filtered`);
-            console.log(user._id);
-            setProducts(res.data.products);
-            
-        } catch(err){
-            setError('Something wrong uploading your products');
-
-        } finally {
-            setLoading(false)
+    const getMyProducts = async () => {
+        try {
+            const response = await api.get(`${process.env.REACT_APP_API_URL}/products/myproducts`); // Usa l'istanza Axios configurata
+            console.log(response.data);
+            return response.data; // Restituisci i prodotti
+        } catch (error) {
+            console.error('Errore nel recupero dei prodotti per autore:', error);
+            throw error;
         }
     };
 
-    useEffect(()=>{
-        if(user){
-            getMyProducts()
-        }
-    }, [user]);
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                setLoading(true);
+                const response = await getMyProducts();
+                setProducts(response);
+                setError('');
+            } catch (error) {
+                setError('Error fetching products');
+                console.log(error)
+                setProducts([]);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProducts();
+    }, [user, token]);
+
+    
 
 
 

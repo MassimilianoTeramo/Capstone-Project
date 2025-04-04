@@ -1,8 +1,12 @@
 import {Router} from 'express';
 import Product from '../models/productModel.js';
 import { upload } from "../utilities/cloudinary.js";
+import { authorization } from '../middlewares/authorization.js';
 
 const router = Router();
+
+
+
 
 // Get all products
 router.get('/', async (req, res) => {
@@ -33,8 +37,12 @@ router.get('/', async (req, res) => {
     }
 });
 
+
+
+
+
 // Create a new product
-router.post("/", upload.single('image'), async (req, res) => {
+router.post("/", authorization, upload.single('image'), async (req, res) => {
     try {
         const { title, description, price, category, author } = req.body;
         console.log('Received data:', req.body);
@@ -66,11 +74,44 @@ router.post("/", upload.single('image'), async (req, res) => {
 });
 
 // Product by Author
-router.get("/filtered", async (req,res) =>{
-    const products = await Product.find({ author: req.user._id });
-    if(products.length === 0) return res.status(404).json({message:"No product found"})
-    res.json(products);
+router.get("/myproducts", authorization, async (req, res) => {
+    try {
+        const products = await Product.find({ author: req.user._id }).populate('author', 'firstName lastName');
+        if (!products) {
+            return res.status(200).json([]);
+        }
+        res.status(200).json(products);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 });
+// Get all products by category
+// router.get('/category/:category', async (req, res) => {
+//     try {
+//         const products = await Product.find({ category: req.params.category }).populate('author', 'firstName lastName');
+//         if (products.length === 0) {
+//             return res.status(404).json({ message: 'No products found in this category' });
+//         }
+//         res.status(200).json(products);
+//     } catch (error) {
+//         res.status(500).json({ message: error.message });
+//     }
+// });
+
+// Get all products by author
+// router.get('/author/:authorId', async (req, res) => {
+//     try {
+//         const products = await Product.find({ author: req.params.authorId }).populate('author', 'firstName lastName');
+//         if (products.length === 0) {
+//             return res.status(404).json({ message: 'No products found for this author' });
+//         }
+//         res.status(200).json(products);
+//     } catch (error) {
+//         res.status(500).json({ message: error.message });
+//     }
+// });
+
+
 
 
 // Get product by ID
@@ -89,7 +130,7 @@ router.get('/:id', async (req, res) => {
 
 
 // Update a product
-router.put('/:id', upload.single('image'), async (req, res) => {
+router.put('/:id', authorization,  upload.single('image'), async (req, res) => {
     try {
         const { title, description, price, category, author } = req.body;
         const updateData = {};
@@ -123,7 +164,7 @@ router.put('/:id', upload.single('image'), async (req, res) => {
 });
 
 // Delete a product
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', authorization, async (req, res) => {
     try {
         const product = await Product.findByIdAndDelete(req.params.id);
         if (!product) {

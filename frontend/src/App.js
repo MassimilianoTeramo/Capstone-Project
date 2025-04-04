@@ -29,6 +29,7 @@ function App() {
             <Route path="/productsCard" element={<ProductsCard />} /> 
             <Route path="/myproducts" element={<MyProducts />} />
             <Route path="/products/:id" element={<ProductDetails />} /> 
+            <Route path="/products/category/:category" element={<ProductDetails />} /> 
             {/* <Route path="/profile" element={<Profile />} />
 
             
