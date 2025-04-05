@@ -1,5 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+
 import { Container } from "react-bootstrap";
 import { AuthProvider } from "./context/AuthContext";
 import CustomNavbar from "./components/Navbar";
@@ -13,6 +15,7 @@ import CreateProduct from "./pages/CreateProduct";
 import ProductsCard from "./components/ProductsCard";
 import MyProducts from "./pages/MyProducts";
 import ProductDetails from "./pages/ProductDetails";
+import CategoryPage from "./pages/CategoryPage";
 
 function App() {
   return (
@@ -28,8 +31,9 @@ function App() {
             <Route path="/products/create" element={<CreateProduct />} />
             <Route path="/productsCard" element={<ProductsCard />} /> 
             <Route path="/myproducts" element={<MyProducts />} />
+            <Route path="/products/category/:category" element={<CategoryPage />} /> 
             <Route path="/products/:id" element={<ProductDetails />} /> 
-            <Route path="/products/category/:category" element={<ProductDetails />} /> 
+           
             {/* <Route path="/profile" element={<Profile />} />
 
             

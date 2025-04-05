@@ -2,109 +2,134 @@ import React from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectCoverflow, Pagination } from 'swiper/modules';
 import 'swiper/css';
-import imgBg from '../uploads/football.bg2.jpg';
-
+import {Link} from "react-router-dom";
+import magliaCat from '../uploads/maglia-categoria.png';
+import pantsCat from '../uploads/pants-categoria.png';
+import shoesCat from '../uploads/shoes-categoria.png';
+import socksCat from '../uploads/socks-categoria.png';
+import {Col, Card, Button, Container} from 'react-bootstrap';
 
 
 const slider = [
     {
-        title: "BackGround 1",
-        description: "BackGround1",
-       url: imgBg
+        title: "shirts",
+        description: "T-shirts",
+       url: magliaCat
     },
     {
-        title: "BackGround 2",
-        Description: "BackGround2",
-        url: imgBg
+        title: "pants",
+        description: "Shorts",
+        url: pantsCat
     },
     {
-        title: "BackGround 3",
-        Description: "BackGround3",
-        url: imgBg
+        title: "shoes",
+        description: "Shoes",
+        url: shoesCat
     },
     {
-        title: "BackGround 4",
-        Description: "BackGround4",
-        url: imgBg
+        title: "socks",
+        description: "Socks",
+        url: socksCat
     },
-    {
-        title: "BackGround 5",
-        Description: "BackGround5",
-        url: imgBg
-    },
-    {
-        title: "BackGround 6",
-        Description: "BackGround5",
-        url: imgBg
-    },
+   
 ]
 
 const Carousel = ()=>{
     return (
-        <div className="carousel">
-            <div>
-                <div className="carousel-content">
-                    <span>For the real supporter</span>
-                    <h1>Live Football, Wear Your Passion!</h1>
-                    <hr />
-                    <p>Find everything you need to play, support, and live football to the fullest. Fast shipping and guaranteed quality!</p>
-                    <a href="#" className="slider-btn">Shop Now</a>
-                </div>
-            </div>
-             
-            <Swiper 
-                className="myswiper"
-                modules={[Pagination, EffectCoverflow, Autoplay]}
-                effect={"coverflow"}
-                grabCursor={true}
-                centeredSlides={true}
-                coverflowEffect={{
-                    rotate: 0,
-                    stretch: 0,
-                    depth: 100,
-                    modifier: 3,
-                    slideShadows: true
-                }}
-                loop={true}
-                pagination={{clickable: true}}
-                slidesPerView={2}
-                autoplay={{
-                    delay: 4000,
-                    disableOnInteraction:false
-                }}
-                breakpoints={{
-                    640: {
-                        slidesPerView:2
-                    },
-                    768: {
-                        slidesPerView:1
-                    },
-                    1024: {
-                        slidesPerView:2
-                    },
-                    1560: {
-                        slidesPerView:3
-                    },
-                }}
-                >
-                {
-                   slider.map((data, index) => (
-                    <SwiperSlide 
-                        key={index} 
-                        style={{backgroundImage: `url(${data.url})`}} 
-                        className="myswiper-slider"
-                    >
-                        <div>
-                            <h2>{data.title}</h2>
-                            <p>{data.description}</p>
-                            <a href={`${data.url}`} target="_blank" rel="noopener noreferrer" className="slider-btn">Explore</a> 
-                        </div>
-                    </SwiperSlide>
-                   )) 
-                }
-            </Swiper>
+      <div className="carousel mt-5">
+        <div className="carousel-header">
+          <div className="carousel-content text-center">
+            <span className="carousel-tagline">For the real supporter</span>
+            <h1 className="carousel-title">Live Football, Wear Your Passion!</h1>
+            <hr className="carousel-divider" />
+            <p className="carousel-description">
+              Find everything you need to play, support, and live football to
+              the fullest. Fast shipping and guaranteed quality!
+            </p>
+            <a href="#" className="slider-btn">
+              Shop Now
+            </a>
+          </div>
         </div>
-    )
+        <Container className="mt-5">
+          <h2 className="text-center section-title">Shop by Category</h2>
+          <hr className="section-divider" />
+          <p className="text-center section-description">
+            Explore our wide range of products and find your perfect match!
+          </p>
+          <Swiper
+            className="myswiper"
+            modules={[Pagination, EffectCoverflow, Autoplay]}
+            effect={"coverflow"}
+            grabCursor={true}
+            centeredSlides={true}
+            coverflowEffect={{
+              rotate: 0,
+              stretch: 0,
+              depth: 100,
+              modifier: 3,
+              slideShadows: true,
+            }}
+            loop={true}
+            pagination={{ clickable: true }}
+            slidesPerView={2}
+            autoplay={{
+              delay: 4000,
+              disableOnInteraction: false,
+            }}
+            breakpoints={{
+              640: {
+                slidesPerView: 2,
+              },
+              768: {
+                slidesPerView: 1,
+              },
+              1024: {
+                slidesPerView: 2,
+              },
+              1560: {
+                slidesPerView: 3,
+              },
+            }}
+          >
+            {slider.map((data, index) => (
+              <SwiperSlide key={index} className="myswiper-slider mt-5 mb-5">
+                <Col className="col-12 col-md-6 col-lg-3 ">
+                  <Card className="h-100 card-swiper shadow-sm">
+                    <Card.Img
+                      variant="top"
+                      src={data.url}
+                      alt={data.title}
+                      className="card-image"
+                    />
+                    <Card.Body className="d-flex flex-column align-items-center justify-content-center">
+                      <Card.Title>
+                        <h2 className="card-title">{data.description}</h2>
+                      </Card.Title>
+                      <Link to={`/products/category/${data.title}`} className="swiper_button">
+                        Check it out!
+                      </Link>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </Container>
+      </div>
+    );
 }
 
 export default Carousel;
+
+
+{/* <div className="card category-card">
+                        <img src={data.url} className="card-img-top" alt={data.title} />
+                        <div className="card-body">
+                            <h5 className="card-title">{data.title}</h5>
+                            <p className="card-text">{data.description}</p>
+                            <a href={`${data.url}`} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+                                Explore {data.title}
+                            </a>
+                        </div>
+                    </div> */}

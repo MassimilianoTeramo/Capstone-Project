@@ -21,7 +21,7 @@ const ProductDetails =()=>{
         const fetchProduct = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(`http://localhost:3002/products/${id}`);
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/products/${id}`);
                 if (response.status === 200) {
                     setProduct(response.data);
                     setError(null);

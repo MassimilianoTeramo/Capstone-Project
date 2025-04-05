@@ -104,8 +104,9 @@ return (
                             required
                         >
                             <option value="">Select</option>
+                            <option value="shirts">T-Shirts</option>
+                            <option value="pants">Pants</option>
                             <option value="shoes">Shoes</option>
-                            <option value="shorts">Shorts</option>
                             <option value="socks">Socks</option>
                         </Form.Select>
                     </Form.Group>

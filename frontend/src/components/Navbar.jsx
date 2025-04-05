@@ -35,9 +35,29 @@ const CustomNavbar = () => {
               <Nav.Link as={Link} to="/" className="nav-link-custom">
                 Home
               </Nav.Link>
-              <Nav.Link as={Link} to="/products" className="nav-link-custom">
-                Products
-              </Nav.Link>
+              <NavDropdown
+                title="Products"
+                id="basic-nav-dropdown"
+                className="dropdown-navbar"
+                data-bs-theme="dark"
+                style={{ color: "white" }}
+               
+              >
+                <NavDropdown.Item
+                  as={Link} to="/products/category/shirts" className="dropdown_custom">
+                T-Shirts
+              </NavDropdown.Item >
+              <NavDropdown.Item  as={Link} to="/products/category/shorts" className="dropdown_custom">
+                Shorts
+              </NavDropdown.Item>
+              <NavDropdown.Item  as={Link} to="/products/category/socks" className="dropdown_custom">
+                Socks
+              </NavDropdown.Item>
+              <NavDropdown.Item  as={Link} to="/products/category/shoes" className="dropdown_custom">
+                Shoes
+              </NavDropdown.Item>
+              </NavDropdown>
+
              
                {user && (
                  <>

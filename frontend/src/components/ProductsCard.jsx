@@ -6,6 +6,8 @@ import axios from 'axios';
 import { useState } from 'react';
 import {Button} from 'react-bootstrap';
 import ProductDetails from '../pages/ProductDetails';
+import {BiCart} from 'react-icons/bi';
+
 
 const ProductsCard =({product})=>{
     const navigate = useNavigate();
@@ -20,13 +22,13 @@ const ProductsCard =({product})=>{
            <img className="card_img" src={product.image} alt={product.title} />
           <div className="card_data">
             <div className="card_title">{product.title}</div>
-            <div className="mb-2 card_price">£ {product.price}</div>
+            <div className="mt-2 mb-2 card_price">£ {product.price}</div>
             <div>
               <div className="card_description">
               {product.description}
               </div>
             </div>
-          {userName === authorName ? (
+          
            <div className="mt-3 d-flex justify-content-start gap-3">
             <Button 
               variant="warning" 
@@ -34,10 +36,10 @@ const ProductsCard =({product})=>{
               onClick={() => navigate(`/products/${product._id}`)}
               > Details </Button> 
             {/* <Button onClick={()=> deleteProduct(product._id)}> Delete </Button> */}
-           </div>
-          ) : (
-          <button variant="warning" className="card_button">Add to cart</button>
-          )}
+           
+      
+          <button variant="warning" className="card_button"><BiCart size={24}/></button>
+          </div>
          </div>
        </div>
        

@@ -85,32 +85,6 @@ router.get("/myproducts", authorization, async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
-// Get all products by category
-// router.get('/category/:category', async (req, res) => {
-//     try {
-//         const products = await Product.find({ category: req.params.category }).populate('author', 'firstName lastName');
-//         if (products.length === 0) {
-//             return res.status(404).json({ message: 'No products found in this category' });
-//         }
-//         res.status(200).json(products);
-//     } catch (error) {
-//         res.status(500).json({ message: error.message });
-//     }
-// });
-
-// Get all products by author
-// router.get('/author/:authorId', async (req, res) => {
-//     try {
-//         const products = await Product.find({ author: req.params.authorId }).populate('author', 'firstName lastName');
-//         if (products.length === 0) {
-//             return res.status(404).json({ message: 'No products found for this author' });
-//         }
-//         res.status(200).json(products);
-//     } catch (error) {
-//         res.status(500).json({ message: error.message });
-//     }
-// });
-
 
 
 
@@ -176,6 +150,20 @@ router.delete('/:id', authorization, async (req, res) => {
     }
 });
 
+// Get all products by category
+router.get('/category/:category', async (req, res) => {
+    try {
+        const { category } = req.params;
+
+        const products = await Product.find({ category: category });
+        if (products.length === 0) {
+            return res.status(404).json({ message: 'No products found in this category' });
+        }
+        res.status(200).json(products);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
 
 
 
