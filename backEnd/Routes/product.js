@@ -5,9 +5,6 @@ import { authorization } from '../middlewares/authorization.js';
 
 const router = Router();
 
-
-
-
 // Get all products
 router.get('/', async (req, res) => {
     try {
@@ -37,14 +34,10 @@ router.get('/', async (req, res) => {
     }
 });
 
-
-
-
-
 // Create a new product
 router.post("/", authorization, upload.single('image'), async (req, res) => {
     try {
-        const { title, description, price, category, author } = req.body;
+        const { title, description, price, category, author, condition, size, contact } = req.body;
         console.log('Received data:', req.body);
         console.log('Received file:', req.file);
 
@@ -59,19 +52,63 @@ router.post("/", authorization, upload.single('image'), async (req, res) => {
             price, 
             category, 
             author,
+            condition,
+            size,
+            contact
         });
 
         const savedProduct = await newProduct.save();
         // Populate the author field with user details
         const populatedProduct = await Product.findById(savedProduct._id).populate('author', 'firstName lastName');
-        res.status(201).json(populatedProduct);
+
+        res.status(201).json({
+            message: "Product created successfully",
+            product: populatedProduct
+        });
     } catch (error) {
-        res.status(500).json.json({ 
+        res.status(500).json({ 
             message: "Errore durante il salvataggio del prodotto",
             error: error.message 
         });
     }
 });
+
+
+// Update a product
+router.put('/:id', authorization,  upload.single('image'), async (req, res) => {
+    try {
+        const { title, description, price, category, condition, size } = req.body;
+        const updateData = {};
+
+        // campi che forniti nella richiesta
+        if (title) updateData.title = title;
+        if (description) updateData.description = description;
+        if (price) updateData.price = price;
+        if (category) updateData.category = category;
+        if (req.file) updateData.image = req.file.path;
+        if (condition) updateData.condition = condition;
+        if (size) updateData.size = size;
+
+        const product = await Product.findByIdAndUpdate(
+            req.params.id, 
+            updateData, 
+            { new: true, runValidators: true }
+        );
+
+        if (!product) {
+            return res.status(404).json({ message: "Prodotto non trovato" });
+        }
+
+        const updatedProduct = await Product.findById(req.params.id);
+        res.json(updatedProduct);
+    } catch (err) {
+        res.status(500).json({ 
+            message: "Errore durante l'aggiornamento del prodotto",
+            error: err.message 
+        });
+    }
+});
+
 
 // Product by Author
 router.get("/myproducts", authorization, async (req, res) => {
@@ -103,40 +140,6 @@ router.get('/:id', async (req, res) => {
 
 
 
-// Update a product
-router.put('/:id', authorization,  upload.single('image'), async (req, res) => {
-    try {
-        const { title, description, price, category, author } = req.body;
-        const updateData = {};
-
-        // campi che forniti nella richiesta
-        if (title) updateData.title = title;
-        if (description) updateData.description = description;
-        if (price) updateData.price = price;
-        if (category) updateData.category = category;
-        if (author) updateData.author = author;
-        if (req.file) updateData.image = req.file.path;
-
-        const product = await Product.findByIdAndUpdate(
-            req.params.id, 
-            updateData, 
-            { new: true, runValidators: true }
-        );
-
-        if (!product) {
-            return res.status(404).json({ message: "Prodotto non trovato" });
-        }
-
-        const updatedProduct = await Product.findById(req.params.id).populate('author', 'firstName lastName');
-        res.json(updatedProduct);
-    } catch (err) {
-        res.status(500).json({ 
-            message: "Errore durante l'aggiornamento del prodotto",
-            error: err.message 
-        });
-    }
-});
-
 // Delete a product
 router.delete('/:id', authorization, async (req, res) => {
     try {
@@ -165,6 +168,20 @@ router.get('/category/:category', async (req, res) => {
     }
 });
 
+// Get products by condition
+router.get('/condition/:condition', async (req, res) => {
+    try {
+        const { condition } = req.params;
+
+        const products = await Product.find({ condition: condition });
+        if (products.length === 0) {
+            return res.status(404).json({ message: 'No products found in this condition' });
+        }
+        res.status(200).json(products);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
 
 
 export default router;

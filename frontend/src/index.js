@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-
-import './carousel.css';
-import './index.css';
+import './styles/index.css';
+import './styles/carousel.css';
+import './styles/index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 

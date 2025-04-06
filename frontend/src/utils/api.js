@@ -8,21 +8,17 @@ const api = axios.create({
 api.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem('token');
-        console.log('Token dal localStorage:', token);
-        
-        console.log('Token salvato:', localStorage.getItem('token'));
-        
+        // console.log('Token trovato:', token);
         if (token) {
             const trimmedToken = token.trim();
             // Rimuovo eventuali spazi e il prefisso Bearer se presente
             const cleanToken = trimmedToken.startsWith('Bearer ') 
         ? trimmedToken 
         : `Bearer ${trimmedToken}`;
-            console.log('Token pulito:', cleanToken);
-    
+
             // Aggiungo sempre il prefisso Bearer
             config.headers.Authorization = cleanToken;
-            console.log('Header Authorization finale:', config.headers.Authorization);
+            // console.log('Header Authorization finale:', config.headers.Authorization);
         }
         return config;
     },

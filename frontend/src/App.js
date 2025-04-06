@@ -16,6 +16,7 @@ import ProductsCard from "./components/ProductsCard";
 import MyProducts from "./pages/MyProducts";
 import ProductDetails from "./pages/ProductDetails";
 import CategoryPage from "./pages/CategoryPage";
+import ConditionPage from "./pages/ConditionPage";
 
 function App() {
   return (
@@ -27,18 +28,13 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/productsCard" element={<ProductsCard />} /> 
             <Route path="/products" element={<Products />} />
             <Route path="/products/create" element={<CreateProduct />} />
-            <Route path="/productsCard" element={<ProductsCard />} /> 
-            <Route path="/myproducts" element={<MyProducts />} />
             <Route path="/products/category/:category" element={<CategoryPage />} /> 
+            <Route path="/products/condition/:condition" element={<ConditionPage />} />
             <Route path="/products/:id" element={<ProductDetails />} /> 
-           
-            {/* <Route path="/profile" element={<Profile />} />
-
-            
-            <Route path="/productElement" element={<ProductElement />} />
-            */}
+            <Route path="/myproducts" element={<MyProducts />} />
           </Routes>
         </Container>
         <Footer />

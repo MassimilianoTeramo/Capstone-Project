@@ -52,11 +52,11 @@ const Carousel = ()=>{
           </div>
         </div>
         <Container className="mt-5">
-          <h2 className="text-center section-title">Shop by Category</h2>
-          <hr className="section-divider" />
-          <p className="text-center section-description">
-            Explore our wide range of products and find your perfect match!
-          </p>
+          <h2 
+          className="text-center title2sec mt-4"
+          style={{fontSize:'25px', textAlign:'center'}}
+          >Shop by Category</h2>
+          <hr className="section-divider mt-3" />
           <Swiper
             className="myswiper"
             modules={[Pagination, EffectCoverflow, Autoplay]}
@@ -67,7 +67,7 @@ const Carousel = ()=>{
               rotate: 0,
               stretch: 0,
               depth: 100,
-              modifier: 3,
+              modifier: 4,
               slideShadows: true,
             }}
             loop={true}
@@ -121,15 +121,3 @@ const Carousel = ()=>{
 }
 
 export default Carousel;
-
-
-{/* <div className="card category-card">
-                        <img src={data.url} className="card-img-top" alt={data.title} />
-                        <div className="card-body">
-                            <h5 className="card-title">{data.title}</h5>
-                            <p className="card-text">{data.description}</p>
-                            <a href={`${data.url}`} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-                                Explore {data.title}
-                            </a>
-                        </div>
-                    </div> */}

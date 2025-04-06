@@ -15,7 +15,10 @@ const CreateProduct = ()=> {
         image: "",
         price: "",
         category: "",
+        size: "",
+        condition: "",
         author: user ? user.firstName + user.lastName : "",// Set the author to the logged-in user's first name
+        contact: user ? user.email : "", // Set the contact to the logged-in user's email
     });
    
     const [productImg, setProductImg] = useState(null);
@@ -50,7 +53,9 @@ const CreateProduct = ()=> {
             sentForm.append('category', formData.category);
             sentForm.append('author', user._id);
             sentForm.append('condition', formData.condition);
+            sentForm.append('size', formData.size);
             sentForm.append('image', productImg);
+            sentForm.append('contact', user.email);
 
             // Log dei dati inviati
             console.log('Form data:', {
@@ -59,11 +64,15 @@ const CreateProduct = ()=> {
                 price: formData.price,
                 category: formData.category,
                 author: user._id,
-                image: productImg
+                size: formData.size,
+                image: productImg,
+                condition: formData.condition,
+                contact: user.email
+                
             });
 
-            const response = await api.post(
-                "http://localhost:3002/products", 
+
+            const response = await api.post(`${process.env.REACT_APP_API_URL}/products`, 
                 sentForm, 
                 {
                     headers: {
@@ -71,9 +80,8 @@ const CreateProduct = ()=> {
                     }
                 }
             );
-
             console.log('Response:', response.data);
-            navigate('/products');
+            navigate('/myproducts');
         } catch (err) {
             console.error('Error creating product:', err);
             setError(err.response?.data?.message || "Errore durante la creazione del prodotto");
@@ -105,7 +113,7 @@ return (
                         >
                             <option value="">Select</option>
                             <option value="shirts">T-Shirts</option>
-                            <option value="pants">Pants</option>
+                            <option value="shorts">Shorts</option>
                             <option value="shoes">Shoes</option>
                             <option value="socks">Socks</option>
                         </Form.Select>
@@ -146,6 +154,57 @@ return (
                             placeholder="£"
                             required
                         />
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Condition</Form.Label>
+                        <Form.Select
+                            aria-label="Default select example"
+                            value={formData.condition}
+                            onChange={(e) => setFormData({ ...formData, condition: e.target.value })}
+                            required
+                        >
+                            <option value="">Select</option>
+                            <option value="new">New</option>
+                            <option value="used">Used</option>
+                        </Form.Select>
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Size</Form.Label>
+                        <Form.Select
+                            aria-label="Default select example"
+                            value={formData.size}
+                            onChange={(e) => setFormData({ ...formData, size: e.target.value })}
+                            required
+                        >
+                            {formData.category === "shirts" || formData.category === "shorts" || formData.category === "socks"  ? (
+                                <>
+                                    <option value="">Select</option>
+                                    <option value="XS">XS</option>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                    <option value="XXL">XXL</option>
+                                </>
+                            ) : (
+                                <>
+                                    <option value="">Select</option>
+                                    <option value="36">36</option>
+                                    <option value="37">37</option>
+                                    <option value="38">38</option>
+                                    <option value="39">39</option>
+                                    <option value="40">40</option>
+                                    <option value="41">41</option>
+                                    <option value="42">42</option>
+                                    <option value="43">43</option>
+                                    <option value="44">44</option>
+                                    <option value="45">45</option>
+                                    <option value="46">46</option>
+                                    <option value="47">47</option>
+                                    <option value="48">48</option>
+                                </>
+                            )}
+                        </Form.Select>
                     </Form.Group>
                     <Button className="submit-button" variant="primary" type="submit">
                         Publish it!

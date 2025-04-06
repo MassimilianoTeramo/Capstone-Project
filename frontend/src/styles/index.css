@@ -251,22 +251,16 @@ body::after {
   overflow-y: visible;
 }
 
-.card:hover .card_img {
- 
-  transform: translate(-1.5rem, -9.5rem) rotate(-20deg);
-}
-
 .card:hover .card_data {
-  transform: translateY(4.8rem);
+  transform: translateY(7rem);
 }
 
 .card:hover .card_title {
-  transform: translateX(-2.3rem);
-  margin-bottom: 0;
+ visibility: hidden;
 }
 
 .card:hover .card_price {
-  transform: translateX(-6.8rem);
+  visibility: hidden;
 }
 
 .card:hover .card_description, 

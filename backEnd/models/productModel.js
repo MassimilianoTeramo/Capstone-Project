@@ -8,7 +8,7 @@ const productSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-},
+  },
   description: {
     type: String,
     required: true
@@ -19,11 +19,25 @@ const productSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    enum: ["shirts", "shoes", "pants", "socks"],
+    enum: ["shirts", "shoes", "shorts", "socks"],
+    required: true
+  },
+  size: {
+    type: String,
     required: true
   },
   author: {
     type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true
+  },
+  condition: {
+    type: String,
+    enum: ["new", "used"],
+    required: true
+  },
+  contact: {
+    type: String,
     ref: "User",
     required: true
   },
