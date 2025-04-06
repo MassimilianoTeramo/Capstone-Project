@@ -17,6 +17,7 @@ const CreateProduct = ()=> {
         category: "",
         size: "",
         condition: "",
+        brand: "",
         author: user ? user.firstName + user.lastName : "",// Set the author to the logged-in user's first name
         contact: user ? user.email : "", // Set the contact to the logged-in user's email
     });
@@ -54,6 +55,7 @@ const CreateProduct = ()=> {
             sentForm.append('author', user._id);
             sentForm.append('condition', formData.condition);
             sentForm.append('size', formData.size);
+            sentForm.append('brand', formData.brand);
             sentForm.append('image', productImg);
             sentForm.append('contact', user.email);
 
@@ -63,11 +65,10 @@ const CreateProduct = ()=> {
                 description: formData.description,
                 price: formData.price,
                 category: formData.category,
-                author: user._id,
                 size: formData.size,
                 image: productImg,
                 condition: formData.condition,
-                contact: user.email
+                brand: formData.brand,
                 
             });
 
@@ -116,6 +117,7 @@ return (
                             <option value="shorts">Shorts</option>
                             <option value="shoes">Shoes</option>
                             <option value="socks">Socks</option>
+                            <option value="balls">Balls</option>
                         </Form.Select>
                     </Form.Group>
                     <Form.Group className="mb-3">
@@ -176,7 +178,7 @@ return (
                             onChange={(e) => setFormData({ ...formData, size: e.target.value })}
                             required
                         >
-                            {formData.category === "shirts" || formData.category === "shorts" || formData.category === "socks"  ? (
+                            {formData.category === "shirts" || formData.category === "shorts" || formData.category === "socks" ? (
                                 <>
                                     <option value="">Select</option>
                                     <option value="XS">XS</option>
@@ -185,6 +187,13 @@ return (
                                     <option value="L">L</option>
                                     <option value="XL">XL</option>
                                     <option value="XXL">XXL</option>
+                                </>
+                            ) : formData.category === "balls" ? (
+                                <>
+                                    <option value="">Select</option>
+                                    <option value="3">Size 3</option>
+                                    <option value="4">Size 4</option>
+                                    <option value="5">Size 5</option>
                                 </>
                             ) : (
                                 <>
@@ -204,6 +213,25 @@ return (
                                     <option value="48">48</option>
                                 </>
                             )}
+                        </Form.Select>
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Brand</Form.Label>
+                        <Form.Select
+                            aria-label="Default select example"
+                            value={formData.brand}
+                            onChange={(e) => setFormData({ ...formData, brand: e.target.value })}
+                            required
+                        >
+                            <option value="">Select</option>
+                            <option value="Nike">Nike</option>
+                            <option value="Adidas">Adidas</option>
+                            <option value="Puma">Puma</option>
+                            <option value="Errea">Errea</option>
+                            <option value="Mizuno">Mizuno</option>
+                            <option value="Kappa">Kappa</option>
+                            <option value="Joma">Joma</option>
+                            <option value="Diadora">Diadora</option>
                         </Form.Select>
                     </Form.Group>
                     <Button className="submit-button" variant="primary" type="submit">

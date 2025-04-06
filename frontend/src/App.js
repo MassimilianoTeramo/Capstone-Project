@@ -17,6 +17,7 @@ import MyProducts from "./pages/MyProducts";
 import ProductDetails from "./pages/ProductDetails";
 import CategoryPage from "./pages/CategoryPage";
 import ConditionPage from "./pages/ConditionPage";
+import BrandPage from "./pages/BrandPage";
 
 function App() {
   return (
@@ -33,8 +34,10 @@ function App() {
             <Route path="/products/create" element={<CreateProduct />} />
             <Route path="/products/category/:category" element={<CategoryPage />} /> 
             <Route path="/products/condition/:condition" element={<ConditionPage />} />
+            <Route path="/products/brand/:brand" element={<BrandPage />} />
             <Route path="/products/:id" element={<ProductDetails />} /> 
             <Route path="/myproducts" element={<MyProducts />} />
+            
           </Routes>
         </Container>
         <Footer />

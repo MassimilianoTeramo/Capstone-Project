@@ -7,6 +7,7 @@ import magliaCat from '../uploads/maglia-categoria.png';
 import pantsCat from '../uploads/pants-categoria.png';
 import shoesCat from '../uploads/shoes-categoria.png';
 import socksCat from '../uploads/socks-categoria.png';
+import ballsCat from '../uploads/ballsCat.png';
 import {Col, Card, Button, Container} from 'react-bootstrap';
 
 
@@ -31,6 +32,11 @@ const slider = [
         description: "Socks",
         url: socksCat
     },
+    {
+      title: "balls",
+      description: "Balls",
+      url: ballsCat
+  },
    
 ]
 
@@ -67,7 +73,7 @@ const Carousel = ()=>{
               rotate: 0,
               stretch: 0,
               depth: 100,
-              modifier: 4,
+              modifier: 6,
               slideShadows: true,
             }}
             loop={true}
@@ -93,7 +99,7 @@ const Carousel = ()=>{
             }}
           >
             {slider.map((data, index) => (
-              <SwiperSlide key={index} className="myswiper-slider mt-5 mb-5">
+              <SwiperSlide key={index} className="myswiper-slider mt-5 mb-5 text-center">
                 <Col className="col-12 col-md-6 col-lg-3 ">
                   <Card className="h-100 card-swiper shadow-sm">
                     <Card.Img

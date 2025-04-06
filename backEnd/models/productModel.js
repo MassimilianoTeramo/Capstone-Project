@@ -19,7 +19,7 @@ const productSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    enum: ["shirts", "shoes", "shorts", "socks"],
+    enum: ["shirts", "shoes", "shorts", "socks", "balls"],
     required: true
   },
   size: {
@@ -34,6 +34,11 @@ const productSchema = new mongoose.Schema({
   condition: {
     type: String,
     enum: ["new", "used"],
+    required: true
+  },
+  brand: {
+    type: String,
+    enum: ["Nike", "Adidas", "Puma", "Errea", "Mizuno", "Kappa", "Joma", "Diadora"],
     required: true
   },
   contact: {

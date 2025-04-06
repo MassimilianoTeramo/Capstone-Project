@@ -27,7 +27,7 @@ const Home = () => {
 
     return (
       <>
-       <Container fluid > 
+       <Container fluid className=""> 
           <section className="mt-5 d-flex flex-column align-items-center"> 
             <Carousel />
           </section>

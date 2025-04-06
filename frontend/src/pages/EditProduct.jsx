@@ -28,6 +28,7 @@ const EditProduct = () => {
     image: "",
     condition: "",
     size: "",
+    brand: "",
     author: user ? user.firstName + user.lastName : "",
     contact: user ? user.email : "",
   });
@@ -36,7 +37,9 @@ const EditProduct = () => {
     const fetchEdit = async () => {
       setLoading(true);
       try {
-        const res = await api.get( `${process.env.REACT_APP_API_URL}/products/${id}`);
+        const res = await api.get(
+          `${process.env.REACT_APP_API_URL}/products/${id}`
+        );
         const product = res.data;
         console.log(res.data);
 
@@ -47,9 +50,8 @@ const EditProduct = () => {
           description: product.description,
           image: product.image,
           condition: product.condition,
-          author: user._id,
           size: product.size,
-          contact: user.email
+          brand: product.brand,
         });
         setPreviewUrl(productImg);
       } catch (err) {
@@ -81,8 +83,7 @@ const EditProduct = () => {
       editedForm.append("price", formData.price);
       editedForm.append("condition", formData.condition);
       editedForm.append("size", formData.size);
-      editedForm.append("author", user._id);
-      editedForm.append("contact", user.email);
+      editedForm.append("brand", formData.brand);
 
       if (productImg) {
         editedForm.append("image", productImg);
@@ -97,8 +98,7 @@ const EditProduct = () => {
         image: productImg,
         condition: formData.condition,
         size: formData.size,
-        author: user._id,
-        contact: user.email
+        brand: formData.brand,
       });
 
       if (!process.env.REACT_APP_API_URL) {
@@ -169,6 +169,7 @@ const EditProduct = () => {
                 <option value="shoes">Shoes</option>
                 <option value="shorts">Shorts</option>
                 <option value="socks">Socks</option>
+                <option value="balls">Balls</option>
               </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3">
@@ -256,6 +257,13 @@ const EditProduct = () => {
                     <option value="XL">XL</option>
                     <option value="XXL">XXL</option>
                   </>
+                ) : formData.category === "balls" ? (
+                  <>
+                    <option value="">Select</option>
+                    <option value="3">Size 3</option>
+                    <option value="4">Size 4</option>
+                    <option value="5">Size 5</option>
+                  </>
                 ) : (
                   <>
                     <option value="">Select</option>
@@ -276,6 +284,25 @@ const EditProduct = () => {
                 )}
               </Form.Select>
             </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Brand</Form.Label>
+              <Form.Select
+                aria-label="Default select example"
+                value={formData.brand}
+                onChange={(e) => setFormData({ ...formData, brand: e.target.value })}
+                required
+              >
+                <option value="">Select</option>
+                <option value="Nike">Nike</option>
+                <option value="Adidas">Adidas</option>
+                <option value="Puma">Puma</option>
+                <option value="Errea">Errea</option>
+                <option value="Mizuno">Mizuno</option>
+                <option value="Kappa">Kappa</option>
+                <option value="Joma">Joma</option>
+                <option value="Diadora">Diadora</option>
+              </Form.Select>
+            </Form.Group>
 
             <div className="d-flex gap-3">
               <Button className="submit-button" type="submit">
@@ -285,7 +312,6 @@ const EditProduct = () => {
                 variant="dark"
                 onClick={handleClose}
                 style={{
-                  
                   border: "2px solid #2eff60",
                 }}
               >

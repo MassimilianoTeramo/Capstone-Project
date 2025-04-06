@@ -37,7 +37,7 @@ router.get('/', async (req, res) => {
 // Create a new product
 router.post("/", authorization, upload.single('image'), async (req, res) => {
     try {
-        const { title, description, price, category, author, condition, size, contact } = req.body;
+        const { title, description, price, category, author, condition, size, brand, contact } = req.body;
         console.log('Received data:', req.body);
         console.log('Received file:', req.file);
 
@@ -54,6 +54,7 @@ router.post("/", authorization, upload.single('image'), async (req, res) => {
             author,
             condition,
             size,
+            brand,
             contact
         });
 
@@ -77,7 +78,7 @@ router.post("/", authorization, upload.single('image'), async (req, res) => {
 // Update a product
 router.put('/:id', authorization,  upload.single('image'), async (req, res) => {
     try {
-        const { title, description, price, category, condition, size } = req.body;
+        const { title, description, price, category, condition, brand, size } = req.body;
         const updateData = {};
 
         // campi che forniti nella richiesta
@@ -87,6 +88,7 @@ router.put('/:id', authorization,  upload.single('image'), async (req, res) => {
         if (category) updateData.category = category;
         if (req.file) updateData.image = req.file.path;
         if (condition) updateData.condition = condition;
+        if (brand) updateData.brand = brand;
         if (size) updateData.size = size;
 
         const product = await Product.findByIdAndUpdate(
@@ -183,5 +185,19 @@ router.get('/condition/:condition', async (req, res) => {
     }
 });
 
+// Get products by brand
+router.get('/brand/:brand', async (req, res) => {
+    try {
+        const { brand } = req.params;
+
+        const products = await Product.find({ brand: brand });
+        if (products.length === 0) {
+            return res.status(404).json({ message: 'No products found in this brand' });
+        }
+        res.status(200).json(products);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
 
 export default router;

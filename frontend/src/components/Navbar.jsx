@@ -56,6 +56,9 @@ const CustomNavbar = () => {
               <NavDropdown.Item  as={Link} to="/products/category/shoes" className="dropdown_custom">
                 Shoes
               </NavDropdown.Item>
+              <NavDropdown.Item  as={Link} to="/products/category/balls" className="dropdown_custom">
+                Balls
+              </NavDropdown.Item>
               </NavDropdown>
 
              
@@ -66,6 +69,39 @@ const CustomNavbar = () => {
               </Nav.Link>
               </>
               )}
+               <NavDropdown
+                title="Brands"
+                className="dropdown-navbar"
+                data-bs-theme="dark"
+                style={{ color: "white" }}
+               
+              >
+                <NavDropdown.Item
+                  as={Link} to="/products/brand/Nike" className="dropdown_custom">
+                Nike
+              </NavDropdown.Item >
+              <NavDropdown.Item  as={Link} to="/products/brand/Adidas" className="dropdown_custom">
+                Adidas
+              </NavDropdown.Item>
+              <NavDropdown.Item  as={Link} to="/products/brand/Puma" className="dropdown_custom">
+                Puma
+              </NavDropdown.Item>
+              <NavDropdown.Item  as={Link} to="/products/brand/Errea" className="dropdown_custom">
+                Errea
+              </NavDropdown.Item>
+              <NavDropdown.Item  as={Link} to="/products/brand/Mizuno" className="dropdown_custom">
+                Mizuno
+              </NavDropdown.Item>
+              <NavDropdown.Item  as={Link} to="/products/brand/Kappa" className="dropdown_custom">
+                Kappa
+              </NavDropdown.Item>
+              <NavDropdown.Item  as={Link} to="/products/brand/Joma" className="dropdown_custom">
+                Joma
+              </NavDropdown.Item>
+              <NavDropdown.Item  as={Link} to="/products/brand/Diadora" className="dropdown_custom">
+                Diadora
+              </NavDropdown.Item>
+              </NavDropdown>
             </div>
           </Nav>
           <Nav className="ml-auto justify-content-end align-items-center">

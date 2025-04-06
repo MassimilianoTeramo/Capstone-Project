@@ -2,25 +2,24 @@ import { useState, useEffect } from "react";
 import { Col, Container, Row, Button, Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import EditProduct from "./EditProduct";
 import { useAuth } from '../context/AuthContext'
 import { useNavigate } from "react-router-dom";
 import ProductsCard from "../components/ProductsCard";
 import { Alert } from "react-bootstrap";
 
 
-const CategoryPage = () => {
+const BrandPage = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const { category } = useParams();
-    console.log("Category parameter:", category); // Debugging log
+    const { brand } = useParams();
+    console.log("brand parameter:", brand); // Debugging log
     const { user } = useAuth();
     const navigate = useNavigate();
 
-    const getProductsByCategory = async () => {
+    const getProductsByBrand = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/products/category/${category}`);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/products/brand/${brand}`);
         console.log("Response from API:", response.data); // Debugging log
        
         console.log("Products fetched:", response.data); // Debugging log
@@ -37,7 +36,7 @@ const CategoryPage = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const data = await getProductsByCategory();
+                const data = await getProductsByBrand();
                 setProducts(data);
                 setLoading(false);
                 setError('');
@@ -51,7 +50,7 @@ const CategoryPage = () => {
         };
 
         fetchProducts();
-    }, [category]);
+    }, [brand]);
 
 
     if (loading) return <Container className='mt-4'><p>Loading...</p></Container>;
@@ -59,7 +58,7 @@ const CategoryPage = () => {
 
     return (
         <Container className='mt-4'>
-            <h4 className='mb-4 form-label fw-bold' style={{fontSize:'20px'}} >My Products</h4>
+            <h4 className='mb-4 form-label fw-bold' style={{fontSize:'20px'}} >{products.brand}</h4>
             <Row>
                 {products.length > 0 ? (
                     products.map(product => (
@@ -89,4 +88,4 @@ const CategoryPage = () => {
 
 };
 
-export default CategoryPage;
+export default BrandPage;
