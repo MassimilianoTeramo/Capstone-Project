@@ -2,6 +2,8 @@ import express, {Router} from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import googleStrategy from './middlewares/passport.config.js';
+import passport from 'passport';
 dotenv.config();
 
 //Routes
@@ -14,6 +16,7 @@ const server = express();
 // Middleware
 server.use(cors());
 server.use(express.json());
+passport.use(googleStrategy);
 
 //Routes
 server.use('/products', productRoutes);

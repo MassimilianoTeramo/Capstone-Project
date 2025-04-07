@@ -2,7 +2,8 @@ import {useEffect, useState} from 'react';
 import {Form, Button, Alert, Col, Row, Container} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import api from '../utils/api'; // Assicurati di avere il percorso corretto per l'API
+import { FaGoogle } from 'react-icons/fa';
+import api from '../utils/api';
 
 
 const Login = () => {
@@ -57,9 +58,9 @@ const handleSubmit = async (e) => {
         }
     }, [login, navigate]);
 
-    // const handleGoogleLogin = () => {
-    //     window.location.href = 'http://localhost:3001/auth/google';
-    // }
+    const handleGoogleLogin = () => {
+        window.location.href = process.env.REACT_APP_API_URL+'/auth/google';
+    }
 
     return (
         <Container className='mt-5'>
@@ -107,19 +108,19 @@ const handleSubmit = async (e) => {
                                 Login
                             </Button>
                             
-                            {/* <Button 
+                            <Button 
                                 onClick={handleGoogleLogin} 
+                                className="submit-button"
                                 style={{ 
-                                    background: 'linear-gradient(to right, blue, red)', 
-                                    border: 'none', 
-                                    borderRadius: '10px', 
-                                    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', 
-                                    width: '100%' 
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    gap: '10px',
                                 }}
-                                className='mb-4'
                             >
-                                Login with Google 
-                            </Button> */}
+                                <FaGoogle />
+                                Accedi con Google
+                            </Button>
                         </div>
                     </Form>
                 </Col>

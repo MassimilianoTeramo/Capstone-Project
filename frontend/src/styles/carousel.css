@@ -66,16 +66,7 @@
     -webkit-text-fill-color: transparent;
   
   }
-  
-  .carousel.content hr {
-    display: block;
-    background: #2eff60;
-    height: 0.25rem;
-    width: 6.25rem;
-    border: none;
-    margin: 1.123rem 0 1.876rem 0; 
-  }
-  
+    
   .carousel-content p {
     line-height: 1.6;
     color:rgba(255, 255, 255, 0.53);
@@ -112,7 +103,6 @@
     justify-content: center; /* Centra le card */
     height: auto; /* Permette alle card di adattarsi al contenuto */
     background-color: transparent;
-   
     box-sizing: border-box; 
 }
 .myswiper-slider:hover {
@@ -122,7 +112,6 @@
   .swiper-slide-active div {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
     opacity: 1;
     height: 100%;
     background-color: transparent;
@@ -166,6 +155,7 @@
   }
 
   /* Stile per il contenuto della card */
+  
 .card-swiper {
   border: 1px solid #2eff60; /* Bordo grigio chiaro */
   overflow: hidden;

@@ -25,6 +25,7 @@ const userSchema = new mongoose.Schema({
     required: true, 
     default: "customer",
   },
+  profile: String,
   googleId: {
     type: String,
     unique: true,

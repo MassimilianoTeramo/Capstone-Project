@@ -73,7 +73,7 @@ const Carousel = ()=>{
               rotate: 0,
               stretch: 0,
               depth: 100,
-              modifier: 6,
+              modifier: 7,
               slideShadows: true,
             }}
             loop={true}
@@ -100,7 +100,7 @@ const Carousel = ()=>{
           >
             {slider.map((data, index) => (
               <SwiperSlide key={index} className="myswiper-slider mt-5 mb-5 text-center">
-                <Col className="col-12 col-md-6 col-lg-3 ">
+                <Col className="col-12 col-md-6 col-lg-3">
                   <Card className="h-100 card-swiper shadow-sm">
                     <Card.Img
                       variant="top"
@@ -112,8 +112,8 @@ const Carousel = ()=>{
                       <Card.Title>
                         <h2 className="card-title">{data.description}</h2>
                       </Card.Title>
-                      <Link to={`/products/category/${data.title}`} className="swiper_button">
-                        Check it out!
+                      <Link to={`/products/category/${data.title}`} className="swiper_button mt-5 mx-auto">
+                      Explore {data.title}
                       </Link>
                     </Card.Body>
                   </Card>

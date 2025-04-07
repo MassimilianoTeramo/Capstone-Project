@@ -21,16 +21,6 @@ body::after {
 }
 
 
-@keyframes slideBackground {
-  from {
-    background-position: 0 0;
-  }
-  to {
-    background-position: 0 100px;
-  }
-}
-
-
 /* NAVBAR */
 
 .custom-navbar {

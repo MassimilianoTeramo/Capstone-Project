@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import User from '../models/userModel.js';
 import jwt from 'jsonwebtoken';
 import generateToken from "../helpers/token.js";
+import passport from "passport";
 
 
 
@@ -80,6 +81,15 @@ router.post('/register', async (request, response) => {
 
 
 // Google Login
+router.get('/google', passport.authenticate('google', {scope: ['profile', 'email'] }));
+
+// Google login endpoint
+router.get('/callback-google', passport.authenticate('google', { failureRedirect: process.env.FRONTEND_URL + '/error' }), //creare questa pagina!!!
+(req, res) => {
+    const token = generateToken(req.user);
+    res.redirect(`${process.env.FRONTEND_URL}/login?token=${token}`);
+});
+
 
 //endpoint for login
 router.get('/me', async (request, response) => {
