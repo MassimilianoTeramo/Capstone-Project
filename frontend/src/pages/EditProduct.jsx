@@ -30,7 +30,7 @@ const EditProduct = () => {
     size: "",
     brand: "",
     author: user ? user.firstName + user.lastName : "",
-    contact: user ? user.email : "",
+
   });
 
   useEffect(() => {

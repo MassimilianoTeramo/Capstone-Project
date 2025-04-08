@@ -2,6 +2,7 @@ import express, {Router} from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import GoogleStrategy from 'passport-google-oauth20';
 import googleStrategy from './middlewares/passport.config.js';
 import passport from 'passport';
 dotenv.config();
@@ -10,18 +11,23 @@ dotenv.config();
 import productRoutes from './Routes/product.js';
 import userRoutes from './Routes/users.js';
 import authRoutes from './Routes/auth.js';
+import reviewRoutes from './Routes/reviews.js';
 
 const server = express();
 
+
 // Middleware
 server.use(cors());
-server.use(express.json());
 passport.use(googleStrategy);
+
+server.use(express.json());
+
 
 //Routes
 server.use('/products', productRoutes);
 server.use('/users', userRoutes);
 server.use('/auth', authRoutes);
+server.use('/reviews', reviewRoutes);
 
 //MONGODB
 mongoose

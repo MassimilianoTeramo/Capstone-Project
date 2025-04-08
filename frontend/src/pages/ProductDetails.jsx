@@ -6,6 +6,7 @@ import EditProduct from './EditProduct';
 import { useAuth } from '../context/AuthContext'
 import { useNavigate } from "react-router-dom";
 import '../styles/pDetails.css';
+import Reviews from "../components/Reviews";
 
 
 const ProductDetails =()=>{
@@ -92,10 +93,12 @@ const ProductDetails =()=>{
                             ))}
                         </div>
                         <hr />
+                        <Reviews productId={id} />
+                        <hr />
                         <div className="mb-3">
                             <h5>Seller</h5>
                             <p>{product.author.firstName} {product.author.lastName}</p>
-                            <p>{product.contact}</p>
+                            <p>{product.author.email}</p>
                         </div>
 
                         <hr />

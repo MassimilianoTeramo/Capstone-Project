@@ -2,6 +2,7 @@ import {Router} from 'express';
 import Product from '../models/productModel.js';
 import { upload } from "../utilities/cloudinary.js";
 import { authorization } from '../middlewares/authorization.js';
+import { loggedUser } from '../middlewares/loggedUser.js';
 
 const router = Router();
 
@@ -55,12 +56,12 @@ router.post("/", authorization, upload.single('image'), async (req, res) => {
             condition,
             size,
             brand,
-            contact
+
         });
 
         const savedProduct = await newProduct.save();
         // Populate the author field with user details
-        const populatedProduct = await Product.findById(savedProduct._id).populate('author', 'firstName lastName');
+        const populatedProduct = await Product.findById(savedProduct._id).populate('author');
 
         res.status(201).json({
             message: "Product created successfully",
@@ -115,7 +116,7 @@ router.put('/:id', authorization,  upload.single('image'), async (req, res) => {
 // Product by Author
 router.get("/myproducts", authorization, async (req, res) => {
     try {
-        const products = await Product.find({ author: req.user._id }).populate('author', 'firstName lastName');
+        const products = await Product.find({ author: req.user._id }).populate('author');
         if (!products) {
             return res.status(200).json([]);
         }
@@ -130,7 +131,7 @@ router.get("/myproducts", authorization, async (req, res) => {
 // Get product by ID
 router.get('/:id', async (req, res) => {
     try {
-        const product = await Product.findById(req.params.id).populate('author', 'firstName lastName');
+        const product = await Product.findById(req.params.id).populate('author');
         if (!product) {
             return res.status(404).json({ message: 'Product not found' });
         }
@@ -156,14 +157,13 @@ router.delete('/:id', authorization, async (req, res) => {
 });
 
 // Get all products by category
-router.get('/category/:category', async (req, res) => {
+router.get('/category/:category', loggedUser, async (req, res) => {
     try {
         const { category } = req.params;
+       
 
-        const products = await Product.find({ category: category });
-        if (products.length === 0) {
-            return res.status(404).json({ message: 'No products found in this category' });
-        }
+        const products = await Product.find({ category: category, author:{$ne: req.user?._id} });
+       
         res.status(200).json(products);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -171,14 +171,12 @@ router.get('/category/:category', async (req, res) => {
 });
 
 // Get products by condition
-router.get('/condition/:condition', async (req, res) => {
+router.get('/condition/:condition', loggedUser, async (req, res) => {
     try {
         const { condition } = req.params;
 
-        const products = await Product.find({ condition: condition });
-        if (products.length === 0) {
-            return res.status(404).json({ message: 'No products found in this condition' });
-        }
+        const products = await Product.find({ condition: condition, author:{$ne: req.user?._id} });
+       
         res.status(200).json(products);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -186,14 +184,12 @@ router.get('/condition/:condition', async (req, res) => {
 });
 
 // Get products by brand
-router.get('/brand/:brand', async (req, res) => {
+router.get('/brand/:brand', loggedUser, async (req, res) => {
     try {
         const { brand } = req.params;
 
-        const products = await Product.find({ brand: brand });
-        if (products.length === 0) {
-            return res.status(404).json({ message: 'No products found in this brand' });
-        }
+        const products = await Product.find({ brand: brand, author:{$ne: req.user?._id} });
+       
         res.status(200).json(products);
     } catch (error) {
         res.status(500).json({ message: error.message });

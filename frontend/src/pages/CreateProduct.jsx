@@ -19,7 +19,7 @@ const CreateProduct = ()=> {
         condition: "",
         brand: "",
         author: user ? user.firstName + user.lastName : "",// Set the author to the logged-in user's first name
-        contact: user ? user.email : "", // Set the contact to the logged-in user's email
+       
     });
    
     const [productImg, setProductImg] = useState(null);
@@ -57,7 +57,6 @@ const CreateProduct = ()=> {
             sentForm.append('size', formData.size);
             sentForm.append('brand', formData.brand);
             sentForm.append('image', productImg);
-            sentForm.append('contact', user.email);
 
             // Log dei dati inviati
             console.log('Form data:', {

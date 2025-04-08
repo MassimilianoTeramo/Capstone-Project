@@ -7,6 +7,7 @@ import { useAuth } from '../context/AuthContext'
 import { useNavigate } from "react-router-dom";
 import ProductsCard from "../components/ProductsCard";
 import { Alert } from "react-bootstrap";
+import api from "../utils/api";
 
 
 const CategoryPage = () => {
@@ -20,7 +21,7 @@ const CategoryPage = () => {
 
     const getProductsByCategory = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/products/category/${category}`);
+        const response = await api.get(`${process.env.REACT_APP_API_URL}/products/category/${category}`);
         console.log("Response from API:", response.data); // Debugging log
        
         console.log("Products fetched:", response.data); // Debugging log

@@ -6,7 +6,7 @@ import { useAuth } from '../context/AuthContext'
 import { useNavigate } from "react-router-dom";
 import ProductsCard from "../components/ProductsCard";
 import { Alert } from "react-bootstrap";
-
+import api from '../utils/api'
 
 const BrandPage = () => {
     const [products, setProducts] = useState([]);
@@ -19,7 +19,7 @@ const BrandPage = () => {
 
     const getProductsByBrand = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/products/brand/${brand}`);
+        const response = await api.get(`${process.env.REACT_APP_API_URL}/products/brand/${brand}`);
         console.log("Response from API:", response.data); // Debugging log
        
         console.log("Products fetched:", response.data); // Debugging log

@@ -38,7 +38,7 @@ const handleSubmit = async (e) => {
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
-        const token = urlParams.get('token');
+        const token = urlParams.get('jwt');
         
         if (token) {
             try {
@@ -49,6 +49,7 @@ const handleSubmit = async (e) => {
                     console.log(response.data.user);
                     console.log(token);
                     alert("hi there");
+                    navigate('/');
                 }).catch(error => {
                     setError(error.response?.data?.message || 'Errore di autenticazione con Google');
                 });
@@ -59,7 +60,10 @@ const handleSubmit = async (e) => {
     }, [login, navigate]);
 
     const handleGoogleLogin = () => {
-        window.location.href = process.env.REACT_APP_API_URL+'/auth/google';
+        window.location.href = 'http://localhost:3002/auth/google';
+        console.log('Login con Google avviato');
+        console.log(process.env.REACT_APP_API_URL);
+        console.log(process.env.REACT_APP_API_URL+'/auth/google');
     }
 
     return (

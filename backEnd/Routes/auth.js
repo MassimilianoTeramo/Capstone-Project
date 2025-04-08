@@ -4,7 +4,9 @@ import User from '../models/userModel.js';
 import jwt from 'jsonwebtoken';
 import generateToken from "../helpers/token.js";
 import passport from "passport";
-
+import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+import dotenv from 'dotenv';
+dotenv.config();
 
 
 const router = Router();
@@ -63,6 +65,7 @@ router.post('/register', async (request, response) => {
             role: newUser.role,
             firstName: newUser.firstName,
             lastName: newUser.lastName,
+            password: newUser.password
         };
 
         const token = await generateToken(newUser);
@@ -70,7 +73,7 @@ router.post('/register', async (request, response) => {
             user: userToSend, 
             token
         });
-
+            console.log(token);
        
     } catch (err) {
         console.error('Registration error:', err);
@@ -81,14 +84,18 @@ router.post('/register', async (request, response) => {
 
 
 // Google Login
-router.get('/google', passport.authenticate('google', {scope: ['profile', 'email'] }));
+router.get('/google', 
+    passport.authenticate('google', {scope: ['profile', 'email'] }));
 
 // Google login endpoint
-router.get('/callback-google', passport.authenticate('google', { failureRedirect: process.env.FRONTEND_URL + '/error' }), //creare questa pagina!!!
-(req, res) => {
-    const token = generateToken(req.user);
-    res.redirect(`${process.env.FRONTEND_URL}/login?token=${token}`);
-});
+router.get('/callback-google', 
+    passport.authenticate('google', { session: false}),
+   async (req, res, next) => {
+        const token =  await generateToken(req.user);
+        console.log('Token generato:', token);
+        res.redirect(process.env.FRONTEND_URL + '/login?jwt=' + token);
+    }
+);
 
 
 //endpoint for login

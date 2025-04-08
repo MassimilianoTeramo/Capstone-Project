@@ -41,11 +41,6 @@ const productSchema = new mongoose.Schema({
     enum: ["Nike", "Adidas", "Puma", "Errea", "Mizuno", "Kappa", "Joma", "Diadora"],
     required: true
   },
-  contact: {
-    type: String,
-    ref: "User",
-    required: true
-  },
 
 }, {timestamps: true});
 
