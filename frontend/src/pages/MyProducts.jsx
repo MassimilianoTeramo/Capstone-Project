@@ -66,7 +66,7 @@ const MyProducts =  ()=>{
                     ))
                 ):(
                     <Col>
-                        <p>You haven't published any post yet!</p>
+                        <p>You haven't advertised any product yet!</p>
                     </Col>
 
                 )}

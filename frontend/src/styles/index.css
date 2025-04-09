@@ -147,13 +147,13 @@ body::after {
 
 /*second Section*/
 
-.title2sec {
+.title {
   text-transform: capitalize;
   text-shadow: 0 0 10px rgba(46, 200, 90, 0.5);
   letter-spacing: 0.8;
   font-size: 4rem;
   line-height: 1.1;
-  background-image: linear-gradient(45deg, #2eff60, black);
+  background-image: linear-gradient(180deg, #2eff60, black);
   background-size: 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -189,7 +189,7 @@ body::after {
 }
 .card_title{
   font-size: 24px;
-        color: rgb(225, 174, 7);
+        color: #e1ae07;
         margin-bottom: .5rem;
         font-weight: 400;
 
@@ -202,6 +202,7 @@ body::after {
   font-size: 16px;
   font-weight: 500;
   margin-bottom: 1.25rem;
+  color: #e1ae07;
 }
 .card-price:hover{
   transition: .8s;
@@ -259,3 +260,8 @@ body::after {
   opacity: 1;
 }
 
+.section-divider {
+  color:#2eff5f77;
+  height: 1px;
+  width: 100%;
+}

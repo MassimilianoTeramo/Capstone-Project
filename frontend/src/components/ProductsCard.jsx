@@ -1,24 +1,132 @@
-// import { Card, Button, CardBody, Badge } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import EditProduct from "../pages/EditProduct";
 import { useAuth } from "../context/AuthContext";
-import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
-import ProductDetails from "../pages/ProductDetails";
 import { BiCart } from "react-icons/bi";
+import { GiSoccerBall } from "react-icons/gi";
+import api from "../utils/api";
+import { Card } from "react-bootstrap";
+import { useDispatchCart } from "../context/CartContext"; //carrello
 
-const ProductsCard = ({ product }) => {
+const ProductsCard = ({ product, showActions, onLikeToggle }) => {
+  const dispatch = useDispatchCart(); //carrello
   const navigate = useNavigate();
   const { user, logout } = useAuth();
   const userName = user ? `${user.firstName} ${user.lastName}` : "unknown";
-  const authorName = product.author
-    ? `${product.author.firstName} ${product.author.lastName}`
-    : "Unknown";
+  const authorName = product.author? `${product.author.firstName} ${product.author.lastName}`: "Unknown";
   const [error, setError] = useState("");
+  const [isLiked, setIsLiked] = useState(false);
+
+  //carrello
+  const addToCart = (item)=>{
+    dispatch({type: "ADD", item})
+  };
+
+  useEffect(() => {
+    const checkIfLiked = async () => {
+      if (user) {
+        try {
+          const response = await api.get(
+            `${process.env.REACT_APP_API_URL}/wishlist`
+          );
+          const likedProducts = response.data;
+          const isProductLiked =
+            likedProducts.find((p) => p._id === product._id) !== undefined;
+          setIsLiked(isProductLiked);
+        } catch (error) {
+          console.error("Errore nel controllo dei like:", error);
+        }
+      }
+    };
+    checkIfLiked();
+  }, [user, product._id]);
+
+  const handleLike = async () => {
+    if (!user) {
+      return;
+    }
+
+    try {
+      const response = await api.post(
+        `${process.env.REACT_APP_API_URL}/wishlist/${product._id}`
+      );
+      setIsLiked(response.data.isLiked);
+      if (onLikeToggle) {
+        onLikeToggle();
+      }
+    } catch (error) {
+      console.error("Errore nel like:", error);
+    }
+  };
 
   return (
-    <div className="card">
+    <Card style={{ width: "18rem" }} className="mb-4 position-relative">
+      {/* Pulsante like posizionato in alto a destra */}
+      {showActions && (
+        <Button
+          variant="link"
+          className="position-absolute top-0 end-0 p-2"
+          onClick={handleLike}
+          disabled={!user}
+          style={{
+            zIndex: 1,
+            backgroundColor: "transparent",
+            border: "none",
+            boxShadow: "none",
+          }}
+        >
+          <GiSoccerBall
+            style={{
+              fontSize: "30px",
+              color: isLiked ? "#2eff60 " : "#ffffff",
+              filter: isLiked
+                ? "drop-shadow(0px 0px 3px rgb(46, 255, 96)"
+                : "drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.5))",
+              transition: "all 0.3s ease",
+            }}
+          />
+        </Button>
+      )}
+
+      <Card.Img
+        variant="top"
+        src={product.image}
+        className="card_img"
+        style={{
+          height: "200px",
+          objectFit: "cover",
+          filter: isLiked ? "brightness(1.2)" : "none",
+          transition: "all 0.3s ease",
+        }}
+      />
+      <Card.Body className="card_data mt-3">
+        <Card.Title className="card_title">{product.title}</Card.Title>
+
+          <div className="mt-2 mb-2 card_price">£ {product.price}</div>
+
+        {showActions && (
+          <div className="d-flex justify-content-between">
+            <Button
+              className="card_button"
+              onClick={() => navigate(`/products/${product._id}`)}
+            >
+              Dettagli
+            </Button>
+            <Button 
+              className="card_button"
+              onClick={()=>addToCart(product)}
+              >
+              <BiCart size={24} />
+            </Button>
+          </div>
+        )}
+      </Card.Body>
+    </Card>
+  );
+};
+
+/* 
+  <div className="card">
       <img
         className="card_img"
         src={product?.image || ""}
@@ -39,7 +147,7 @@ const ProductsCard = ({ product }) => {
             {" "}
             Details{" "}
           </Button>
-          {/* <Button onClick={()=> deleteProduct(product._id)}> Delete </Button> */}
+          {/* <Button onClick={()=> deleteProduct(product._id)}> Delete </Button> 
 
           <button variant="warning" className="card_button">
             <BiCart size={24} />
@@ -47,7 +155,7 @@ const ProductsCard = ({ product }) => {
         </div>
       </div>
     </div>
-  );
-};
+
+*/
 
 export default ProductsCard;

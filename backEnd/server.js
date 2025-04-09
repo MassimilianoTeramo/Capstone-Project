@@ -5,13 +5,15 @@ import dotenv from 'dotenv';
 import GoogleStrategy from 'passport-google-oauth20';
 import googleStrategy from './middlewares/passport.config.js';
 import passport from 'passport';
-dotenv.config();
+
 
 //Routes
 import productRoutes from './Routes/product.js';
 import userRoutes from './Routes/users.js';
 import authRoutes from './Routes/auth.js';
 import reviewRoutes from './Routes/reviews.js';
+import wishlistRoutes from './Routes/wishlist.js';
+
 
 const server = express();
 
@@ -28,7 +30,7 @@ server.use('/products', productRoutes);
 server.use('/users', userRoutes);
 server.use('/auth', authRoutes);
 server.use('/reviews', reviewRoutes);
-
+server.use('/wishlist', wishlistRoutes);
 //MONGODB
 mongoose
     .connect(process.env.MONGODB_URL)

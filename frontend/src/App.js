@@ -1,7 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
-
 import { Container } from "react-bootstrap";
 import { AuthProvider } from "./context/AuthContext";
 import CustomNavbar from "./components/Navbar";
@@ -18,6 +16,10 @@ import ProductDetails from "./pages/ProductDetails";
 import CategoryPage from "./pages/CategoryPage";
 import ConditionPage from "./pages/ConditionPage";
 import BrandPage from "./pages/BrandPage";
+import WishList from "./pages/WishList";
+import CartPage from "./pages/CartPage";
+
+
 
 function App() {
   return (
@@ -37,6 +39,8 @@ function App() {
             <Route path="/products/brand/:brand" element={<BrandPage />} />
             <Route path="/products/:id" element={<ProductDetails />} /> 
             <Route path="/myproducts" element={<MyProducts />} />
+            <Route path="/wishlist" element={<WishList />} />
+            <Route path="/cartpage" element={<CartPage />} />
             
           </Routes>
         </Container>

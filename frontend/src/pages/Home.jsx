@@ -32,8 +32,12 @@ const Home = () => {
             <Carousel />
           </section>
           <section className="mt-5 d-flex flex-column align-items-center">
-            <h4 className="mt-5 mb-4 title2sec" style={{fontSize:'25px', textAlign:'center'}}>New or Used?</h4>
+            <h2 className="mt-5 mb-4 title" style={{fontSize:'25px', textAlign:'center'}}>New or Used?</h2>
+            
+            <hr className="section-divider mt-5" />
+            
             <div className="mb-4 d-flex justify-content-between container-fluid">
+              
               {imgMenu.map((data, index) => (
                   <Card 
                     key={index}

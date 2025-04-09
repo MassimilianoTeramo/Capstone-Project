@@ -40,8 +40,7 @@ const productSchema = new mongoose.Schema({
     type: String,
     enum: ["Nike", "Adidas", "Puma", "Errea", "Mizuno", "Kappa", "Joma", "Diadora"],
     required: true
-  },
-
+  }
 }, {timestamps: true});
 
 export default model("Product", productSchema);

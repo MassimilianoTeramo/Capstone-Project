@@ -71,7 +71,7 @@ const BrandPage = () => {
                     ))
                 ):(
                     <Col>
-                        <p>You haven't published any post yet!</p>
+                        <p>No products at the moment</p>
                     </Col>
 
                 )}

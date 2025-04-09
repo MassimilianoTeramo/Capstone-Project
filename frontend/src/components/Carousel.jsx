@@ -52,33 +52,32 @@ const Carousel = ()=>{
               Find everything you need to play, support, and live football to
               the fullest. Fast shipping and guaranteed quality!
             </p>
-            <a href="#" className="slider-btn">
-              Shop Now
-            </a>
           </div>
         </div>
         <Container className="mt-5">
           <h2 
-          className="text-center title2sec mt-4"
+          className="text-center title mt-4 mb-3"
           style={{fontSize:'25px', textAlign:'center'}}
           >Shop by Category</h2>
-          <hr className="section-divider mt-3" />
+          <hr className="section-divider mt-5" />
           <Swiper
             className="myswiper"
+            initialSlide={3}
             modules={[Pagination, EffectCoverflow, Autoplay]}
             effect={"coverflow"}
             grabCursor={true}
             centeredSlides={true}
+            speed={600}
             coverflowEffect={{
               rotate: 0,
-              stretch: 0,
+              stretch: 5,
               depth: 100,
               modifier: 7,
               slideShadows: true,
             }}
             loop={true}
             pagination={{ clickable: true }}
-            slidesPerView={2}
+            slidesPerView="auto"
             autoplay={{
               delay: 4000,
               disableOnInteraction: false,

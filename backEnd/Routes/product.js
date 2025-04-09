@@ -126,6 +126,18 @@ router.get("/myproducts", authorization, async (req, res) => {
     }
 });
 
+//get liked product
+router.get("/wishlist", authorization, async (req, res) => {
+    try {
+        const wishlistProducts = await Product.find({ liked: true });
+        if (!wishlistProducts) {
+            return res.status(200).json([]);
+        }
+        res.status(200).json(wishlistProducts);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
 
 
 // Get product by ID
