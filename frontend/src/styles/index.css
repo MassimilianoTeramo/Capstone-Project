@@ -20,6 +20,14 @@ body::after {
   pointer-events: none;
 }
 
+.bg1 {
+  position: fixed;
+  top: 0;
+  z-index: -1;
+  opacity: 0.19;
+  object-fit: cover;
+}
+
 
 /* NAVBAR */
 
@@ -174,13 +182,15 @@ body::after {
   position: absolute;
   width: 260px;
   filter: drop-shadow(5px 10px 15px rgba(8, 9, 13, .4));
+  z-index: 3;
 }
 .card_img:hover{
   transition: .8s;
   z-index: 2;
 }
 .card_data{
-  transform: translateY(13.2rem);
+  transform: translateY(16.2rem);
+  width: 300px;
   text-align: center;
   color:rgb(170, 167, 167);
 }
@@ -204,9 +214,7 @@ body::after {
   margin-bottom: 1.25rem;
   color: #e1ae07;
 }
-.card-price:hover{
-  transition: .8s;
-}
+
 .card_description{
   font-size: 14px;
         text-align: initial;
@@ -243,21 +251,23 @@ body::after {
 }
 
 .card:hover .card_data {
-  transform: translateY(7rem);
+  transform: translateY(10rem);
 }
 
 .card:hover .card_title {
  visibility: hidden;
+ transition: .2s;
 }
 
 .card:hover .card_price {
-  visibility: hidden;
+  display: none;
+ transition: .1s;
 }
 
-.card:hover .card_description, 
 .card:hover .card_button {
-  transition-delay: .2s;
+  transition-delay: .5s;
   opacity: 1;
+  margin-top: 30px;
 }
 
 .section-divider {

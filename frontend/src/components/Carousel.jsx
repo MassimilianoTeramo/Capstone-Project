@@ -8,6 +8,7 @@ import pantsCat from '../uploads/shorts1.png';
 import shoesCat from '../uploads/shoes-categoria.png';
 import socksCat from '../uploads/socksCat.jpeg';
 import ballsCat from '../uploads/ballsCat.png';
+
 import {Col, Card, Button, Container} from 'react-bootstrap';
 
 
@@ -57,7 +58,7 @@ const Carousel = ()=>{
       <Container className="mt-5">
         <h2 
         className="text-center title mt-4 mb-3"
-        style={{fontSize:'25px', textAlign:'center'}}
+        style={{fontSize:'35px', textAlign:'center'}}
         >Shop by Category</h2>
         <hr className="section-divider mt-5" />
         <Swiper
@@ -121,17 +122,12 @@ const Carousel = ()=>{
                 color: "#fff",
                 borderRadius: "5px",
                 textDecoration: "none",
-                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
                 transition: "all 0.3s ease",
+                position:"absolute",
+                bottom:"10px",
+                right: "15px",
               }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-3px)";
-                e.currentTarget.style.boxShadow = "0 6px 8px rgba(0, 0, 0, 0.2)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 4px 6px rgba(0, 0, 0, 0.1)";
-              }}
+             
               >
               Explore {data.title}
               </Link>
@@ -141,7 +137,11 @@ const Carousel = ()=>{
           </SwiperSlide>
         ))}
         </Swiper>
+
+
       </Container>
+
+
       </div>
     );
 }

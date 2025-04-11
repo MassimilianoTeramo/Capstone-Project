@@ -122,7 +122,7 @@ const Reviews = ({ productId }) => {
                         <div style={{fontStyle:'italic'}} className="form-label" >
                             {review.author?.firstName || 'Utente Eliminato'} {review.author?.lastName || ''}
                         </div>
-                        <div className="review-text" style={{color:'white'}}>{review.content}
+                        <div className="review-text" style={{color:'black'}}>{review.content}
                             <div className='text-muted small pt-2 pb-2'>{new Date(review.createdAt).toLocaleString()}</div>
                         </div>
                         {user && review.author && user._id === review.author._id && (

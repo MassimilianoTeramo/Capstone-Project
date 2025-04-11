@@ -1,6 +1,7 @@
 import express from 'express';
 import Wishlist from '../models/wishListModel.js';
 import { authorization } from '../middlewares/authorization.js';
+import { Alert } from 'react-bootstrap';
 
 const router = express.Router();
 
@@ -32,7 +33,7 @@ router.post('/:productId', authorization, async (req, res) => {
             await newWish.save();
             return res.status(200).json({ 
                 message: 'Prodotto aggiunto alla wishlist',
-                isLiked: true 
+                isLiked: true,
             });
         }
     } catch (error) {

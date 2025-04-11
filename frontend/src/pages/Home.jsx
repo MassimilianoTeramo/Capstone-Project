@@ -7,6 +7,8 @@ import { useAuth } from "../context/AuthContext";
 import {Link} from "react-router-dom";
 import newCat from '../uploads/newCat.jpg';
 import usedCat from '../uploads/usedCat.jpg';
+import bg1 from '../uploads/bg1.jpg';
+
 
 const Home = () => {
 
@@ -32,7 +34,7 @@ const Home = () => {
             <Carousel />
           </section>
           <section className="mt-5 d-flex flex-column align-items-center">
-            <h2 className="mt-5 mb-4 title" style={{fontSize:'25px', textAlign:'center'}}>New or Used?</h2>
+            <h2 className="mb-4 title" style={{fontSize:'35px', textAlign:'center'}}>New or Used?</h2>
             
             <hr className="section-divider mt-5" />
             
@@ -62,6 +64,9 @@ const Home = () => {
                   </Card>
               ))}
             </div>
+
+
+        <img src={bg1} alt="bg1" className='bg1' />
                 </section>
         </Container>
 

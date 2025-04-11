@@ -1,11 +1,12 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
+import { Alert, Button } from "react-bootstrap";
 import { BiCart } from "react-icons/bi";
 import { GiSoccerBall } from "react-icons/gi";
 import api from "../utils/api";
 import { Card } from "react-bootstrap";
+import EditProduct from "../pages/EditProduct";
 import { useDispatchCart } from "../context/CartContext"; //carrello
 
 const ProductsCard = ({ product, showActions, onLikeToggle }) => {
@@ -41,6 +42,7 @@ const ProductsCard = ({ product, showActions, onLikeToggle }) => {
     checkIfLiked();
   }, [user, product._id]);
 
+
   const handleLike = async () => {
     if (!user) {
       return;
@@ -60,7 +62,7 @@ const ProductsCard = ({ product, showActions, onLikeToggle }) => {
   };
 
   return (
-    <Card style={{ width: "18rem" }} className="mb-4 position-relative">
+    <Card id="card" style={{ width: "18rem" }} className="mb-4 position-relative d-flex align-items-center pt-3">
       {/* Pulsante like posizionato in alto a destra */}
       {showActions && user && user._id !== product.author._id && (
         <Button
@@ -69,7 +71,7 @@ const ProductsCard = ({ product, showActions, onLikeToggle }) => {
           onClick={handleLike}
           disabled={!user}
           style={{
-            zIndex: 1,
+            zIndex: 4,
             backgroundColor: "transparent",
             border: "none",
             boxShadow: "none",
@@ -105,22 +107,34 @@ const ProductsCard = ({ product, showActions, onLikeToggle }) => {
         <div className="mt-2 mb-2 card_price">£ {product.price}</div>
 
         {showActions && (
-          <div className="d-flex justify-content-between">
+                 <div className="d-flex justify-content-around">
             <Button
-              className="card_button"
+              className="card_button" style={{width: "100px", fontSize: "12px"}}
               onClick={() => navigate(`/products/${product._id}`)}
             >
               Dettagli
             </Button>
-            {user && user._id !== product.author._id && ( 
+          {user && user._id !== product.author._id ? (
             <Button 
               className="card_button"
               onClick={() => addToCart(product)}
+              style={{width: "100px", fontSize: "12px"}}
             >
               <BiCart size={24} />
             </Button>
-            )}
+          ) : (
+            <div>
+            <Button
+              className="card_button" 
+              as={Link}
+              style={{width: "100px", fontSize: "12px"}}
+              to={`/products/category/${product.category}`}
+            >Go to {product.category}</Button>
           </div>
+          )}
+          </div>
+        
+
         )}
       </Card.Body>
     </Card>

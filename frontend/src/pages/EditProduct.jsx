@@ -167,7 +167,7 @@ const EditProduct = () => {
                 <Form.Check
                   type="checkbox"
                   label="Male"
-                  value={"Men"}
+                  value={"Male"}
                   onChange={(e) =>
                     setFormData({ ...formData, gender: e.target.value })
                   }
@@ -175,7 +175,7 @@ const EditProduct = () => {
                 <Form.Check
                   type="checkbox"
                   label="Female"
-                  value={"Women"}
+                  value={"Female"}
                   onChange={(e) =>
                     setFormData({ ...formData, gender: e.target.value })
                   }

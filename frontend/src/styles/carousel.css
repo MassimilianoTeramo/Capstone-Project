@@ -13,15 +13,16 @@
 
 .carousel-title {
   text-transform: capitalize;
-  text-shadow: 0 0 10px rgba(46, 200, 90, 0.5);
+  text-shadow: 0 0 15px rgba(46, 200, 90, 0.5);
   letter-spacing: 0.8;
   font-size: 4rem;
   line-height: 1.1;
-  background-image: linear-gradient(180deg, #2eff60, black);
+  background-image: linear-gradient(180deg, #2eff60, rgb(1, 38, 40));
   background-size: 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
 
 .carousel-content hr {
   display: block;
@@ -69,25 +70,14 @@
     text-transform:uppercase;
     letter-spacing: 0.20rem;
     font-size: 1rem;
-    color:rgba(255, 255, 255, 0.53);
+    color:rgba(255, 255, 255, 0.771);
   }
   
-  .carousel-content h1 {
-    text-transform: capitalize;
-    text-shadow: 0 0 10px rgba(46, 200, 90, 0.5);
-    letter-spacing: 0.8;
-    font-size: 4rem;
-    line-height: 1.1;
-    background-image: linear-gradient(45deg, #2eff60, black);
-    background-size: 100%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  
-  }
+
     
   .carousel-content p {
     line-height: 1.6;
-    color:rgba(255, 255, 255, 0.53);
+    color:rgba(255, 255, 255, 0.771);
   }
   
   .slider-btn {
@@ -122,6 +112,7 @@
     height: auto; /* Permette alle card di adattarsi al contenuto */
     background-color: transparent;
     box-sizing: border-box; 
+    margin-left: 11px;
 }
 .myswiper-slider:hover {
     transform: scale(1.05); /* Effetto zoom al passaggio del mouse */
@@ -130,7 +121,7 @@
   .swiper-slide-active div {
     display: flex;
     flex-direction: column;
-    opacity: 1;
+    opacity: 4;
     height: 100%;
     background-color: transparent;
   
@@ -177,13 +168,14 @@
 .card-swiper {
   border: 1px solid #2eff60; /* Bordo grigio chiaro */
   overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Spazio uniforme tra gli elementi */
-    height: 100%; /* Occupa tutta l'altezza disponibile */
-    border-radius: 1rem; /* Angoli arrotondati */
-    padding: 1rem; /* Padding interno */
-    box-shadow: 0 4px 8px #ffd620; /* Ombra per profondità */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Spazio uniforme tra gli elementi */
+  height: 100%; /* Occupa tutta l'altezza disponibile */
+  min-height: 28rem; /* Imposta un'altezza minima maggiore per le card */
+  border-radius: 1rem; /* Angoli arrotondati */
+  padding: 1rem; /* Padding interno */
+  box-shadow: 0 4px 8px #ffd620; /* Ombra per profondità */
 }
   .card-swiper:hover {
     transform: scale(1.05); /* Effetto zoom al passaggio del mouse */
