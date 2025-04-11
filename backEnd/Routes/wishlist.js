@@ -45,7 +45,7 @@ router.get('/', authorization, async (req, res) => {
     try {
         const userId = req.user._id;
         
-        const wishlistItems = await Wishlist.find({ user: userId })
+        const wishlistItems = await Wishlist.find({ user: userId, author:{$ne: req.user?._id} })
             .populate('product')
             .populate('user', 'firstName lastName');
 
@@ -58,10 +58,3 @@ router.get('/', authorization, async (req, res) => {
 });
 
 export default router;
-
- 
-
-        //crea nuova voce wishlist
-        
-            
-    

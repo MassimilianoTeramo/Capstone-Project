@@ -5,36 +5,10 @@ import { useState, useEffect } from "react";
 import { Col, Container, Row, Image, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { BiCart } from "react-icons/bi";
+import { FaTrash } from "react-icons/fa";
 
 
-const CartItem = ({ product, index, handleRemove }) => {
-    const [products, setProducts] = useState([]);
-    const { user } = useAuth();
 
-
-  return (
-    <article>
-      <div className="dt w-100 bb b--black-10 pb2 mt2 dim blue" href="#0">
-        <div className="dtc w3">
-          <img src={product.image} className="db w-100" />
-        </div>
-        <div className="dtc v-top pl2">
-          <h1 className="f6 f5-ns fw6 lh-title black mv0">{product.title}</h1>
-          <dl className="mt2 f6">
-            <dt className="clip">Price</dt>
-            <dd className="ml0">
-              {product.price.toLocaleString("en", {
-                style: "currency",
-                currency: "GBP"
-              })}
-            </dd>
-          </dl>
-          <button onClick={() => handleRemove(index)}>Remove from cart</button>
-        </div>
-      </div>
-    </article>
-  );
-};
 
 export default function Store() {
   const items = useCart();
@@ -83,7 +57,7 @@ export default function Store() {
         </Col>
       </Row>
         <div className="cart-items-container">
-            <Row>
+            <Row className="d-flex align-items-center">
             {items.length > 0 ? (
                 items.map((product, index) => (
                     <Row key={product._id} className="d-flex align-items-center mt-4">
@@ -91,15 +65,27 @@ export default function Store() {
                 <Image src={product.image} style={{ width: "60%" }} />
               </Col>
               <Col md={4} className="mb-4">
-                <p className="card_price">£ {product.price}</p>
+                <p className="card_price mt-3">£ {product.price}</p>
               </Col>
               <Col className="mb-4"> 
+              <div className="d-flex justify-content-end">
                 <Button
-                    className="card_button"
+                    className="card_button mx-3 mt-0"
                     onClick={() => navigate(`/products/${product._id}`)}
                 >
               Dettagli
             </Button>
+            <Button
+              className="mt-0" 
+              onClick={() => handleRemove(index)}
+              style={{backgroundColor:"transparent", border:"transparent"}}
+              >
+              
+                <FaTrash size={24} style={{color:"#ffd620"}} />
+              </Button>
+              </div>
+            
+          
             </Col>
             </Row>
                 ))

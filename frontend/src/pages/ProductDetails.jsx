@@ -71,56 +71,57 @@ const ProductDetails =()=>{
             {loading && <p>Loading products...</p>}
             {error && <p>An error occurred: {error.message}</p>}
             {!loading && !error && (
-                <Row className="d-flex justify-content-between">
-                    <Col md={4} className="d-flex align-items-center mt-5">
-                        <img src={product.image} alt={product.title} style={{ width: '100%' }} />
-                    </Col>
-                    <Col md={2}></Col>
-                    <Col md={6} className='colDetails'>
-                        <h1 className="text-center">{product.title}</h1>
-                        <div className="mt-3 d-flex justify-content-around">
-                            <p style={{fontSize:"20px"}}><span style={{color:"#2eff60", marginRight:"10px"}}>Price: </span> {product.price}€</p>
-                            <p style={{fontSize:"20px"}}><span style={{color:"#2eff60", marginRight:"10px"}}>Size:</span> {product.size}</p>
-                            <p style={{fontSize:"20px"}}><span style={{color:"#2eff60", marginRight:"10px"}}>Condition:</span> {product.condition}</p>
-                        </div> 
-                        <hr />            
-                        <div className="mb-3">
-                            <h3>Description</h3>
-                            {product.description?.split('\n').map((paragraph, index) => (
-                                <p key={index} className="content-paragraph">
-                                    {paragraph}
-                                </p>
-                            ))}
-                        </div>
-                        <hr />
-                        <Reviews productId={id} />
-                        <hr />
-                        <div className="mb-3">
-                            <h5>Seller</h5>
-                            <p>{product.author.firstName} {product.author.lastName}</p>
-                            <p>{product.author.email}</p>
-                        </div>
-
-                        <hr />
-                        <div className="d-flex justify-content-center gap-3">
-                       
-                            <div className="mt-3 d-flex justify-content-start gap-3 ">
-                                <EditProduct product={product} 
-                                style={{cursor:'pointer'}} 
-                                
-                                />
-                                <Button 
-                                    variant="danger"
-                                    onClick={() => deleteProduct(id)}    
-                                >
-                                    Delete
-                                </Button>
-                            </div>
-                     
+            <Row className="d-flex justify-content-between">
+                <Col md={4} className="d-flex align-items-center mt-5">
+                <img src={product.image} alt={product.title} style={{ width: '100%' }} />
+                </Col>
+                <Col md={2}></Col>
+                <Col md={6} className='colDetails'>
+                <h1 className="text-center">{product.title}</h1>
+                <div className="mt-3 d-flex justify-content-around">
+                    <p style={{fontSize:"20px"}}><span style={{color:"#2eff60", marginRight:"10px"}}>Price: </span> {product.price}€</p>
+                    <p style={{fontSize:"20px"}}><span style={{color:"#2eff60", marginRight:"10px"}}>Size:</span> {product.size}</p>
+                    <p style={{fontSize:"20px"}}><span style={{color:"#2eff60", marginRight:"10px"}}>Gender:</span> {(product.gender ?? "unknown").charAt(0).toUpperCase() + (product.gender ?? "unknown").slice(1)}</p>
+                    <p style={{fontSize:"20px"}}><span style={{color:"#2eff60", marginRight:"10px"}}>Condition:</span> {product.condition}</p>
+                </div> 
+                <hr />            
+                <div className="mb-3">
+                    <h3>Description</h3>
+                    {product.description?.split('\n').map((paragraph, index) => (
+                    <p key={index} className="content-paragraph">
+                        {paragraph}
+                    </p>
+                    ))}
+                </div>
+                
+                <hr />
+                <div className="mb-3">
+                    <h5>Seller</h5>
+                    <p>{product.author.firstName} {product.author.lastName}</p>
+                    <p>{product.author.email}</p>
+                </div>
+                <hr />
+                <Reviews productId={id} />
+                <hr />
+                <div className="d-flex justify-content-center gap-3">
+                   
+                    <div className="mt-3 d-flex justify-content-start gap-3 ">
+                    <EditProduct product={product} 
+                    style={{cursor:'pointer'}} 
+                    
+                    />
+                    <Button 
+                        variant="danger"
+                        onClick={() => deleteProduct(id)}    
+                    >
+                        Delete
+                    </Button>
                     </div>
-                    </Col>
+                 
+                </div>
+                </Col>
 
-                </Row>
+            </Row>
             )}
         </Container>
         )

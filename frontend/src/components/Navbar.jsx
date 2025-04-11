@@ -186,7 +186,7 @@ const CustomNavbar = () => {
                   <NavDropdown.Item
                     className="dropdown_custom"
                     as={Link}
-                    to="/products/create"
+                    to="/profile"
                   >
                     My Profile
                   </NavDropdown.Item>

@@ -30,7 +30,7 @@ const EditProduct = () => {
     size: "",
     brand: "",
     author: user ? user.firstName + user.lastName : "",
-
+    gender: "",
   });
 
   useEffect(() => {
@@ -52,6 +52,7 @@ const EditProduct = () => {
           condition: product.condition,
           size: product.size,
           brand: product.brand,
+          gender: product.gender,
         });
         setPreviewUrl(productImg);
       } catch (err) {
@@ -84,6 +85,7 @@ const EditProduct = () => {
       editedForm.append("condition", formData.condition);
       editedForm.append("size", formData.size);
       editedForm.append("brand", formData.brand);
+      editedForm.append('gender', formData.gender);
 
       if (productImg) {
         editedForm.append("image", productImg);
@@ -99,6 +101,7 @@ const EditProduct = () => {
         condition: formData.condition,
         size: formData.size,
         brand: formData.brand,
+        gender: formData.gender,
       });
 
       if (!process.env.REACT_APP_API_URL) {
@@ -154,6 +157,46 @@ const EditProduct = () => {
                 }
                 required
               />
+            </Form.Group>
+            <Form.Group className="mb-3">
+            <Form.Label>Gender</Form.Label>
+              <Form.Group
+                className="mb-3 d-flex justify-content-center gap-5"
+                controlId="formBasicCheckbox"
+              >
+                <Form.Check
+                  type="checkbox"
+                  label="Male"
+                  value={"Men"}
+                  onChange={(e) =>
+                    setFormData({ ...formData, gender: e.target.value })
+                  }
+                />
+                <Form.Check
+                  type="checkbox"
+                  label="Female"
+                  value={"Women"}
+                  onChange={(e) =>
+                    setFormData({ ...formData, gender: e.target.value })
+                  }
+                />
+                <Form.Check
+                  type="checkbox"
+                  label="Kid"
+                  value={"Kids"}
+                  onChange={(e) =>
+                    setFormData({ ...formData, gender: e.target.value })
+                  }
+                />
+                 <Form.Check
+                  type="checkbox"
+                  label="Unisex"
+                  value={"Unisex"}
+                  onChange={(e) =>
+                    setFormData({ ...formData, gender: e.target.value })
+                  }
+                />
+            </Form.Group>
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label className="form-label">Category</Form.Label>

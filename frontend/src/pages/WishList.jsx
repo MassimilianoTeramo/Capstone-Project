@@ -5,13 +5,22 @@ import { Alert } from "react-bootstrap";
 import api from "../utils/api";
 import { BiCart } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
+import { useDispatchCart } from "../context/CartContext"; //carrello
+
+
 
 const WishList = () => {
+  const dispatch = useDispatchCart(); //carrello
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { user } = useAuth();
   const navigate = useNavigate();
+
+    //carrello
+    const addToCart = (item)=>{
+      dispatch({type: "ADD", item})
+    };
 
   const fetchWishlist = async () => {
     try {
@@ -82,9 +91,12 @@ const WishList = () => {
               Dettagli
             </Button></Col>
               <Col className="mb-4">
-                <Button className="card_button">
-                  <BiCart size={24} />
-                </Button>
+              <Button 
+              className="card_button"
+              onClick={() => addToCart(product)}
+            >
+              <BiCart size={24} />
+            </Button>
               </Col>
             </Row>
           ))

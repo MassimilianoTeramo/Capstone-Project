@@ -50,6 +50,12 @@
   width: 100%; /* Imposta l'altezza al 100% del contenitore */
 }
  
+.swiper {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 7rem;
+}
   
   @media screen and (min-width:48rem){
     .carousel {

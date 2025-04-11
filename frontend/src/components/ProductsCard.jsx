@@ -62,7 +62,7 @@ const ProductsCard = ({ product, showActions, onLikeToggle }) => {
   return (
     <Card style={{ width: "18rem" }} className="mb-4 position-relative">
       {/* Pulsante like posizionato in alto a destra */}
-      {showActions && (
+      {showActions && user && user._id !== product.author._id && (
         <Button
           variant="link"
           className="position-absolute top-0 end-0 p-2"
@@ -102,7 +102,7 @@ const ProductsCard = ({ product, showActions, onLikeToggle }) => {
       <Card.Body className="card_data mt-3">
         <Card.Title className="card_title">{product.title}</Card.Title>
 
-          <div className="mt-2 mb-2 card_price">£ {product.price}</div>
+        <div className="mt-2 mb-2 card_price">£ {product.price}</div>
 
         {showActions && (
           <div className="d-flex justify-content-between">
@@ -112,50 +112,19 @@ const ProductsCard = ({ product, showActions, onLikeToggle }) => {
             >
               Dettagli
             </Button>
+            {user && user._id !== product.author._id && ( 
             <Button 
               className="card_button"
-              onClick={()=>addToCart(product)}
-              >
+              onClick={() => addToCart(product)}
+            >
               <BiCart size={24} />
             </Button>
+            )}
           </div>
         )}
       </Card.Body>
     </Card>
   );
 };
-
-/* 
-  <div className="card">
-      <img
-        className="card_img"
-        src={product?.image || ""}
-        alt={product?.title || "Product Image"}
-        style={{ marginBottom: "15px" }}
-      />
-      <div className="card_data">
-        <div className="card_title">{product.title}</div>
-        <div className="mt-2 mb-2 card_price">£ {product.price}</div>
-        <div></div>
-
-        <div className="mt-5 d-flex justify-content-start gap-3">
-          <Button
-            variant="warning"
-            className="card_button"
-            onClick={() => navigate(`/products/${product._id}`)}
-          >
-            {" "}
-            Details{" "}
-          </Button>
-          {/* <Button onClick={()=> deleteProduct(product._id)}> Delete </Button> 
-
-          <button variant="warning" className="card_button">
-            <BiCart size={24} />
-          </button>
-        </div>
-      </div>
-    </div>
-
-*/
 
 export default ProductsCard;

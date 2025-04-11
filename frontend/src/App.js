@@ -18,7 +18,7 @@ import ConditionPage from "./pages/ConditionPage";
 import BrandPage from "./pages/BrandPage";
 import WishList from "./pages/WishList";
 import CartPage from "./pages/CartPage";
-
+import Profile from "./pages/MyProfile";
 
 
 function App() {
@@ -41,6 +41,7 @@ function App() {
             <Route path="/myproducts" element={<MyProducts />} />
             <Route path="/wishlist" element={<WishList />} />
             <Route path="/cartpage" element={<CartPage />} />
+            <Route path="/profile" element={<Profile />} />
             
           </Routes>
         </Container>

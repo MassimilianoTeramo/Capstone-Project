@@ -38,7 +38,7 @@ router.get('/', async (req, res) => {
 // Create a new product
 router.post("/", authorization, upload.single('image'), async (req, res) => {
     try {
-        const { title, description, price, category, author, condition, size, brand, contact } = req.body;
+        const { title, description, price, category, author, condition, size, brand, gender } = req.body;
         console.log('Received data:', req.body);
         console.log('Received file:', req.file);
 
@@ -56,6 +56,7 @@ router.post("/", authorization, upload.single('image'), async (req, res) => {
             condition,
             size,
             brand,
+            gender,
 
         });
 
@@ -79,7 +80,7 @@ router.post("/", authorization, upload.single('image'), async (req, res) => {
 // Update a product
 router.put('/:id', authorization,  upload.single('image'), async (req, res) => {
     try {
-        const { title, description, price, category, condition, brand, size } = req.body;
+        const { title, description, price, category, condition, brand, size, gender } = req.body;
         const updateData = {};
 
         // campi che forniti nella richiesta
@@ -91,6 +92,7 @@ router.put('/:id', authorization,  upload.single('image'), async (req, res) => {
         if (condition) updateData.condition = condition;
         if (brand) updateData.brand = brand;
         if (size) updateData.size = size;
+        if (gender) updateData.gender = gender;
 
         const product = await Product.findByIdAndUpdate(
             req.params.id, 
