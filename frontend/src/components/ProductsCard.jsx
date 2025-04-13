@@ -8,6 +8,8 @@ import api from "../utils/api";
 import { Card } from "react-bootstrap";
 import EditProduct from "../pages/EditProduct";
 import { useDispatchCart } from "../context/CartContext"; //carrello
+import { useWish } from "../context/WishListContext";
+import {useDispatchWish} from "../context/WishListContext";
 
 const ProductsCard = ({ product, showActions, onLikeToggle }) => {
   const dispatch = useDispatchCart(); //carrello
@@ -17,6 +19,8 @@ const ProductsCard = ({ product, showActions, onLikeToggle }) => {
   const authorName = product.author? `${product.author.firstName} ${product.author.lastName}`: "Unknown";
   const [error, setError] = useState("");
   const [isLiked, setIsLiked] = useState(false);
+  const likedProducts = useWish();
+  const dispatchWish = useDispatchWish();
 
   //carrello
   const addToCart = (item)=>{
@@ -26,17 +30,9 @@ const ProductsCard = ({ product, showActions, onLikeToggle }) => {
   useEffect(() => {
     const checkIfLiked = async () => {
       if (user) {
-        try {
-          const response = await api.get(
-            `${process.env.REACT_APP_API_URL}/wishlist`
-          );
-          const likedProducts = response.data;
           const isProductLiked =
             likedProducts.find((p) => p._id === product._id) !== undefined;
           setIsLiked(isProductLiked);
-        } catch (error) {
-          console.error("Errore nel controllo dei like:", error);
-        }
       }
     };
     checkIfLiked();
@@ -56,6 +52,14 @@ const ProductsCard = ({ product, showActions, onLikeToggle }) => {
       if (onLikeToggle) {
         onLikeToggle();
       }
+      await api.get(
+        `${process.env.REACT_APP_API_URL}/wishlist`
+      ) 
+      .then (response =>dispatchWish({ type: "UPDATE", items:response.data }))
+  
+      .catch (error=>console.error(error));
+
+      
     } catch (error) {
       console.error("Errore nel like:", error);
     }
@@ -80,9 +84,9 @@ const ProductsCard = ({ product, showActions, onLikeToggle }) => {
           <GiSoccerBall
             style={{
               fontSize: "30px",
-              color: isLiked ? "#2eff60 " : "#ffffff",
+              color: isLiked ? "#e1ae07 " : "#ffffff",
               filter: isLiked
-                ? "drop-shadow(0px 0px 3px rgb(46, 255, 96)"
+                ? "drop-shadow(0px 0px 3px #e1ae07"
                 : "drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.5))",
               transition: "all 0.3s ease",
             }}

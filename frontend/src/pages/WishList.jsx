@@ -6,58 +6,45 @@ import api from "../utils/api";
 import { BiCart } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { useDispatchCart } from "../context/CartContext"; //carrello
-
-
+import { useWish } from "../context/WishListContext";
+import { useDispatchWish } from "../context/WishListContext";
 
 const WishList = () => {
   const dispatch = useDispatchCart(); //carrello
-  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { user } = useAuth();
+  const products = useWish();
   const navigate = useNavigate();
+  const dispatchWish = useDispatchWish();
 
-    //carrello
-    const addToCart = (item)=>{
-      dispatch({type: "ADD", item})
-    };
+  //carrello
+  const addToCart = (item) => {
+    dispatch({ type: "ADD", item });
+  };
 
-  const fetchWishlist = async () => {
+  const handleLike = async (id) => {
+    if (!user) {
+      return;
+    }
+
     try {
-      const response = await api.get(
-        `${process.env.REACT_APP_API_URL}/wishlist`
+      const response = await api.post(
+        `${process.env.REACT_APP_API_URL}/wishlist/${id}`
       );
-      setProducts(response.data);
-      setError(null);
+      await api.get(
+        `${process.env.REACT_APP_API_URL}/wishlist`
+      ) 
+      .then (response =>dispatchWish({ type: "UPDATE", items:response.data }))
+  
+      .catch (error=>console.error(error));
+
+      
     } catch (error) {
-      setError("Errore nel recupero della wishlist");
-      console.error(error);
-    } finally {
-      setLoading(false);
+      console.error("Errore nel like:", error);
     }
   };
 
-  useEffect(() => {
-    if (user) {
-      fetchWishlist();
-    } else {
-      setError("Devi effettuare il login per vedere la tua wishlist");
-      setLoading(false);
-    }
-  }, [user]);
-
-  if (loading)
-    return (
-      <Container className="mt-4">
-        <p>Loading...</p>
-      </Container>
-    );
-  if (error)
-    return (
-      <Container className="mt-4">
-        <Alert variant="danger">{error}</Alert>
-      </Container>
-    );
 
   return (
     <Container className="mt-4">
@@ -83,20 +70,25 @@ const WishList = () => {
               <Col md={3} className="mb-4">
                 <p className="card_price">£ {product.price}</p>
               </Col>
-              <Col className="mb-4"> 
-                <Button
-                    className="card_button"
-                    onClick={() => navigate(`/products/${product._id}`)}
-                >
-              Dettagli
-            </Button></Col>
               <Col className="mb-4">
-              <Button 
-              className="card_button"
-              onClick={() => addToCart(product)}
-            >
-              <BiCart size={24} />
-            </Button>
+                <Button
+                  className="card_button"
+                  onClick={() => navigate(`/products/${product._id}`)}
+                >
+                  Dettagli
+                </Button>
+              </Col>
+              <Col className="mb-4">
+                <Button
+                  className="card_button"
+                  onClick={() => addToCart(product)}
+                >
+                  <BiCart size={24} />
+                </Button>
+                <Button
+                onClick={() => handleLike(product._id)}>
+                    DELETE
+                </Button>
               </Col>
             </Row>
           ))

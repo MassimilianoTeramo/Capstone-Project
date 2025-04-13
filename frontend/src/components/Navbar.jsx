@@ -3,15 +3,19 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { Form, Row, Col } from "react-bootstrap";
 import { VscAccount } from "react-icons/vsc";
-import { useCart } from "../context/CartContext"; //carrello
+import { useCart } from "../context/CartContext";
 import { BiCart } from "react-icons/bi";
+import logo from "../uploads/logo.png";
+import { useWish } from "../context/WishListContext";
+import api from "../utils/api";
+import {useDispatchWish} from "../context/WishListContext";
 
 const CustomNavbar = () => {
-  const items = useCart(); //carrello
+  const items = useCart();
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const dispatch = useDispatchWish();
 
   const handleLogout = async () => {
     try {
@@ -22,225 +26,138 @@ const CustomNavbar = () => {
     }
   };
 
-  useEffect(() => {
-    // Effettua un aggiornamento del componente quando lo stato dell'utente cambia
-  }, [user]);
+    useEffect( ()=> {
+      if (user) {
+          api.get(
+            `${process.env.REACT_APP_API_URL}/wishlist`
+          ) 
+          .then (response =>dispatch({ type: "UPDATE", items:response.data }))
+      
+          .catch (error=>console.error(error));
+
+      };
+    }, [user])
 
   return (
-    <Navbar bg="dark" expand="lg" className="custom-navbar d-flex gap-2 align-items-center">
-      <Container className="d-flex align-items-center">
+    <Navbar bg="dark" expand="lg" className="custom-navbar">
+      <Container>
         <Navbar.Brand as={Link} to="/" className="brand-text">
-          FootShop
+          FootballShop
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="navbar-scroll" className="d-flex align-items-center">
-          <div className="mx-auto d-flex gap-2 justify-content-center align-items-center">
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
             <Nav.Link as={Link} to="/" className="nav-link-custom">
               Home
             </Nav.Link>
             <NavDropdown
               title="Products"
-              id="basic-nav-dropdown"
+              id="products-dropdown"
               className="dropdown-navbar"
-              data-bs-theme="dark"
-              style={{ color: "white" }}
             >
-              <NavDropdown.Item
-                as={Link}
-                to="/products/category/shirts"
-                className="dropdown_custom"
-              >
+              <NavDropdown.Item as={Link} to="/products/category/shirts">
                 T-Shirts
               </NavDropdown.Item>
-              <NavDropdown.Item
-                as={Link}
-                to="/products/category/shorts"
-                className="dropdown_custom"
-              >
+              <NavDropdown.Item as={Link} to="/products/category/shorts">
                 Shorts
               </NavDropdown.Item>
-              <NavDropdown.Item
-                as={Link}
-                to="/products/category/socks"
-                className="dropdown_custom"
-              >
+              <NavDropdown.Item as={Link} to="/products/category/socks">
                 Socks
               </NavDropdown.Item>
-              <NavDropdown.Item
-                as={Link}
-                to="/products/category/shoes"
-                className="dropdown_custom"
-              >
+              <NavDropdown.Item as={Link} to="/products/category/shoes">
                 Shoes
               </NavDropdown.Item>
-              <NavDropdown.Item
-                as={Link}
-                to="/products/category/balls"
-                className="dropdown_custom"
-              >
+              <NavDropdown.Item as={Link} to="/products/category/balls">
                 Balls
               </NavDropdown.Item>
             </NavDropdown>
 
             {user && (
-              <>
-                <Nav.Link
-                  as={Link}
-                  to="/myproducts"
-                  className="nav-link-custom"
-                >
-                  My Products
-                </Nav.Link>
-              </>
+              <Nav.Link as={Link} to="/myproducts" className="nav-link-custom">
+                My Products
+              </Nav.Link>
             )}
+
             <NavDropdown
               title="Brands"
+              id="brands-dropdown"
               className="dropdown-navbar"
-              data-bs-theme="dark"
-              style={{ color: "white" }}
             >
-              <NavDropdown.Item
-                as={Link}
-                to="/products/brand/Nike"
-                className="dropdown_custom"
-              >
+              <NavDropdown.Item as={Link} to="/products/brand/Nike">
                 Nike
               </NavDropdown.Item>
-              <NavDropdown.Item
-                as={Link}
-                to="/products/brand/Adidas"
-                className="dropdown_custom"
-              >
+              <NavDropdown.Item as={Link} to="/products/brand/Adidas">
                 Adidas
               </NavDropdown.Item>
-              <NavDropdown.Item
-                as={Link}
-                to="/products/brand/Puma"
-                className="dropdown_custom"
-              >
+              <NavDropdown.Item as={Link} to="/products/brand/Puma">
                 Puma
               </NavDropdown.Item>
-              <NavDropdown.Item
-                as={Link}
-                to="/products/brand/Errea"
-                className="dropdown_custom"
-              >
+              <NavDropdown.Item as={Link} to="/products/brand/Errea">
                 Errea
               </NavDropdown.Item>
-              <NavDropdown.Item
-                as={Link}
-                to="/products/brand/Mizuno"
-                className="dropdown_custom"
-              >
+              <NavDropdown.Item as={Link} to="/products/brand/Mizuno">
                 Mizuno
               </NavDropdown.Item>
-              <NavDropdown.Item
-                as={Link}
-                to="/products/brand/Kappa"
-                className="dropdown_custom"
-              >
+              <NavDropdown.Item as={Link} to="/products/brand/Kappa">
                 Kappa
               </NavDropdown.Item>
-              <NavDropdown.Item
-                as={Link}
-                to="/products/brand/Joma"
-                className="dropdown_custom"
-              >
+              <NavDropdown.Item as={Link} to="/products/brand/Joma">
                 Joma
               </NavDropdown.Item>
-              <NavDropdown.Item
-                as={Link}
-                to="/products/brand/Diadora"
-                className="dropdown_custom"
-              >
+              <NavDropdown.Item as={Link} to="/products/brand/Diadora">
                 Diadora
               </NavDropdown.Item>
             </NavDropdown>
-          </div>
-        
-            <Button  //bottone CArrello
-              className="card_button mx-3 mt-0"
-              style={{width:"100px"}}
-              onClick={() => navigate(`/CartPage`)}>
-              <BiCart size={24}/> {items.lenght}
+          </Nav>
+
+          <Nav className="ms-auto align-items-center">
+            <Button
+              className="cart-button me-3"
+              variant="warning"
+              onClick={() => navigate("/CartPage")}
+            >
+              <BiCart size={24} /> {items.length}
             </Button>
-          
-          <div>
+
             {user ? (
-              <>
-                <NavDropdown
-                  title={
-                    <span
-                      style={{
-                        color: "rgb(255, 255, 255)",
-                        fontWeight: "500",
-                      }}
-                    >
-                      {user?.firstName ? user.firstName : "Guest"}
-                    </span>
-                  }
-                  id="basic-nav-dropdown"
-                  className="navbar_dropdown"
-                  data-bs-theme="dark"
-                >
-                  <NavDropdown.Item
-                    className="dropdown_custom"
-                    as={Link}
-                    to="/profile"
-                  >
-                    My Profile
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    as={Link}
-                    to="products/create"
-                    className="dropdown_custom"
-                  >
-                    Sell Product
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    as={Link}
-                    to="/wishlist"
-                    className="dropdown_custom"
-                  >
-                    Wish List
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item onClick={handleLogout} style={{}}>
-                    Log Out
-                  </NavDropdown.Item>
-                </NavDropdown>
-                <Nav.Link
-                  as={Link}
-                  to="/profile"
-                  className="dropdown_custom"
-                ></Nav.Link>
-              </>
+              <NavDropdown
+                title={
+                  <span className="user-dropdown-title">
+                    {user.firstName || "Guest"}
+                  </span>
+                }
+                id="user-dropdown"
+                className="navbar_dropdown"
+              >
+                <NavDropdown.Item as={Link} to="/profile">
+                  My Profile
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/products/create">
+                  Sell Product
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/wishlist">
+                  Wish List
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item onClick={handleLogout}>
+                  Log Out
+                </NavDropdown.Item>
+              </NavDropdown>
             ) : (
-              <>
-                <NavDropdown
-                  title={
-                    <VscAccount
-                      style={{ fontSize: "25px", color: "#2eff60" }}
-                    />
-                  }
-                  className="dropdown-navbar"
-                  data-bs-theme="dark"
-                  style={{ color: "white" }}
-                >
-                  <Nav.Link as={Link} to="/login" className="nav-link-custom">
-                    Login
-                  </Nav.Link>
-                  <Nav.Link
-                    as={Link}
-                    to="/register"
-                    className="nav-link-custom"
-                  >
-                    Register
-                  </Nav.Link>
-                </NavDropdown>
-              </>
+              <NavDropdown
+                title={<VscAccount className="account-icon" />}
+                id="auth-dropdown"
+                className="dropdown-navbar"
+              >
+                <NavDropdown.Item as={Link} to="/login">
+                  Login
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/register">
+                  Register
+                </NavDropdown.Item>
+              </NavDropdown>
             )}
-          </div>
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>

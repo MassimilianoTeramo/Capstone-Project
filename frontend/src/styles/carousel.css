@@ -13,11 +13,23 @@
 
 .carousel-title {
   text-transform: capitalize;
-  text-shadow: 0 0 15px rgba(46, 200, 90, 0.5);
+  text-shadow: 0 0 15px rgb(255, 221, 0);
+  margin-bottom: 4rem;
+  margin-top: 2rem;
   letter-spacing: 0.8;
   font-size: 4rem;
   line-height: 1.1;
-  background-image: linear-gradient(180deg, #2eff60, rgb(1, 38, 40));
+  background-image: linear-gradient(180deg, rgb(234, 198, 80), rgb(175, 137, 11));
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.carousel h3 {
+  color: gold;
+  text-shadow: 0 0 15px rgb(255, 221, 0);
+  letter-spacing: 1;
+  background-image: linear-gradient(180deg, rgb(234, 198, 80), rgb(175, 137, 11));
   background-size: 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -55,7 +67,7 @@
   align-items: center;
   display: flex;
   justify-content: center;
-  margin-top: 7rem;
+  margin-top: 5rem;
 }
   
   @media screen and (min-width:48rem){
@@ -82,9 +94,9 @@
   
   .slider-btn {
     display: inline-block;
-    color: #2eff60;
+    color: #ffd22e;
     background: transparent;
-    border: 2px solid #2eff60;
+    border: 2px solid #ffd22e;
     padding: 0.625rem 1.876rem;
     margin-top: 2.125rem;
     text-decoration: none;
@@ -96,8 +108,8 @@
   }
   
   .slider-btn:hover{
-    border: 0.125rem solid #2eff60;
-    color:#2eff60;
+    border: 0.125rem solid #ffd22e;
+    color:#ffd22e;
   }
   
   .myswiper {
@@ -109,7 +121,7 @@
     display: flex;
     align-items: center;
     justify-content: center; /* Centra le card */
-    height: auto; /* Permette alle card di adattarsi al contenuto */
+    height: auto;
     background-color: transparent;
     box-sizing: border-box; 
     margin-left: 11px;
@@ -155,7 +167,7 @@
   }
   
   .myswiper-slider a:hover{
-    color:#2eff60;
+    color:#ffd22e;
   }
   
   .swiper-pagination-bullet,
@@ -166,16 +178,18 @@
   /* Stile per il contenuto della card */
   
 .card-swiper {
-  border: 1px solid #2eff60; /* Bordo grigio chiaro */
+  width: 20rem;
+  border: 1px solid #ffd22e;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* Spazio uniforme tra gli elementi */
   height: 100%; /* Occupa tutta l'altezza disponibile */
   min-height: 28rem; /* Imposta un'altezza minima maggiore per le card */
-  border-radius: 1rem; /* Angoli arrotondati */
+  border-radius: 0.2rem; /* Angoli arrotondati */
   padding: 1rem; /* Padding interno */
   box-shadow: 0 4px 8px #ffd620; /* Ombra per profondità */
+  opacity: 0.4;
 }
   .card-swiper:hover {
     transform: scale(1.05); /* Effetto zoom al passaggio del mouse */
@@ -185,14 +199,14 @@
   .card-swiper img {
     width: 100%; /* Occupa tutta la larghezza disponibile */
     height: auto; /* Mantiene le proporzioni */
-    border-radius: 1rem; /* Angoli arrotondati */
+    object-fit: contain;
   }
   
 
   .card-swiper h2 {
     font-size: 1.5rem; /* Dimensione del titolo */
     margin-bottom: 0.5rem; /* Spazio sotto il titolo */
-    color: #2eff60; /* Colore del titolo */
+    color: #ffd22e; /* Colore del titolo */
     padding: 0;
   }
   
@@ -202,11 +216,10 @@
   }
 
   .swiper_button{
-    background: transparent;
-    border: 2px solid #2eff60;
+    background: black;
+    border: 2px solid #ffd22e;
     border-radius: 5rem;
-    color: #2eff60;
-    padding: 0.625rem 2rem;
+    color: white;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -215,12 +228,15 @@
     margin: 0 auto;
     text-align: center;
     text-decoration: none;
+    padding: 10px 20px;
+    position: absolute;
+    bottom: 25px;
   }
 
   .swiper_button:hover{
-    background: #2eff60;
+    background: #ffd22e;
     color: black !important;
-    box-shadow: 0 0 15px rgba(60, 255, 46, 0.5);
+    box-shadow: 0 0 15px rgba(255, 210, 46, 0.5);
            
           }
   

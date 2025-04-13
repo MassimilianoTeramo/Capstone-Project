@@ -19,14 +19,15 @@ import BrandPage from "./pages/BrandPage";
 import WishList from "./pages/WishList";
 import CartPage from "./pages/CartPage";
 import Profile from "./pages/MyProfile";
+import {WishProvider} from "./context/WishListContext";
 
 
 function App() {
   return (
     <Router>
       <AuthProvider>
+      <WishProvider>
         <CustomNavbar />
-        <Container>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
@@ -44,8 +45,8 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             
           </Routes>
-        </Container>
         <Footer />
+        </WishProvider>
       </AuthProvider>
     </Router>
   );
