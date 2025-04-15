@@ -6,7 +6,8 @@ import { useAuth } from '../context/AuthContext'
 import { useNavigate } from "react-router-dom";
 import ProductsCard from "../components/ProductsCard";
 import { Alert } from "react-bootstrap";
-import api from '../utils/api'
+import api from '../utils/api';
+import brandBg from "../uploads/b7.jpg";
 
 const BrandPage = () => {
     const [products, setProducts] = useState([]);
@@ -57,7 +58,17 @@ const BrandPage = () => {
     if (error) return <Container className='mt-4'><Alert variant='danger'>{error}</Alert></Container>;
 
     return (
-        <Container className='mt-4'>
+        <div style={{ 
+            backgroundImage: `url(${brandBg})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            backgroundBlendMode:"darken",
+            width:"auto",
+            height:"35rem",
+            marginTop:"-10px"
+          }}>
+        <Container className='mt-4 brandContainer'>
             <h4 className='mb-4 form-label fw-bold' style={{fontSize:'20px'}} >{products.brand}</h4>
             <Row>
                 {products.length > 0 ? (
@@ -77,12 +88,11 @@ const BrandPage = () => {
                 )}
 
             </Row>
-
-
         </Container>
+        </div>
     )
 
-
+     
 
 
 

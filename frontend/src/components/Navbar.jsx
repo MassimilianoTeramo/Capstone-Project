@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import { VscAccount } from "react-icons/vsc";
 import { useCart } from "../context/CartContext";
 import { BiCart } from "react-icons/bi";
-import logo from "../uploads/logo.png";
 import { useWish } from "../context/WishListContext";
 import api from "../utils/api";
 import {useDispatchWish} from "../context/WishListContext";

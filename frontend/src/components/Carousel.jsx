@@ -4,10 +4,10 @@ import { Autoplay, EffectCoverflow, Pagination } from "swiper/modules";
 import "swiper/css";
 import { Link } from "react-router-dom";
 import magliaCat from "../uploads/Tshirt-homePage.png";
-import pantsCat from "../uploads/shorts1.png";
+import pantsCat from "../uploads/image1_0.jpg";
 import shoesCat from "../uploads/shoes-categoria.png";
-import socksCat from "../uploads/socksCat.jpeg";
-import ballsCat from "../uploads/ballsCat.png";
+import socksCat from "../uploads/socksHomeP.jpg";
+import ballsCat from "../uploads/bola.jpg";
 
 import { Col, Card, Button, Container } from "react-bootstrap";
 
@@ -92,19 +92,19 @@ const Carousel = () => {
                     backgroundImage: `url(${data.url})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
-                    height: "40rem",
                     border: "5px solid rgb(255, 224, 46)",
 
                   }}
                 >
                   <Card.Body className="d-flex flex-column align-items-center justify-content-center">
-                    <Link
+                    <Button
+                      as={Link}
                       to={`/products/category/${data.title}`}
-                      className="swiper_button mt-5 mx-auto"
-                      style={{right:"15px"}}
-                    >
-                      Explore {data.title}
-                    </Link>
+                      className="swiper_button"
+                      >
+                    Explore {data.title}
+
+                    </Button>
                   </Card.Body>
                 </Card>
               </Col>

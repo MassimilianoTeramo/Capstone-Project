@@ -290,6 +290,7 @@ const CreateProduct = () => {
                 <option value="Kappa">Kappa</option>
                 <option value="Joma">Joma</option>
                 <option value="Diadora">Diadora</option>
+                <option value="Diadora">Umbro</option>
               </Form.Select>
             </Form.Group>
             <Button className="submit-button" variant="primary" type="submit">
