@@ -137,7 +137,7 @@ const EditProduct = () => {
 
   return (
     <>
-      <Button className="swiper_button" onClick={handleShow}>
+      <Button className="" onClick={handleShow}>
         Edit Product
       </Button>
 
@@ -157,7 +157,7 @@ const EditProduct = () => {
                 }
                 required
               />
-            </Form.Group>
+              </Form.Group>
             <Form.Group className="mb-3">
             <Form.Label>Gender</Form.Label>
               <Form.Group
@@ -165,33 +165,41 @@ const EditProduct = () => {
                 controlId="formBasicCheckbox"
               >
                 <Form.Check
-                  type="checkbox"
+                  type="radio"
+                  name="gender"
                   label="Male"
-                  value={"Male"}
+                  value="Male"
+                  checked={formData.gender === "Male"}
                   onChange={(e) =>
                     setFormData({ ...formData, gender: e.target.value })
                   }
                 />
                 <Form.Check
-                  type="checkbox"
+                  type="radio"
+                  name="gender"
                   label="Female"
-                  value={"Female"}
+                  value="Female"
+                  checked={formData.gender === "Female"}
                   onChange={(e) =>
                     setFormData({ ...formData, gender: e.target.value })
                   }
                 />
                 <Form.Check
-                  type="checkbox"
+                  type="radio"
+                  name="gender"
                   label="Kid"
-                  value={"Kids"}
+                  value="Kids"
+                  checked={formData.gender === "Kids"}
                   onChange={(e) =>
                     setFormData({ ...formData, gender: e.target.value })
                   }
                 />
                  <Form.Check
-                  type="checkbox"
+                  type="radio"
+                  name="gender"
                   label="Unisex"
-                  value={"Unisex"}
+                  value="Unisex"
+                  checked={formData.gender === "Unisex"}
                   onChange={(e) =>
                     setFormData({ ...formData, gender: e.target.value })
                   }
@@ -344,7 +352,7 @@ const EditProduct = () => {
                 <option value="Kappa">Kappa</option>
                 <option value="Joma">Joma</option>
                 <option value="Diadora">Diadora</option>
-                <option value="Diadora">Umbro</option>
+                <option value="Umbro">Umbro</option>
               </Form.Select>
             </Form.Group>
 
@@ -356,7 +364,7 @@ const EditProduct = () => {
                 variant="dark"
                 onClick={handleClose}
                 style={{
-                  border: "2px solid #2eff60",
+                  border: "2px solid #e1ae07",
                 }}
               >
                 Close

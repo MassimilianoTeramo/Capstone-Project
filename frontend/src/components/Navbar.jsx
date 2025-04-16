@@ -8,7 +8,7 @@ import { useCart } from "../context/CartContext";
 import { BiCart } from "react-icons/bi";
 import { useWish } from "../context/WishListContext";
 import api from "../utils/api";
-import {useDispatchWish} from "../context/WishListContext";
+import { useDispatchWish } from "../context/WishListContext";
 
 const CustomNavbar = () => {
   const items = useCart();
@@ -25,17 +25,15 @@ const CustomNavbar = () => {
     }
   };
 
-    useEffect( ()=> {
-      if (user) {
-          api.get(
-            `${process.env.REACT_APP_API_URL}/wishlist`
-          ) 
-          .then (response =>dispatch({ type: "UPDATE", items:response.data }))
-      
-          .catch (error=>console.error(error));
+  useEffect(() => {
+    if (user) {
+      api
+        .get(`${process.env.REACT_APP_API_URL}/wishlist`)
+        .then((response) => dispatch({ type: "UPDATE", items: response.data }))
 
-      };
-    }, [user])
+        .catch((error) => console.error(error));
+    }
+  }, [user]);
 
   return (
     <Navbar bg="dark" expand="lg" className="custom-navbar">
@@ -106,56 +104,63 @@ const CustomNavbar = () => {
               <NavDropdown.Item as={Link} to="/products/brand/Diadora">
                 Diadora
               </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/products/brand/Umbro">
+                Umbro
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
 
-          <Nav className="ms-auto align-items-center">
-            <Button
-              className="cart-button me-3"
-              variant="warning"
-              onClick={() => navigate("/CartPage")}
-            >
-              <BiCart size={24} /> {items.length}
-            </Button>
-
-            {user ? (
-              <NavDropdown
-                title={
-                  <span className="user-dropdown-title">
-                    {user.firstName || "Guest"}
-                  </span>
-                }
-                id="user-dropdown"
-                className="navbar_dropdown"
+          <Nav className="ms-auto d-flex"> 
+            <div className="mt-1">
+              <Button
+                className="cart-button me-3"
+                variant="warning"
+                onClick={() => navigate("/CartPage")}
               >
-                <NavDropdown.Item as={Link} to="/profile">
-                  My Profile
-                </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/products/create">
-                  Sell Product
-                </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/wishlist">
-                  Wish List
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item onClick={handleLogout}>
-                  Log Out
-                </NavDropdown.Item>
-              </NavDropdown>
-            ) : (
-              <NavDropdown
-                title={<VscAccount className="account-icon" />}
-                id="auth-dropdown"
-                className="dropdown-navbar"
-              >
-                <NavDropdown.Item as={Link} to="/login">
-                  Login
-                </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/register">
-                  Register
-                </NavDropdown.Item>
-              </NavDropdown>
-            )}
+                <BiCart size={24} /> {items.length}
+              </Button>
+              </div>
+            <div className="cart-user">
+              {user ? (
+                <NavDropdown
+                  title={
+                    <span className="user-dropdown-title">
+                      {user.firstName || "Guest"}
+                    </span>
+                  }
+                  id="user-dropdown"
+                  className="dropdown-navbar"
+                >
+                  <NavDropdown.Item as={Link} to="/profile">
+                    My Profile
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/products/create">
+                    Sell Product
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/wishlist">
+                    Wish List
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item onClick={handleLogout}>
+                    Log Out
+                  </NavDropdown.Item>
+                </NavDropdown>
+              ) : (
+                <NavDropdown
+                  title={<VscAccount className="account-icon" />}
+                  id="auth-dropdown"
+                  className="dropdown-navbar"
+                >
+                  <NavDropdown.Item as={Link} to="/login">
+                    Login
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/register">
+                    Register
+                  </NavDropdown.Item>
+                </NavDropdown>
+              )}
+             
+            </div>
           </Nav>
         </Navbar.Collapse>
       </Container>

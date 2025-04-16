@@ -6,7 +6,7 @@ import { BiCart } from "react-icons/bi";
 import { GiSoccerBall } from "react-icons/gi";
 import api from "../utils/api";
 import { Card } from "react-bootstrap";
-import EditProduct from "../pages/EditProduct";
+import EditProduct from "./EditProduct";
 import { useDispatchCart } from "../context/CartContext"; //carrello
 import { useWish } from "../context/WishListContext";
 import {useDispatchWish} from "../context/WishListContext";

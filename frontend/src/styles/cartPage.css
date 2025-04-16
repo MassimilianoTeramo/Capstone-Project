@@ -1,0 +1,33 @@
+#listaCart {
+    color: white;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    margin-left: 1rem;
+}
+
+.stickyBox {
+    position: sticky;
+    position: -webkit-sticky;
+    top:5rem;
+    height: 100%;
+}
+
+.cartTitle {
+  color: #e1ae07;
+  text-shadow: 0 0 15px rgb(255, 221, 0);
+  letter-spacing: 1;
+  background-image: linear-gradient(180deg, rgb(234, 198, 80), rgb(175, 137, 11));
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.total-price-container {
+    background-color: black;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    color: rgb(255, 210, 46);
+  }

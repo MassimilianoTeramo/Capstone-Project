@@ -14,7 +14,6 @@ const BrandPage = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const { brand } = useParams();
-    console.log("brand parameter:", brand); // Debugging log
     const { user } = useAuth();
     const navigate = useNavigate();
 
@@ -22,7 +21,6 @@ const BrandPage = () => {
       try {
         const response = await api.get(`${process.env.REACT_APP_API_URL}/products/brand/${brand}`);
         console.log("Response from API:", response.data); // Debugging log
-       
         console.log("Products fetched:", response.data); // Debugging log
         setProducts(response.data);
         setError(null);
@@ -68,12 +66,12 @@ const BrandPage = () => {
             height:"35rem",
             marginTop:"-10px"
           }}>
-        <Container className='mt-4 brandContainer'>
-            <h4 className='mb-4 form-label fw-bold' style={{fontSize:'20px'}} >{products.brand}</h4>
+        <Container className='mt-4 pt-4'>
+            <h4 className='mb-4 fw-bold' style={{fontSize:'26px', color:"black", textAlign:"center"}}>{brand}</h4>
             <Row>
                 {products.length > 0 ? (
                     products.map(product => (
-                        <Col key={product._id} md={4} className='mb-4'>
+                        <Col key={product._id} md={3} className='mb-4'>
                             <ProductsCard
                                 product={product}
                                 showActions={true}/>

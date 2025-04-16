@@ -80,7 +80,7 @@ router.post("/", authorization, upload.single('image'), async (req, res) => {
 // Update a product
 router.put('/:id', authorization,  upload.single('image'), async (req, res) => {
     try {
-        const { title, description, price, category, condition, brand, size } = req.body;
+        const { title, description, price, category, condition, brand, size, gender } = req.body;
         const updateData = {};
 
         // campi che forniti nella richiesta
