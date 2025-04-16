@@ -63,7 +63,7 @@ const BrandPage = () => {
             backgroundPosition: "center",
             backgroundBlendMode:"darken",
             width:"auto",
-            height:"35rem",
+            height:"auto",
             marginTop:"-10px"
           }}>
         <Container className='mt-4 pt-4'>

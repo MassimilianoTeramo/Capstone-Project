@@ -67,6 +67,9 @@ const CustomNavbar = () => {
               <NavDropdown.Item as={Link} to="/products/category/balls">
                 Balls
               </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/products">
+                All products
+              </NavDropdown.Item>
             </NavDropdown>
 
             {user && (

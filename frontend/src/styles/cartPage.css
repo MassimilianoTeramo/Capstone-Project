@@ -31,3 +31,36 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     color: rgb(255, 210, 46);
   }
+
+  /* ALL PRODUCT PAGE*/
+
+  .offcanvasCustom{
+    background-color: #1c1f22;
+color: #ba8f04c9;
+padding: 1rem 1rem;
+display: flex;
+flex-direction: column;
+  }
+
+  
+  .btnOffcanvas{
+    background: transparent !important;
+    border: #1c1f22;
+    border-bottom: #e1ae07 !important;
+    transition: all 0.3s ease;
+  }
+
+  .btnOffcanvas:hover{
+    background-color: #ba8f04c9 !important;
+  }
+
+  .btnOffcanvas:active{
+    background-color: #e1ae07 !important;
+  }
+ .btnOffcanvas:active,
+.btnOffcanvas.active {
+    background-color: #ffc107;
+    color: #000;
+    border-color: #ffc107;
+}
+

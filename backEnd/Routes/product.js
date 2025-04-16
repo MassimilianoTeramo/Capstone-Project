@@ -7,18 +7,25 @@ import { loggedUser } from '../middlewares/loggedUser.js';
 const router = Router();
 
 // Get all products
-router.get('/', async (req, res) => {
+router.get('/', loggedUser, async (req, res) => {
     try {
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 9;
         const skip = (page - 1) * limit;
+        const userId = req.query.userId;
 
-        //conta il numero di prodotti
-        const totalProducts = await Product.countDocuments();
+        // Costruisci la query in base all'autenticazione
+        let query = {};
+        if (userId) {
+            query = { author: { $ne: userId } };
+        }
+
+        // Conta il numero di prodotti
+        const totalProducts = await Product.countDocuments(query);
         const totalPages = Math.ceil(totalProducts / limit);
 
-        //product pagination
-        const products = await Product.find()
+        // Product pagination
+        const products = await Product.find(query)
             .populate('author', 'firstName lastName')
             .skip(skip)
             .limit(limit)
