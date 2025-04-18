@@ -20,8 +20,8 @@ router.get('/product/:productId', async(req, res) => {
 //POST
 router.post('/', async (req, res) => {
     try {
-        const { content, author, product } = req.body;
-        const newReview = new Review({ content, author, product });
+        const { content, author, product, rate } = req.body;
+        const newReview = new Review({ content, author, product, rate });
         const savedReview = await newReview.save();
         const populatedReview = await Review.findById(savedReview._id)
             .populate("author", "firstName lastName");

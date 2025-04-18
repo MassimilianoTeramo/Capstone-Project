@@ -50,7 +50,7 @@ body::after {
 }
 
 .nav-link-custom {
-  color: rgba(255, 255, 255, 0.8) !important;
+  color: #ffffffcc !important;
   margin: 0 0.5rem;
   font-weight: 500;
   transition: all 0.3s ease;

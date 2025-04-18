@@ -15,10 +15,15 @@ const reviewSchema = new mongoose.Schema({
         ref: 'Product',
         required: true
     },
+    rate: {
+        type: Number,
+        enum: [1, 2, 3, 4, 5]
+    },
     createdAt: {
         type: Date,
         default: Date.now
     }
+    
 });
 
 const Review = mongoose.model('Review', reviewSchema);
