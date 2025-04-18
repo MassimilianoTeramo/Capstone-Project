@@ -9,12 +9,19 @@ import { BiCart } from "react-icons/bi";
 import { useWish } from "../context/WishListContext";
 import api from "../utils/api";
 import { useDispatchWish } from "../context/WishListContext";
+import { motion } from "framer-motion";
 
 const CustomNavbar = () => {
   const items = useCart();
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const dispatch = useDispatchWish();
+
+  // Calcola il totale degli articoli considerando le quantità, item.quantity se piu di 1 o 1 se null
+  const totalItems = items.reduce(
+    (total, item) => total + (item.quantity || 1),
+    0
+  );
 
   const handleLogout = async () => {
     try {
@@ -30,13 +37,12 @@ const CustomNavbar = () => {
       api
         .get(`${process.env.REACT_APP_API_URL}/wishlist`)
         .then((response) => dispatch({ type: "UPDATE", items: response.data }))
-
         .catch((error) => console.error(error));
     }
   }, [user]);
 
   return (
-    <Navbar bg="dark" expand="lg" className="custom-navbar">
+     <Navbar bg="dark" expand="lg" className="custom-navbar">
       <Container>
         <Navbar.Brand as={Link} to="/" className="brand-text">
           FootballShop
@@ -113,16 +119,16 @@ const CustomNavbar = () => {
             </NavDropdown>
           </Nav>
 
-          <Nav className="ms-auto d-flex"> 
+          <Nav className="ms-auto d-flex">
             <div className="mt-1">
               <Button
                 className="cart-button me-3"
                 variant="warning"
                 onClick={() => navigate("/CartPage")}
               >
-                <BiCart size={24} /> {items.length}
+                <BiCart size={24} /> {totalItems}
               </Button>
-              </div>
+            </div>
             <div className="cart-user">
               {user ? (
                 <NavDropdown
@@ -162,7 +168,6 @@ const CustomNavbar = () => {
                   </NavDropdown.Item>
                 </NavDropdown>
               )}
-             
             </div>
           </Nav>
         </Navbar.Collapse>

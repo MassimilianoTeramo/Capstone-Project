@@ -29,10 +29,9 @@
     background-color: black;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    color: rgb(255, 210, 46);
   }
 
-  /* ALL PRODUCT PAGE*/
+  /* ALL PRODUCTS PAGE*/
 
   .offcanvasCustom{
     background-color: #1c1f22;
@@ -64,3 +63,23 @@ flex-direction: column;
     border-color: #ffc107;
 }
 
+
+/* WISHLIST PAGE*/
+.wishListContainer {
+  margin-bottom: 20rem;
+
+}
+
+
+.wishListContainer strong {
+  color: white;
+}
+
+
+.wishListContainer p {
+  color: white;
+  margin-top: 3rem;
+  margin-bottom: 20rem;
+  font-size: 25px;
+  text-align: center;
+}

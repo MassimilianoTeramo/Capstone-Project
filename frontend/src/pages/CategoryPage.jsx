@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import ProductsCard from "../components/ProductsCard";
 import { Alert } from "react-bootstrap";
 import api from "../utils/api";
+import {motion} from "framer-motion";
 
 const CategoryPage = () => {
     const [products, setProducts] = useState([]);
@@ -53,9 +54,14 @@ const CategoryPage = () => {
 
     return (
         <Container className='mt-4'>
-            <h4 className='mb-4 form-label fw-bold' style={{fontSize:'20px'}}>
-                {category.charAt(0).toUpperCase() + category.slice(1)}
-            </h4>
+            <motion.h3
+                initial={{x:"-100vw", opacity:0, color:"black"}}
+                animate={ {x:0, opacity:1, color:"gold"}}
+                transition={{duration:"2.5", stiffness: 50, type:"spring"}} 
+                className='mb-4 form-label fw-bold' 
+                >
+                {category}
+            </motion.h3>
             <Row>
                 {products.length > 0 ? (
                     products.map(product => (

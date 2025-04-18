@@ -5,6 +5,7 @@ import ProductsCard from '../components/ProductsCard';
 import { Container, Alert, Row, Col, Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import api from '../utils/api' // Assicurati di avere il percorso corretto per l'API
+import {motion} from "framer-motion";
 
 const MyProducts =  ()=>{
     const [products, setProducts] = useState([]);
@@ -53,11 +54,18 @@ const MyProducts =  ()=>{
 
     return (
         <Container className='mt-4'>
-            <h4 className='mb-4 form-label fw-bold' style={{fontSize:'20px'}} >My Products</h4>
+            <motion.div
+             initial={{x:"-100vh", opacity:0}}
+             animate={{ fontSize: "50px", x: 0, opacity:1, color:"gold", letterSpacing:"5px" }}
+             transition={{duration: 3, type:"spring", stiffness: 50, mass:"2", dumpling:"6" }}
+             className='my-5'
+            >
+                <h3>My Products</h3>
+            </motion.div>
             <Row>
                 {products.length > 0 ? (
                     products.map(product => (
-                        <Col key={product._id} md={4} className='mb-4'>
+                        <Col key={product._id} md={3} className='mb-4'>
                             <ProductsCard
                                 product={product}
                                 showActions={true}/>

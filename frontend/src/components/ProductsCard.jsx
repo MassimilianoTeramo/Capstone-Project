@@ -9,35 +9,69 @@ import { Card } from "react-bootstrap";
 import EditProduct from "./EditProduct";
 import { useDispatchCart } from "../context/CartContext"; //carrello
 import { useWish } from "../context/WishListContext";
-import {useDispatchWish} from "../context/WishListContext";
+import { useDispatchWish } from "../context/WishListContext";
+import Toast from "react-bootstrap/Toast";
+import { motion, AnimatePresence } from "framer-motion";
 
-const ProductsCard = ({ product, showActions, onLikeToggle }) => {
+const notificationVariants = {
+  initial: { 
+    opacity: 0,
+    y: 50,
+    scale: 0.3
+  },
+  animate: { 
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.5,
+      type: "spring",
+      stiffness: 100
+    }
+  },
+  exit: {
+    opacity: 0,
+    y: -50,
+    scale: 0.3,
+    transition: {
+      duration: 0.3
+    }
+  }
+}
+
+const ProductsCard = ({ product, showActions }) => {
   const dispatch = useDispatchCart(); //carrello
   const navigate = useNavigate();
   const { user, logout } = useAuth();
   const userName = user ? `${user.firstName} ${user.lastName}` : "unknown";
-  const authorName = product.author? `${product.author.firstName} ${product.author.lastName}`: "Unknown";
+  const authorName = product.author
+    ? `${product.author.firstName} ${product.author.lastName}`
+    : "Unknown";
   const [error, setError] = useState("");
   const [isLiked, setIsLiked] = useState(false);
   const likedProducts = useWish();
   const dispatchWish = useDispatchWish();
+  const [showNotification, setShowNotification] = useState(false);
 
   //carrello
-  const addToCart = (item)=>{
-    dispatch({type: "ADD", item})
+  const addToCart = (item) => {
+    dispatch({ type: "ADD", item });
+    setShowNotification(true);
+    setTimeout(() => {
+      setShowNotification(false);
+    }, 2000);
   };
 
   useEffect(() => {
     const checkIfLiked = async () => {
       if (user) {
-          const isProductLiked =
-            likedProducts.find((p) => p._id === product._id) !== undefined;
-          setIsLiked(isProductLiked);
+        const isProductLiked =
+          likedProducts.find((p) => p._id === product._id) !== undefined;
+        setIsLiked(isProductLiked);
       }
     };
     checkIfLiked();
   }, [user, product._id]);
-
 
   const handleLike = async () => {
     if (!user) {
@@ -49,24 +83,24 @@ const ProductsCard = ({ product, showActions, onLikeToggle }) => {
         `${process.env.REACT_APP_API_URL}/wishlist/${product._id}`
       );
       setIsLiked(response.data.isLiked);
-      if (onLikeToggle) {
-        onLikeToggle();
-      }
-      await api.get(
-        `${process.env.REACT_APP_API_URL}/wishlist`
-      ) 
-      .then (response =>dispatchWish({ type: "UPDATE", items:response.data }))
-  
-      .catch (error=>console.error(error));
+      await api
+        .get(`${process.env.REACT_APP_API_URL}/wishlist`)
+        .then((response) =>
+          dispatchWish({ type: "UPDATE", items: response.data })
+        )
 
-      
+        .catch((error) => console.error(error));
     } catch (error) {
       console.error("Errore nel like:", error);
     }
   };
 
   return (
-    <Card id="card" style={{ width: "18rem" }} className="mb-4 position-relative d-flex align-items-center pt-3">
+    <Card
+      id="card"
+      style={{ width: "18rem" }}
+      className="mb-4 position-relative d-flex align-items-center pt-3"
+    >
       {/* Pulsante like posizionato in alto a destra */}
       {showActions && user && user._id !== product.author._id && (
         <Button
@@ -111,34 +145,63 @@ const ProductsCard = ({ product, showActions, onLikeToggle }) => {
         <div className="mt-2 mb-2 card_price">£ {product.price}</div>
 
         {showActions && (
-                 <div className="d-flex justify-content-around">
+          <div className="d-flex justify-content-around">
             <Button
-              className="card_button" style={{width: "100px", fontSize: "12px"}}
+              className="card_button"
+              style={{ width: "100px", fontSize: "12px" }}
               onClick={() => navigate(`/products/${product._id}`)}
             >
               Dettagli
             </Button>
-          {user && user._id !== product.author._id ? (
-            <Button 
-              className="card_button"
-              onClick={() => addToCart(product)}
-              style={{width: "100px", fontSize: "12px"}}
-            >
-              <BiCart size={24} />
-            </Button>
-          ) : (
-            <div>
-            <Button
-              className="card_button" 
-              as={Link}
-              style={{width: "100px", fontSize: "12px"}}
-              to={`/products/category/${product.category}`}
-            >Go to {product.category}</Button>
-          </div>
-          )}
-          </div>
-        
+            {user && user._id !== product.author._id ? (
+              <>
+           
+                <Button
+                  className="card_button"
+                  onClick={() => addToCart(product)}
+                  style={{ width: "100px", fontSize: "12px" }}
+                >
+                  <BiCart size={24} />
+                </Button>
+                <AnimatePresence>
+                  {showNotification && (
+                    <motion.div
+                      variants={notificationVariants}
+                      initial="initial"
+                      animate="animate"
+                      exit="exit"
+                      style={{
+                        position: 'absolute',
+                        transform: 'translateX(-50%)',
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        bottom: "11rem",
+                        color: 'gold',
+                        padding: '8px 16px',
+                        borderRadius: '4px',
+                        fontSize: '14px',
+                        whiteSpace: 'nowrap',
+                        zIndex: 1000
+                      }}
+                    >
+                      Prodotto aggiunto al carrello!
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+                </>
 
+            ) : (
+             
+                <Button
+                  className="card_button"
+                  as={Link}
+                  style={{ width: "100px", fontSize: "12px" }}
+                  to={`/products/category/${product.category}`}
+                >
+                  Go to {product.category}
+                </Button>
+
+            )}
+          </div>
         )}
       </Card.Body>
     </Card>

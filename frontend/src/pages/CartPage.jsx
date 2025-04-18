@@ -1,45 +1,40 @@
 import React from "react";
 import { useCart, useDispatchCart } from "../context/CartContext";
-import { useAuth } from "../context/AuthContext";
-import { useState, useEffect } from "react";
 import { Col, Container, Row, Image, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { BiCart } from "react-icons/bi";
-import { FaTrash } from "react-icons/fa";
-
-const ImageZoom = ({ imageUrl }) => {
-  return (
-    <div 
-      id="imageZoom" 
-      style={{
-        '--url': `url(${imageUrl})`,
-        '--zoom-x': '0%',
-        '--zoom-y': '0%',
-        '--display': 'none'
-      }}
-    >
-      <img src={imageUrl} alt="" />
-    </div>
-  );
-};
+import { FaTrash, FaPlus, FaMinus } from "react-icons/fa";
 
 export default function Store() {
   const items = useCart();
   const navigate = useNavigate();
   const dispatch = useDispatchCart();
-  const totalPrice = items.reduce((total, b) => total + b.price, 0);
+  const tax = 0.2;
+  const expedition = 16;
+  const totalPrice = items.reduce(
+    (total, item) => total + (item.price * item.quantity), 0) * (1 + tax) + expedition;
 
-  const handleRemove = (index) => {
-    dispatch({ type: "REMOVE", index });
+  const handleRemove = (productId) => {
+    try {
+      dispatch({ 
+        type: "REMOVE", 
+        payload: { id: productId } 
+      });
+    } catch (error) {
+      console.error("Errore durante la rimozione del prodotto:", error);
+    }
   };
 
-  if (items.length === 0) {
-    return (
-      <main>
-        <p>Cart is empty</p>
-      </main>
-    );
-  }
+  const handleQuantityChange = (productId, change) => {
+    try {
+      dispatch({
+        type: "UPDATE_QUANTITY",
+        payload: { id: productId, change }
+      });
+    } catch (error) {
+      console.error("Errore durante l'aggiornamento della quantità:", error);
+    }
+  };
+
   return (
     <div
       style={{
@@ -56,63 +51,100 @@ export default function Store() {
     >
       <Container className="mt-4 d-flex flex-column">
         <div className="mb-4">
-          <h3 className="text-center mb-4 cartTitle">Your Cart</h3>
+          <h3 className="text-center mb-4 text-warning">Your Cart</h3>
           <hr className="section-divider mt-3 w-100" />
         </div>
         <div className="d-flex flex-horizontal">
           <Col md={8}>
             {items.length > 0 ? (
               items.map((product) => (
-                <>
-                <Row
-                  key={product._id}
-                  className="d-flex align-items-center mt-4"
-                >
-                  <Col md={4}>
-                    <Image src={product.image} style={{ width: "60%" }} />
-                  </Col>
-                  <Col md={4} className="mb-4">
-                    <h4 className="mb-3" style={{ color: "#ffd22e" }}>
-                      {product.title.toUpperCase()}
-                    </h4>
-                    <p style={{ color: "white" }}>
-                      Price:{" "}
-                      <span className="card_price my-0 mx-1">
-                        £ {product.price}
-                      </span>
-                    </p>
-                    <p style={{ color: "white" }}>
-                      {" "}
-                      Size:{" "}
-                      <span className="card_price my-0 mx-1">
-                        {product.size}
-                      </span>{" "}
-                    </p>
-                    <p style={{ color: "white" }}>
-                      {" "}
-                      Gender:{" "}
-                      <span className="card_price my-0 mx-1">
-                        {product.gender}
-                      </span>
-                    </p>
-                  </Col>
-                  <Col md={4}></Col>
-                </Row>
-                <hr style={{color:"gold"}} />
-               </>
+                <div key={product._id}>
+                  <Row className="d-flex align-items-center mt-4">
+                    <Col md={3}>
+                      <Image src={product.image} style={{ width: "60%" }} />
+                    </Col>
+                    <Col md={3} className="mb-4">
+                      <h4 className="mb-3" style={{ color: "#ffd22e" }}>
+                        {product.title}
+                      </h4>
+                      <p style={{ color: "white" }}>
+                        Price:
+                        <span className="card_price my-0 mx-1">
+                          £ {product.price}
+                        </span>
+                      </p>
+                      <p style={{ color: "white" }}>
+                        Size:
+                        <span className="card_price my-0 mx-1">
+                          {product.size}
+                        </span>
+                      </p>
+                      <p style={{ color: "white" }}>
+                        Gender:
+                        <span className="card_price my-0 mx-1">
+                          {product.gender}
+                        </span>
+                      </p>
+                      <div className="d-flex align-items-center mt-2">
+                        <Button 
+                          variant="warning" 
+                          size="sm"
+                          onClick={() => handleQuantityChange(product._id, -1)}
+                          disabled={product.quantity <= 1}
+                        >
+                          <FaMinus />
+                        </Button>
+                        <span className="mx-2" style={{ color: "white" }}>
+                          {product.quantity}
+                        </span>
+                        <Button 
+                          variant="warning" 
+                          size="sm"
+                          onClick={() => handleQuantityChange(product._id, 1)}
+                        >
+                          <FaPlus />
+                        </Button>
+                      </div>
+                    </Col>
+                    <Col md={3}>
+                      <Button 
+                        variant="warning"
+                        onClick={() => navigate(`/products/${product._id}`)}
+                      >
+                        Details
+                      </Button>
+                    </Col>
+                    <Col md={3}>
+                      <Button 
+                        variant="warning"
+                        onClick={() => handleRemove(product._id)}
+                      >
+                        <FaTrash />
+                      </Button>
+                    </Col>
+                  </Row>
+                  <hr style={{ color: "gold" }} />
+                </div>
               ))
             ) : (
               <div className="text-center py-5" style={{ color: "#666" }}>
-                <h4>Il tuo carrello è vuoto</h4>
-                <p className="mb-0">Aggiungi alcuni prodotti per iniziare!</p>
+                <h4 className="ms-2 text-warning mb-3">Your cart is empty!</h4>
               </div>
             )}
           </Col>
           <Col md={4} className="ms-3 stickyBox">
+            <h4 className="ms-2 text-warning mb-3">Cart Details</h4>
             <div id="listaCart">
-            <li>Sales Taxes:</li>
-            <li>Use Voucher: </li>
-            <li>Shipping costs:</li>
+              <div className="d-flex justify-content-between">
+                <span>Sales Taxes:</span>
+                <span> 20%</span>
+              </div>
+              <div className="d-flex justify-content-between">
+                Use Voucher: <input></input>
+              </div>
+              <div className="d-flex justify-content-between">
+                Shipping costs:<span> £ 16.00</span>
+              </div>
             </div>
             <div
               className="total-price-container p-3 mb-4"
@@ -122,8 +154,8 @@ export default function Store() {
                 boxShadow: "0 2px 4px rgba(0,0,0,0.05)",
               }}
             >
-              <h4 className="mb-0">
-                Totale:{" "}
+              <h4 className="mb-0 text-warning">
+                Totale:
                 {totalPrice.toLocaleString("en", {
                   style: "currency",
                   currency: "GBP",

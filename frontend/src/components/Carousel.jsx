@@ -8,6 +8,7 @@ import pantsCat from "../uploads/image1_0.jpg";
 import shoesCat from "../uploads/shoes-categoria.png";
 import socksCat from "../uploads/socksHomeP.jpg";
 import ballsCat from "../uploads/bola.jpg";
+import { motion } from "framer-motion";
 
 import { Col, Card, Button, Container } from "react-bootstrap";
 
@@ -42,7 +43,14 @@ const slider = [
 const Carousel = () => {
   return (
     <div className="carousel">
-      <h3>EXPLORE CATEGORIES</h3>
+      
+      <motion.h3
+        initial={{x:"-100vh"}}
+        animate={{ fontSize: "50px", x: 0 }}
+        transition={{duration: 3, type:"spring", stiffness: 50, mass:"2", dumpling:"10" }}
+        >
+          EXPLORE CATEGORIES
+      </motion.h3>
         <Swiper
           className="myswiper ms-4"
           initialSlide={3}

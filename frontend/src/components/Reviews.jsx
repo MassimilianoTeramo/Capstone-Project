@@ -3,7 +3,7 @@ import { Form, Button, Alert, ListGroup } from 'react-bootstrap';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 
-const Reviews = ({ productId }) => {
+const Reviews = ({ productId, productAuthorId }) => {
     const [reviews, setReviews] = useState([]);
     const [newReview, setNewReview] = useState('');
     const [error, setError] = useState('');
@@ -25,8 +25,7 @@ const Reviews = ({ productId }) => {
     };
 
     useEffect(() => {
-       
-            fetchReviews();
+        fetchReviews();
     }, [productId]);
 
     const handleReviewSubmit = async (e) => {
@@ -45,7 +44,6 @@ const Reviews = ({ productId }) => {
             return;
         }
         try {
-           
             const response = await axios.post(process.env.REACT_APP_API_URL +'/reviews', {
                 content: newReview,
                 author: user._id,
@@ -65,9 +63,7 @@ const Reviews = ({ productId }) => {
     };
 
     const handleDelete = async (reviewId) => {
-    
         try {
-
             const response = await axios.delete(process.env.REACT_APP_API_URL + `/reviews/${reviewId}`);
             
             if (response.status === 200) {
@@ -78,7 +74,7 @@ const Reviews = ({ productId }) => {
         } catch (err) {
             console.error('Errore completo:', err.response || err);
             if (err.response?.status === 401) {
-
+                setError('Non sei autorizzato a eliminare questa review');
             } else if (err.response?.status === 403) {
                 setError('Non sei autorizzato a eliminare questa review');
             } else {
@@ -87,21 +83,23 @@ const Reviews = ({ productId }) => {
         }
     };
 
+    // Controlla se l'utente corrente è l'autore del prodotto
+    const isProductAuthor = user && productAuthorId && user._id === productAuthorId;
+
     return (
         <div className="comments-section">
-            <h2 className='mt-4 mb-4 form-label' style={{fontSize:"20px"}}>Reviews</h2>
-            {reviews.length === 0 && <Alert variant="info">No comments yet</Alert>}
+            <h5 className='mt-4 mb-4 form-label' style={{color:"rgb(255, 210, 46)"}}>Reviews</h5>
+            {reviews.length === 0 && <Alert variant="warning">No Reviews yet</Alert>}
             {error && <Alert variant="danger">{error}</Alert>}
             
-            {user ? (
+            {user && !isProductAuthor ? (
                 <Form onSubmit={handleReviewSubmit} className="comment-form form-container mb-4">
                     <Form.Group controlId="comment">
-                        <Form.Label className='form-label'>Leave a Review</Form.Label>
                         <Form.Control
                             as="textarea"
                             value={newReview}
                             onChange={(e) => setNewReview(e.target.value)}
-                            placeholder="Scrivi un commento..."
+                            placeholder="Leave a Review..."
                             required
                             className="form-control"
                         />
@@ -110,11 +108,11 @@ const Reviews = ({ productId }) => {
                         Submit
                     </Button>
                 </Form>
-            ) : (
-                <Alert variant="info">
+            ) : !user ? (
+                <Alert variant="danger">
                     Log In to leave a Review
                 </Alert>
-            )}
+            ) : isProductAuthor && (null)}
 
             <ListGroup className='mt-4' style={{borderRadius:'15px'}}>
                 {reviews.map((review) => (

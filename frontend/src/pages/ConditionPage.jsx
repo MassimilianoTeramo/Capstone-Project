@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import ProductsCard from "../components/ProductsCard";
 import { Alert } from "react-bootstrap";
 import api from '../utils/api'
-
+import FilterComponent from "../components/FilterComponent";
 
 const ConditionPage = () => {
     const [products, setProducts] = useState([]);
@@ -19,6 +19,8 @@ const ConditionPage = () => {
     const { user } = useAuth();
     const userName = user ? `${user.firstName} ${user.lastName}` : "unknown";
     const navigate = useNavigate();
+    const [allProducts, setAllProducts] = useState([]);
+    const [showFilter, setShowFilter] = useState(false);
 
     const getProductsByCondition = async () => {
       try {
@@ -55,12 +57,20 @@ const ConditionPage = () => {
         fetchProducts();
     }, [condition]);
 
+    const handleCloseFilter = () => setShowFilter(false);
+    const handleShowFilter = () => setShowFilter(true);
 
     if (loading) return <Container className='mt-4'><p>Loading...</p></Container>;
     if (error) return <Container className='mt-4'><Alert variant='danger'>{error}</Alert></Container>;
 
     return (
         <Container className='mt-4'>
+            <FilterComponent 
+            showFilter={showFilter}
+            handleCloseFilter={handleCloseFilter}
+            allProducts={allProducts}
+            setProducts={setProducts}
+          />
             <h4 className='mb-4 form-label fw-bold' style={{fontSize:'20px'}} >{products.condition}</h4>
             <Row>
                 {products.length > 0 ? (

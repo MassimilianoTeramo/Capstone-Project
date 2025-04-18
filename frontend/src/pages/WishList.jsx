@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatchCart } from "../context/CartContext"; //carrello
 import { useWish } from "../context/WishListContext";
 import { useDispatchWish } from "../context/WishListContext";
+import { FaTrash } from "react-icons/fa";
 
 const WishList = () => {
   const dispatch = useDispatchCart(); //carrello
@@ -47,13 +48,13 @@ const WishList = () => {
 
 
   return (
-    <Container className="mt-4">
-      <h4 className="mb-4 mt-3 title text-center">My Wish List</h4>
-      <Row>
+    <Container className="mt-4 wishListContainer">
+      <h4 className="mb-5 mt-4 title text-center">My Wish List</h4>
+      <Row className="text-center mt-5">
         <Col md={3}>
           <strong>Product Name</strong>
         </Col>
-        <Col md={3}>
+        <Col md={2}>
           <strong>Price</strong>
         </Col>
         <Col md={3}>
@@ -63,14 +64,14 @@ const WishList = () => {
       <Row>
         {products.length > 0 ? (
           products.map((product) => (
-            <Row key={product._id} className="d-flex align-items-center mt-4">
-              <Col className="mb-4">
+            <Row key={product._id} className="d-flex align-items-center text-center mt-4">
+              <Col md={3} className="mb-4">
                 <Image src={product.image} style={{ width: "60%" }} />
               </Col>
-              <Col md={3} className="mb-4">
-                <p className="card_price">£ {product.price}</p>
+              <Col md={2}>
+                <span className="card_price">£ {product.price}</span>
               </Col>
-              <Col className="mb-4">
+              <Col md={3} className="mb-3">
                 <Button
                   className="card_button"
                   onClick={() => navigate(`/products/${product._id}`)}
@@ -78,23 +79,34 @@ const WishList = () => {
                   Dettagli
                 </Button>
               </Col>
-              <Col className="mb-4">
+              <Col className="mb-3">
                 <Button
                   className="card_button"
+                  style={{
+                    width:"4rem",
+                    borderRadius:"10%",
+                    marginLeft:"1rem",
+                  }}
                   onClick={() => addToCart(product)}
                 >
                   <BiCart size={24} />
                 </Button>
-                <Button
+                <Button 
+                className="card_button"
+                style={{
+                  width:"4rem",
+                  borderRadius:"10%",
+                  marginLeft:"1rem",
+                }}
                 onClick={() => handleLike(product._id)}>
-                    DELETE
+                    <FaTrash />
                 </Button>
               </Col>
             </Row>
           ))
         ) : (
           <Col>
-            <p>Non hai ancora aggiunto prodotti alla wishlist!</p>
+            <p>Your wish list is empty!</p>
           </Col>
         )}
       </Row>
@@ -102,29 +114,5 @@ const WishList = () => {
   );
 };
 
-/* 
-        <Container className='mt-4'>
-            <h4 className='mb-4'>La tua Wishlist</h4>
-            <Row>
-                {products.length > 0 ? (
-                    products.map(product => (
-                    
-                        <Col key={product._id} md={4} className='mb-4'>
-                            <ProductsCard
-                                product={product}
-                                showActions={true}
-                                onLikeToggle={fetchWishlist}
-                            />
-                        </Col>
-                    ))
-                ) : (
-                    <Col>
-                        <p>Non hai ancora aggiunto prodotti alla wishlist!</p>
-                    </Col>
-                )}
-            </Row>
-        </Container>
-
-*/
 
 export default WishList;
