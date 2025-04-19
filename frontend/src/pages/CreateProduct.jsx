@@ -1,12 +1,80 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
+import {
+  Form,
+  Button,
+  Container,
+  Row,
+  Col,
+  Alert,
+  FormLabel,
+} from "react-bootstrap";
 import axios from "axios";
-import api from "../utils/api"; // Assicurati di avere il percorso corretto per l'API
+import api from "../utils/api";
+import { delay, motion, spring } from "framer-motion";
+
+const TitleAn = {
+  initial: { y: "-200vh", opacity: 0 },
+  animate: {
+    y: 0,
+    opacity: 1,
+  },
+  transition: { duration: 1, type: "spring", bounceStiffness: 10 },
+  when: "beforeChildren",
+};
+
+const InputLeft = {
+  hidden: {
+    x: "-100vw",
+    opacity: 0,
+  },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      type: "spring",
+      stiffness: 100,
+      delay: 0.5,
+    },
+  },
+};
+
+const InputRight = {
+  hidden: {
+    x: "100vw",
+    opacity: 0,
+  },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      type: "spring",
+      stiffness: 100,
+      delay: 0.5,
+    },
+  },
+};
+
+const Popup = {
+  hidden: {
+    opacity: 0,
+    scale: 0.4,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.5,
+      delay: 1.2,
+    },
+  },
+};
 
 const CreateProduct = () => {
-  const { user } = useAuth(); // Retrieve the logged-in user from AuthContext
+  const { user } = useAuth();
 
   const [formData, setFormData] = useState({
     title: "",
@@ -91,82 +159,124 @@ const CreateProduct = () => {
     }
   };
   return (
-    <Container>
+    <Container className="text-center">
       <Row className="justify-content-center mt-5">
         <Col xs={12} md={6}>
-          <h1 className="form-title mt-3">Sell your product</h1>
+          <motion.h2
+            variants={TitleAn}
+            initial="initial"
+            animate="animate"
+            className="mb-4 animated-title"
+          >
+            Start Selling
+          </motion.h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit} className="form-container">
-            <Form.Group className="mb-3">
-              <Form.Label>Title</Form.Label>
-              <Form.Control
-                type="text"
-                value={formData.title}
-                onChange={(e) =>
-                  setFormData({ ...formData, title: e.target.value })
-                }
-                required
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Gender</Form.Label>
-              <Form.Group
-                className="mb-3 d-flex justify-content-center gap-5"
-                controlId="formBasicCheckbox"
-              >
-                <Form.Check
-                  type="checkbox"
-                  label="Male"
-                  value={"Male"}
+            <motion.div
+              variants={InputRight}
+              initial="hidden"
+              animate="visible"
+              transition={{
+                delay: 1,
+              }}
+            >
+              <Form.Group className="mb-3 formLabel">
+                <Form.Label >Title</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={formData.title}
                   onChange={(e) =>
-                    setFormData({ ...formData, gender: e.target.value })
+                    setFormData({ ...formData, title: e.target.value })
                   }
-                />
-                <Form.Check
-                  type="checkbox"
-                  label="Female"
-                  value={"Female"}
-                  onChange={(e) =>
-                    setFormData({ ...formData, gender: e.target.value })
-                  }
-                />
-                <Form.Check
-                  type="checkbox"
-                  label="Kid"
-                  value={"Kids"}
-                  onChange={(e) =>
-                    setFormData({ ...formData, gender: e.target.value })
-                  }
-                />
-                 <Form.Check
-                  type="checkbox"
-                  label="Unisex"
-                  value={"Unisex"}
-                  onChange={(e) =>
-                    setFormData({ ...formData, gender: e.target.value })
-                  }
+                  required
                 />
               </Form.Group>
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Category</Form.Label>
-              <Form.Select
-                aria-label="Default select example"
-                value={formData.category}
-                onChange={(e) =>
-                  setFormData({ ...formData, category: e.target.value })
-                }
-                required
+            </motion.div>
+            <motion.div variants={Popup} initial="hidden" animate="visible">
+              <Form.Group
+                className="my-4 d-flex flex-column justify-content-center formLabel"
+                controlId="formBasicCheckbox"
               >
-                <option value="">Select</option>
-                <option value="shirts">T-Shirts</option>
-                <option value="shorts">Shorts</option>
-                <option value="shoes">Shoes</option>
-                <option value="socks">Socks</option>
-                <option value="balls">Balls</option>
-              </Form.Select>
-            </Form.Group>
-            <Form.Group className="mb-3">
+                <Form.Label >Gender</Form.Label>
+                <div
+                  className="d-flex justify-content-center gap-5"
+                  
+                >
+                  <Form.Check
+                    type="checkbox"
+                    label="Male"
+                    value={"Male"}
+                    onChange={(e) =>
+                      setFormData({ ...formData, gender: e.target.value })
+                    }
+                  />
+
+                  <Form.Check
+                    type="checkbox"
+                    label="Female"
+                    value={"Female"}
+                    onChange={(e) =>
+                      setFormData({ ...formData, gender: e.target.value })
+                    }
+                  />
+
+                  <Form.Check
+                    type="checkbox"
+                    label="Kid"
+                    value={"Kids"}
+                    onChange={(e) =>
+                      setFormData({ ...formData, gender: e.target.value })
+                    }
+                  />
+
+                  <Form.Check
+                    type="checkbox"
+                    label="Unisex"
+                    value={"Unisex"}
+                    onChange={(e) =>
+                      setFormData({ ...formData, gender: e.target.value })
+                    }
+                  />
+                </div>
+              </Form.Group>
+            </motion.div>
+            <motion.div
+              variants={InputLeft}
+              initial="hidden"
+              animate="visible"
+              transition={{
+                delay: 2.5,
+                duration: 0.5,
+                type: "spring",
+                stiffness: 100
+              }}
+            >
+              <Form.Group className="mb-3  formLabel">
+                <Form.Label>Category</Form.Label>
+                <Form.Select
+                  aria-label="Default select example"
+                  value={formData.category}
+                  onChange={(e) =>
+                    setFormData({ ...formData, category: e.target.value })
+                  }
+                  required
+                >
+                  <option value="">Select</option>
+                  <option value="shirts">T-Shirts</option>
+                  <option value="shorts">Shorts</option>
+                  <option value="shoes">Shoes</option>
+                  <option value="socks">Socks</option>
+                  <option value="balls">Balls</option>
+                </Form.Select>
+              </Form.Group>
+            </motion.div>
+             <motion.div
+                          variants={InputRight}
+                          initial="hidden"
+                          animate="visible"
+                          transition={{ delay: 2.9, duration: 0.2, type:spring, stiffness:100 }}
+                        >
+            <Form.Group className="mb-3  formLabel">
               <Form.Label>Image</Form.Label>
               <Form.Control
                 type="file"
@@ -183,7 +293,14 @@ const CreateProduct = () => {
                 />
               )}
             </Form.Group>
-            <Form.Group className="mb-3">
+            </motion.div>
+              <motion.div
+                          variants={InputLeft}
+                          initial="hidden"
+                          animate="visible"
+                          transition={{ delay: 2, duration: 0.1, type:spring, stiffness:100}}
+                        >
+            <Form.Group className="mb-3  formLabel">
               <Form.Label>Description</Form.Label>
               <Form.Control
                 as="textarea"
@@ -195,7 +312,14 @@ const CreateProduct = () => {
                 required
               />
             </Form.Group>
-            <Form.Group className="mb-3">
+          </motion.div>
+           <motion.div
+                        variants={InputRight}
+                        initial="hidden"
+                        animate="visible"
+                        transition={{ delay: 2.5, duration: 0.1, type:spring, stiffness:100 }}
+                      >
+            <Form.Group className="mb-3  formLabel">
               <Form.Label>Price</Form.Label>
               <Form.Control
                 type="text"
@@ -207,7 +331,14 @@ const CreateProduct = () => {
                 required
               />
             </Form.Group>
-            <Form.Group className="mb-3">
+            </motion.div>
+             <motion.div
+                          variants={InputLeft}
+                          initial="hidden"
+                          animate="visible"
+                          transition={{ delay: 3, duration: 0.1, type:"spring", stiffness:100 }}
+                        >
+            <Form.Group className="mb-3  formLabel">
               <Form.Label>Condition</Form.Label>
               <Form.Select
                 aria-label="Default select example"
@@ -222,7 +353,14 @@ const CreateProduct = () => {
                 <option value="used">Used</option>
               </Form.Select>
             </Form.Group>
-            <Form.Group className="mb-3">
+            </motion.div>
+              <motion.div
+                          variants={InputRight}
+                          initial="hidden"
+                          animate="visible"
+                          transition={{ delay: 3, duration: 0.1, type:"spring", stiffness:100 }}
+                        >
+            <Form.Group className="mb-3  formLabel">
               <Form.Label>Size</Form.Label>
               <Form.Select
                 aria-label="Default select example"
@@ -271,7 +409,14 @@ const CreateProduct = () => {
                 )}
               </Form.Select>
             </Form.Group>
-            <Form.Group className="mb-3">
+            </motion.div>
+              <motion.div
+                          variants={InputLeft}
+                          initial="hidden"
+                          animate="visible"
+                          transition={{ delay: 3, duration: 0.1, type:"spring", stiffness:100 }}
+                        >
+            <Form.Group className="mb-3  formLabel">
               <Form.Label>Brand</Form.Label>
               <Form.Select
                 aria-label="Default select example"
@@ -293,7 +438,8 @@ const CreateProduct = () => {
                 <option value="Diadora">Umbro</option>
               </Form.Select>
             </Form.Group>
-            <Button className="submit-button" variant="primary" type="submit">
+            </motion.div>
+            <Button className="submit-button my-4" variant="warning" type="submit">
               Publish it!
             </Button>
           </Form>

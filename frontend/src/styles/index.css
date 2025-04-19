@@ -49,6 +49,13 @@ body::after {
   text-shadow: 0 0 10px #e1ae07;
 }
 
+.logo {
+  width: 50%;
+  height:auto;
+  margin: 0 auto;
+
+}
+
 .nav-link-custom {
   color: #ffffffcc !important;
   margin: 0 0.5rem;
@@ -522,3 +529,12 @@ section h3{
 
 /* Fine FOOTER */
 
+.animated-title {
+  font-size: 50px;
+  color: gold;
+  letter-spacing: 5px;
+}
+
+.formLabel {
+  color: #ffffffcc;
+}

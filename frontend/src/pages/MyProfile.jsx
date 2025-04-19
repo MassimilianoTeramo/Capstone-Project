@@ -168,11 +168,17 @@ const Profile = () => {
               />
             </Form.Group>
             </motion.div>
-
+            <motion.div
+              variants={TitleAn}
+              initial="initial"
+              animate="animate"
+              transition={{ delay: 2, duration: 0.1, type:"spring", stiffness:50 }}
+            >
             <h4 className="form-label mt-5 mb-4" style={{ fontSize: "20px", color:"gold" }}>
               Change Password
             </h4>
-            
+            </motion.div>
+
             <motion.div
               variants={InputLeft}
               initial="hidden"

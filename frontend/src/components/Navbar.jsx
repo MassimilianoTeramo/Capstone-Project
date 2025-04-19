@@ -9,7 +9,18 @@ import { BiCart } from "react-icons/bi";
 import { useWish } from "../context/WishListContext";
 import api from "../utils/api";
 import { useDispatchWish } from "../context/WishListContext";
+import logo1 from "../uploads/logo1.png";
 import { motion } from "framer-motion";
+
+const svgVariants = {
+  hidden: {
+    rotate: 0,
+  },
+  visible: {
+    rotate: 360,
+    transition: { repeat: Infinity, duration: 4, ease: "linear" },
+  },
+};
 
 const CustomNavbar = () => {
   const items = useCart();
@@ -44,6 +55,16 @@ const CustomNavbar = () => {
   return (
      <Navbar bg="dark" expand="lg" className="custom-navbar">
       <Container>
+        <motion.div style={{width:"5rem"}}>
+          <motion.img 
+            variants={svgVariants}
+            initial="hidden"
+            animate="visible"
+            src={logo1} 
+            alt="logo" 
+            className="logo"
+            />
+          </motion.div>
         <Navbar.Brand as={Link} to="/" className="brand-text">
           FootballShop
         </Navbar.Brand>
