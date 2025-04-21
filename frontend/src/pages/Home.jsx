@@ -20,7 +20,7 @@ const CardVariants = {
     scale: 1.1,
     boxShadow: "0px 0px 28px gold",
     transition: {
-      duration: 0.3,
+      duration: 0.2,
       when: "beforeChildren",
       staggerChildren: 0.1
     },

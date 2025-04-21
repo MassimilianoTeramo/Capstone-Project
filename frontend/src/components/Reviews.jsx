@@ -169,7 +169,7 @@ const Reviews = ({ productId, productAuthorId }) => {
         isProductAuthor && null
       )}
 
-      <ListGroup className="mt-4" style={{ borderRadius: "15px" }}>
+      <ListGroup className="mt-4 review_container" style={{ borderRadius: "15px" }}>
         {reviews.map((review) => (
           <ListGroup.Item
             key={review._id}
@@ -193,7 +193,7 @@ const Reviews = ({ productId, productAuthorId }) => {
                 />
               </span>
             </div>
-            <div className="review-text" style={{ color: "black" }}>
+            <div className="review-text" style={{ color: "#ffffff" }}>
               {review.content}
               <div className="text-muted small pt-2 pb-2">
                 {new Date(review.createdAt).toLocaleString()}

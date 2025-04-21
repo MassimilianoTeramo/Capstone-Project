@@ -122,3 +122,27 @@
 }
 
 /* Fine Modal Styling */
+
+/* Form Control */
+.form-control {
+  background-color: #2a2a2a !important;
+  border: 1px solid #e1ae07;
+  color: #ffffff;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+.form-control:focus {
+  background-color: #2a2a2a;
+  border-color: #e1ae07;
+  box-shadow: 0 0 10px rgba(225, 174, 7, 0.3);
+  color: #ffffff;
+}
+.form-control::placeholder {
+  color: #ffffff;
+  opacity: 0.7;
+}
+
+.review-item {
+  background-color: #2a2a2a;
+  border-color: #e1ae07;
+}

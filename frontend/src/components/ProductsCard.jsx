@@ -1,16 +1,14 @@
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useState, useEffect } from "react";
-import { Alert, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { BiCart } from "react-icons/bi";
 import { GiSoccerBall } from "react-icons/gi";
 import api from "../utils/api";
 import { Card } from "react-bootstrap";
-import EditProduct from "./EditProduct";
 import { useDispatchCart } from "../context/CartContext"; //carrello
 import { useWish } from "../context/WishListContext";
 import { useDispatchWish } from "../context/WishListContext";
-import Toast from "react-bootstrap/Toast";
 import { motion, AnimatePresence, inertia } from "framer-motion";
 
 const CardVariants = {
@@ -81,7 +79,7 @@ const ProductsCard = ({ product, showActions }) => {
     const checkIfLiked = async () => {
       if (user) {
         const isProductLiked =
-          likedProducts.find((p) => p._id === product._id) !== undefined;
+          likedProducts.find((p) => p?._id === product._id) !== undefined;
         setIsLiked(isProductLiked);
       }
     };
