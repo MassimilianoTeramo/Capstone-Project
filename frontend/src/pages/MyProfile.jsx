@@ -139,7 +139,7 @@ const Profile = () => {
               variants={InputLeft}
               initial="hidden"
               animate="visible"
-              transition={{ delay: 1, duration: 0.2,  type:spring, stiffness:100}}
+              transition={{ delay: 0.7, duration: 0.2,  type:spring, stiffness:100}}
             >
               <Form.Group className="mb-3">
                 <Form.Label style={{color:"#ffffffcc"}}>Surname</Form.Label>
@@ -156,7 +156,7 @@ const Profile = () => {
               variants={InputRight}
               initial="hidden"
               animate="visible"
-              transition={{ delay: 1.5, duration: 0.2, type:spring, stiffness:100 }}
+              transition={{ delay: 1.2, duration: 0.2, type:spring, stiffness:100 }}
             >
             <Form.Group className="mb-3">
               <Form.Label style={{color:"#ffffffcc"}}>email</Form.Label>
@@ -172,7 +172,7 @@ const Profile = () => {
               variants={TitleAn}
               initial="initial"
               animate="animate"
-              transition={{ delay: 2, duration: 0.1, type:"spring", stiffness:50 }}
+              transition={{ delay: 1.8, duration: 0.1, type:"spring", stiffness:50 }}
             >
             <h4 className="form-label mt-5 mb-4" style={{ fontSize: "20px", color:"gold" }}>
               Change Password
@@ -183,7 +183,7 @@ const Profile = () => {
               variants={InputLeft}
               initial="hidden"
               animate="visible"
-              transition={{ delay: 2, duration: 0.1, type:spring, stiffness:100}}
+              transition={{ delay: 2.3, duration: 0.1, type:spring, stiffness:100}}
             >
             <Form.Group className="mb-3">
               <Form.Label style={{color:"#ffffffcc"}}>Current Password</Form.Label>
@@ -199,7 +199,7 @@ const Profile = () => {
               variants={InputRight}
               initial="hidden"
               animate="visible"
-              transition={{ delay: 2.5, duration: 0.1, type:spring, stiffness:100 }}
+              transition={{ delay: 2.9, duration: 0.1, type:spring, stiffness:100 }}
             >
             <Form.Group className="mb-3">
            <Form.Label style={{color:"#ffffffcc"}}>New Password</Form.Label>
@@ -215,7 +215,7 @@ const Profile = () => {
               variants={InputLeft}
               initial="hidden"
               animate="visible"
-              transition={{ delay: 3, duration: 0.1, type:"spring", stiffness:100 }}
+              transition={{ delay: 3.5, duration: 0.1, type:"spring", stiffness:100 }}
             >
             <Form.Group className="mb-3">
               <Form.Label style={{color:"#ffffffcc"}}>Confirm New Password</Form.Label>
@@ -231,7 +231,7 @@ const Profile = () => {
               variants={InputRight}
               initial="hidden"
               animate="visible"
-              transition={{ delay: 3, duration: 0.1, type:"spring", stiffness:100 }}
+              transition={{ delay: 3.9, duration: 0.1, type:"spring", stiffness:100 }}
             >
             <Button className="submit-button my-4" variant="warning" type="submit">
               Submit

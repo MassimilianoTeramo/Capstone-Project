@@ -6,6 +6,7 @@ import Rating from "@mui/material/Rating";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFutbol } from "@fortawesome/free-solid-svg-icons";
 import { styled } from '@mui/material/styles';
+import { motion } from "framer-motion";
 
 const StyledRating = styled(Rating)({
   '& .MuiRating-iconFilled': {
@@ -148,13 +149,19 @@ const Reviews = ({ productId, productAuthorId }) => {
               className="form-control"
             />
           </Form.Group>
+          <motion.div 
+            className="d-flex justify-content-center"
+             whileHover={{ scale: 1.1 }}
+             whileTap={{ scale: 0.9 }}>
           <Button
-            variant="primary"
+            variant="warning"
             type="submit"
-            className="mt-2 submit-button"
+            className="mt-4 submit-button"
           >
+           
             Submit
-          </Button>
+          </Button> 
+          </motion.div>
         </Form>
       ) : !user ? (
         <Alert variant="danger">Log In to leave a Review</Alert>

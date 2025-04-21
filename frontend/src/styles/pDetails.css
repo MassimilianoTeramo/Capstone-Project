@@ -18,3 +18,107 @@
   color: rgb(255, 210, 46);
 }
 
+/* Modal Styling */
+.modal-dark {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-dark .modal-content {
+  background-color: #1c1f22;
+  border: 2px solid #e1ae07;
+  box-shadow: 0 0 20px rgba(225, 174, 7, 0.3);
+  border-radius: 10px;
+}
+
+.modal-dark .modal-header {
+  border-bottom: 1px solid #e1ae07;
+  padding: 1.5rem;
+}
+
+.modal-dark .modal-title {
+  color: #e1ae07;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(225, 174, 7, 0.5);
+}
+
+.modal-dark .close {
+  color: #e1ae07;
+  text-shadow: none;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.modal-dark .close:hover {
+  color: #ffffff;
+  opacity: 1;
+  text-shadow: 0 0 10px rgba(225, 174, 7, 0.8);
+}
+
+.modal-dark .form-label {
+  color: #e1ae07;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.modal-dark .form-control {
+  background-color: #2a2a2a;
+  border: 1px solid #e1ae07;
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.modal-dark .form-control:focus {
+  background-color: #2a2a2a;
+  border-color: #e1ae07;
+  box-shadow: 0 0 10px rgba(225, 174, 7, 0.3);
+  color: #ffffff;
+}
+
+.modal-dark .form-select {
+  background-color: #2a2a2a;
+  border: 1px solid #e1ae07;
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.modal-dark .form-select:focus {
+  background-color: #2a2a2a;
+  border-color: #e1ae07;
+  box-shadow: 0 0 10px rgba(225, 174, 7, 0.3);
+  color: #ffffff;
+}
+
+.modal-dark .submit-button {
+  background-color: transparent;
+  border: 2px solid #e1ae07;
+  color: #e1ae07;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.5rem 2rem;
+  transition: all 0.3s ease;
+}
+
+.modal-dark .submit-button:hover {
+  background-color: #e1ae07;
+  color: #000000;
+  box-shadow: 0 0 15px rgba(225, 174, 7, 0.5);
+}
+
+.modal-dark .form-check-input:checked {
+  background-color: #e1ae07;
+  border-color: #e1ae07;
+}
+
+.modal-dark .form-check-input:focus {
+  border-color: #e1ae07;
+  box-shadow: 0 0 10px rgba(225, 174, 7, 0.3);
+}
+
+.modal-dark .form-check-label {
+  color: #ffffff;
+}
+
+/* Fine Modal Styling */

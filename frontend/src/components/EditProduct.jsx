@@ -4,6 +4,8 @@ import { Form, Button, Row, Col, Modal } from "react-bootstrap";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../utils/api";
+import {motion} from "framer-motion";
+
 
 const EditProduct = () => {
   const { id } = useParams();
@@ -137,10 +139,13 @@ const EditProduct = () => {
 
   return (
     <>
-      <Button className="" onClick={handleShow}>
+      <motion.div 
+             whileHover={{ scale: 1.1 }}
+             whileTap={{ scale: 0.9 }}>
+      <Button className="" onClick={handleShow} variant="warning">
         Edit Product
       </Button>
-
+</motion.div>
       <Modal show={show} onHide={handleClose} className="modal-dark">
         <Modal.Header closeButton className="border-0">
           <Modal.Title className="form-title">Edit your product</Modal.Title>

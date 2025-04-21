@@ -80,9 +80,14 @@ const Products = () => {
              >
                 <h3>All Products</h3>
             </motion.div>
+
+            <motion.div 
+             whileHover={{ scale: 1.1 }}
+             whileTap={{ scale: 0.9 }}>
             <Button variant="warning" onClick={handleShowFilter}>
               Filter
             </Button>
+            </motion.div>
           
           <FilterComponent 
             showFilter={showFilter}
@@ -104,10 +109,11 @@ const Products = () => {
         </Row>
         {totalPages > 1 && (
           <div>
-            <Pagination className="justify-content-center">
+            <Pagination className="justify-content-center gap-1">
               <Pagination.Prev
                 disabled={currentPage === 1}
                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                
               />
               {[...Array(totalPages)].map((_, index) => (
                 <Pagination.Item

@@ -141,7 +141,10 @@ const CustomNavbar = () => {
           </Nav>
 
           <Nav className="ms-auto d-flex">
-            <div className="mt-1">
+            <motion.div 
+             whileHover={{ scale: 1.1 }}
+             whileTap={{ scale: 0.9 }}
+            className="mt-1">
               <Button
                 className="cart-button me-3"
                 variant="warning"
@@ -149,7 +152,7 @@ const CustomNavbar = () => {
               >
                 <BiCart size={24} /> {totalItems}
               </Button>
-            </div>
+            </motion.div>
             <div className="cart-user">
               {user ? (
                 <NavDropdown

@@ -85,13 +85,14 @@ const Register = () => {
   };
   return (
     <Container className="d-flex flex-column text-center my-5">
-      <Row className="justify-content-center">
+      <Row className="justify-content-center mt-5">
         <Col md={6} xs={12}>
           <motion.h2
             variants={TitleAn}
             initial="initial"
             animate="animate"
             className="mb-4"
+            style={{fontFamily:"Anek Odia"}}
           >
             Register
           </motion.h2>

@@ -218,9 +218,6 @@ body::after {
   flex-direction: row;
 }
 
-
-
-
 /* Fine NAVBAR */
 
 /* fitst sec*/
@@ -232,14 +229,16 @@ body::after {
   height: 35rem;
   background-position: center -220px;
   opacity: 0.7;
+  box-shadow: 0 40px 150px rgba(0, 0, 0, 0.5);
 }
 
 
 .maintitle {
   text-transform: capitalize;
-  text-shadow: 0 0 15px rgb(255, 221, 0);
+  text-shadow: 0 0 25px rgb(255, 221, 0);
+  color: gold;
   margin-bottom: 4rem;
-  letter-spacing: 0.8;
+  letter-spacing: 1;
   margin-top: 2rem;
   font-size: 4rem;
   line-height: 1.1;
@@ -281,98 +280,92 @@ section h3{
   height: 400px;
   background: rgba(21, 21, 21, 0.71);
   border-radius: 1rem;
-  padding: 4rem 2rem 0;
-  overflow-y: hidden;
+  padding: 1rem;
+  overflow: hidden;
   font-style: oblique;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
 }
 
 .card_img {
-  position: absolute;
-  width: 260px;
+  width: 90%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
   filter: drop-shadow(5px 10px 15px rgba(8, 9, 13, 0.4));
   z-index: 3;
+  transition: all 0.3s ease;
 }
-.card_img:hover {
-  transition: 0.8s;
-  z-index: 2;
-}
+
 .card_data {
-  transform: translateY(16.2rem);
-  width: 300px;
+  width: 100%;
   text-align: center;
   color: rgb(170, 167, 167);
+  transition: all 0.3s ease;
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
 }
-.card_data {
-  transition: 0.8s;
-}
+
 .card_title {
   font-size: 24px;
   color: #e1ae07;
   margin-bottom: 0.5rem;
   font-weight: 400;
+  transition: all 0.3s ease;
 }
-.card_title:hover {
-  transition: 0.8s;
-}
+
 .card_price {
   display: inline-block;
   font-size: 16px;
   font-weight: 500;
   color: #e1ae07;
+  transition: all 0.3s ease;
 }
 
-.card_description {
-  font-size: 14px;
-  text-align: initial;
-  margin-bottom: 1.25rem;
+.card_buttons {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1rem;
   opacity: 0;
+  transition: all 0.3s ease;
+  
 }
-.card__description:hover {
-  transition: 0.8s;
+
+.card:hover .card_data {
+  opacity: 0;
+  transform: translateX(-50%) translateY(20px);
+}
+
+.card:hover .card_buttons {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 .card_button {
   background: transparent;
-  border: 2px solid #ffd620;
+  border: 2px solid #e1ae07;
   border-radius: 5rem;
-  color: #ffd620;
+  color: #e1ae07;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 1px;
   transition: all 0.3s ease;
-  width: 50%;
-  margin-top: 1rem;
+  padding: 0.5rem 1.5rem;
 }
 
 .card_button:hover {
-  background: #ffd620;
+  background: #e1ae07;
   color: #000000;
   box-shadow: 0 0 15px rgba(255, 245, 46, 0.5);
-}
-
-/* Hover card effect */
-.card:hover {
-  overflow-y: visible;
-}
-
-.card:hover .card_data {
-  transform: translateY(10rem);
-}
-
-.card:hover .card_title {
-  visibility: hidden;
-  transition: 0.2s;
-}
-
-.card:hover .card_price {
-  display: none;
-  transition: 0.1s;
-}
-
-.card:hover .card_button {
-  transition-delay: 0.5s;
-  opacity: 1;
-  margin-top: 30px;
+  border-color: gold;
 }
 
 /* SECTION NEW USED*/
@@ -392,6 +385,7 @@ section h3{
   flex-direction: column;
   align-items: center;
   position: relative;
+  box-shadow: 0 0 200px rgba(0, 0, 0, 0.5);
 }
 
 .cardNewUsed {
@@ -399,6 +393,7 @@ section h3{
   text-align: center;
   padding: 0;
 }
+
 
 .cardNewUsed .card_New_data {
   transform: translateY(25rem);
@@ -430,16 +425,27 @@ section h3{
   box-shadow: 0 0 25px rgb(255, 210, 46);
 }
 
-
-
-.cardUsed {
-  border: 2px solid rgb(255, 210, 46);
+.card_New_data {
+  position: absolute;
+  bottom: 2rem;
+  left: 10%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 1rem 2rem;
+  border-radius: 4px;
+  width: 80%;
   text-align: center;
-  background-image: url(../uploads/cardUsed.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
 }
+
+.NUsec {
+  color: gold;
+  margin: 0;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+
 /*DETAIL*/
 
 .imageDetail:hover{
@@ -535,6 +541,60 @@ section h3{
   letter-spacing: 5px;
 }
 
+
+
+.bannerCart {
+  position: absolute;
+  bottom: 2rem;
+  left: 10%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: gold;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: nowrap;
+  z-index: 1000;
+}
+
+
 .formLabel {
   color: #ffffffcc;
 }
+
+/* Pagination Styling */
+.pagination {
+  margin-top: 2rem;
+}
+
+.pagination .page-item .page-link {
+  background-color: #1c1f22;
+  border: 1px solid #e1ae07;
+  color: #e1ae07;
+  margin: 0 0.2rem;
+  transition: all 0.3s ease;
+}
+
+.pagination .page-item .page-link:hover {
+  background-color: #e1ae07;
+  color: #000000;
+  box-shadow: 0 0 15px rgba(255, 203, 46, 0.5);
+  border-color: #e1ae07;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #e1ae07;
+  border-color: #e1ae07;
+  color: #000000;
+  box-shadow: 0 0 15px rgba(255, 203, 46, 0.5);
+}
+
+.pagination .page-item.disabled .page-link {
+  background-color: #1c1f22;
+  border-color: #495057;
+  color: #495057;
+}
+
+/* Fine Pagination Styling */
+
+

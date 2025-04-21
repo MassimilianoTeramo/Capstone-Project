@@ -132,8 +132,8 @@ const Login = () => {
             variants={TitleAn}
             initial="initial"
             animate="animate"
-            className="text-center mt-4 form-label"
-            style={{ fontSize: "20px" }}
+            className="text-center mt-4"
+            style={{fontFamily:"Anek Odia", fontSize:"40px"}}
           >
             Login
           </motion.h2>

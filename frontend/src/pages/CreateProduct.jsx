@@ -1,15 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import {
-  Form,
-  Button,
-  Container,
-  Row,
-  Col,
-  Alert,
-  FormLabel,
-} from "react-bootstrap";
+import { Form, Button, Container, Row, Col, Alert, FormLabel} from "react-bootstrap";
 import axios from "axios";
 import api from "../utils/api";
 import { delay, motion, spring } from "framer-motion";
@@ -29,16 +21,16 @@ const InputLeft = {
     x: "-100vw",
     opacity: 0,
   },
-  visible: {
+  visible: (custom) => ({
     x: 0,
     opacity: 1,
     transition: {
-      duration: 0.5,
+      duration: 1,
       type: "spring",
       stiffness: 100,
-      delay: 0.5,
+      delay: custom * 0.2,
     },
-  },
+  }),
 };
 
 const InputRight = {
@@ -46,16 +38,16 @@ const InputRight = {
     x: "100vw",
     opacity: 0,
   },
-  visible: {
+  visible:(custom) => ({
     x: 0,
     opacity: 1,
     transition: {
-      duration: 0.5,
+      duration: 1,
       type: "spring",
       stiffness: 100,
-      delay: 0.5,
+      delay: custom * 0.2,
     },
-  },
+  }),
 };
 
 const Popup = {
@@ -63,14 +55,14 @@ const Popup = {
     opacity: 0,
     scale: 0.4,
   },
-  visible: {
+  visible: (custom) => ({
     opacity: 1,
     scale: 1,
     transition: {
       duration: 0.5,
-      delay: 1.2,
-    },
-  },
+      delay: custom
+    }
+  }),
 };
 
 const CreateProduct = () => {
@@ -176,12 +168,10 @@ const CreateProduct = () => {
               variants={InputRight}
               initial="hidden"
               animate="visible"
-              transition={{
-                delay: 1,
-              }}
+              custom={1}
             >
               <Form.Group className="mb-3 formLabel">
-                <Form.Label >Title</Form.Label>
+                <Form.Label>Title</Form.Label>
                 <Form.Control
                   type="text"
                   value={formData.title}
@@ -192,51 +182,31 @@ const CreateProduct = () => {
                 />
               </Form.Group>
             </motion.div>
-            <motion.div variants={Popup} initial="hidden" animate="visible">
+            <motion.div variants={Popup} initial="hidden" animate="visible" exit={"hidden"}>
               <Form.Group
                 className="my-4 d-flex flex-column justify-content-center formLabel"
                 controlId="formBasicCheckbox"
               >
-                <Form.Label >Gender</Form.Label>
-                <div
-                  className="d-flex justify-content-center gap-5"
-                  
-                >
-                  <Form.Check
-                    type="checkbox"
-                    label="Male"
-                    value={"Male"}
-                    onChange={(e) =>
-                      setFormData({ ...formData, gender: e.target.value })
-                    }
-                  />
-
-                  <Form.Check
-                    type="checkbox"
-                    label="Female"
-                    value={"Female"}
-                    onChange={(e) =>
-                      setFormData({ ...formData, gender: e.target.value })
-                    }
-                  />
-
-                  <Form.Check
-                    type="checkbox"
-                    label="Kid"
-                    value={"Kids"}
-                    onChange={(e) =>
-                      setFormData({ ...formData, gender: e.target.value })
-                    }
-                  />
-
-                  <Form.Check
-                    type="checkbox"
-                    label="Unisex"
-                    value={"Unisex"}
-                    onChange={(e) =>
-                      setFormData({ ...formData, gender: e.target.value })
-                    }
-                  />
+                <Form.Label>Gender</Form.Label>
+                <div className="d-flex justify-content-center gap-5">
+                  {["Male", "Female", "Kids", "Unisex"].map((label, index) => (
+                    <motion.div
+                      key={label}
+                      variants={Popup}
+                      initial="hidden"
+                      animate="visible"
+                      custom={(index +1) * 0.4}
+                    >
+                      <Form.Check
+                        type="checkbox"
+                        label={label}
+                        value={label}
+                        onChange={(e) =>
+                          setFormData({ ...formData, gender: e.target.value })
+                        }
+                      />
+                    </motion.div>
+                  ))}
                 </div>
               </Form.Group>
             </motion.div>
@@ -244,11 +214,11 @@ const CreateProduct = () => {
               variants={InputLeft}
               initial="hidden"
               animate="visible"
+              custom={1.5}
               transition={{
-                delay: 2.5,
                 duration: 0.5,
                 type: "spring",
-                stiffness: 100
+                stiffness: 100,
               }}
             >
               <Form.Group className="mb-3  formLabel">
@@ -270,178 +240,212 @@ const CreateProduct = () => {
                 </Form.Select>
               </Form.Group>
             </motion.div>
-             <motion.div
-                          variants={InputRight}
-                          initial="hidden"
-                          animate="visible"
-                          transition={{ delay: 2.9, duration: 0.2, type:spring, stiffness:100 }}
-                        >
-            <Form.Group className="mb-3  formLabel">
-              <Form.Label>Image</Form.Label>
-              <Form.Control
-                type="file"
-                accept="image/*"
-                onChange={handleImageChange}
-                required
-              />
-              {previewUrl && (
-                <img
-                  src={previewUrl}
-                  alt="Preview"
-                  className="mt-2"
-                  style={{ maxWidth: "200px" }}
+            <motion.div
+              variants={InputRight}
+              initial="hidden"
+              animate="visible"
+              custom={2}
+              transition={{
+                duration: 0.2,
+                type: spring,
+                stiffness: 100,
+              }}
+            >
+              <Form.Group className="mb-3  formLabel">
+                <Form.Label>Image</Form.Label>
+                <Form.Control
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  required
                 />
-              )}
-            </Form.Group>
-            </motion.div>
-              <motion.div
-                          variants={InputLeft}
-                          initial="hidden"
-                          animate="visible"
-                          transition={{ delay: 2, duration: 0.1, type:spring, stiffness:100}}
-                        >
-            <Form.Group className="mb-3  formLabel">
-              <Form.Label>Description</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={5}
-                value={formData.description}
-                onChange={(e) =>
-                  setFormData({ ...formData, description: e.target.value })
-                }
-                required
-              />
-            </Form.Group>
-          </motion.div>
-           <motion.div
-                        variants={InputRight}
-                        initial="hidden"
-                        animate="visible"
-                        transition={{ delay: 2.5, duration: 0.1, type:spring, stiffness:100 }}
-                      >
-            <Form.Group className="mb-3  formLabel">
-              <Form.Label>Price</Form.Label>
-              <Form.Control
-                type="text"
-                value={formData.price}
-                onChange={(e) =>
-                  setFormData({ ...formData, price: e.target.value })
-                }
-                placeholder="£"
-                required
-              />
-            </Form.Group>
-            </motion.div>
-             <motion.div
-                          variants={InputLeft}
-                          initial="hidden"
-                          animate="visible"
-                          transition={{ delay: 3, duration: 0.1, type:"spring", stiffness:100 }}
-                        >
-            <Form.Group className="mb-3  formLabel">
-              <Form.Label>Condition</Form.Label>
-              <Form.Select
-                aria-label="Default select example"
-                value={formData.condition}
-                onChange={(e) =>
-                  setFormData({ ...formData, condition: e.target.value })
-                }
-                required
-              >
-                <option value="">Select</option>
-                <option value="new">New</option>
-                <option value="used">Used</option>
-              </Form.Select>
-            </Form.Group>
-            </motion.div>
-              <motion.div
-                          variants={InputRight}
-                          initial="hidden"
-                          animate="visible"
-                          transition={{ delay: 3, duration: 0.1, type:"spring", stiffness:100 }}
-                        >
-            <Form.Group className="mb-3  formLabel">
-              <Form.Label>Size</Form.Label>
-              <Form.Select
-                aria-label="Default select example"
-                value={formData.size}
-                onChange={(e) =>
-                  setFormData({ ...formData, size: e.target.value })
-                }
-                required
-              >
-                {formData.category === "shirts" ||
-                formData.category === "shorts" ||
-                formData.category === "socks" ? (
-                  <>
-                    <option value="">Select</option>
-                    <option value="XS">XS</option>
-                    <option value="S">S</option>
-                    <option value="M">M</option>
-                    <option value="L">L</option>
-                    <option value="XL">XL</option>
-                    <option value="XXL">XXL</option>
-                  </>
-                ) : formData.category === "balls" ? (
-                  <>
-                    <option value="">Select</option>
-                    <option value="3">Size 3</option>
-                    <option value="4">Size 4</option>
-                    <option value="5">Size 5</option>
-                  </>
-                ) : (
-                  <>
-                    <option value="">Select</option>
-                    <option value="36">36</option>
-                    <option value="37">37</option>
-                    <option value="38">38</option>
-                    <option value="39">39</option>
-                    <option value="40">40</option>
-                    <option value="41">41</option>
-                    <option value="42">42</option>
-                    <option value="43">43</option>
-                    <option value="44">44</option>
-                    <option value="45">45</option>
-                    <option value="46">46</option>
-                    <option value="47">47</option>
-                    <option value="48">48</option>
-                  </>
+                {previewUrl && (
+                  <img
+                    src={previewUrl}
+                    alt="Preview"
+                    className="mt-2"
+                    style={{ maxWidth: "200px" }}
+                  />
                 )}
-              </Form.Select>
-            </Form.Group>
+              </Form.Group>
             </motion.div>
-              <motion.div
-                          variants={InputLeft}
-                          initial="hidden"
-                          animate="visible"
-                          transition={{ delay: 3, duration: 0.1, type:"spring", stiffness:100 }}
-                        >
-            <Form.Group className="mb-3  formLabel">
-              <Form.Label>Brand</Form.Label>
-              <Form.Select
-                aria-label="Default select example"
-                value={formData.brand}
-                onChange={(e) =>
-                  setFormData({ ...formData, brand: e.target.value })
-                }
-                required
-              >
-                <option value="">Select</option>
-                <option value="Nike">Nike</option>
-                <option value="Adidas">Adidas</option>
-                <option value="Puma">Puma</option>
-                <option value="Errea">Errea</option>
-                <option value="Mizuno">Mizuno</option>
-                <option value="Kappa">Kappa</option>
-                <option value="Joma">Joma</option>
-                <option value="Diadora">Diadora</option>
-                <option value="Diadora">Umbro</option>
-              </Form.Select>
-            </Form.Group>
+            <motion.div
+              variants={InputLeft}
+              initial="hidden"
+              animate="visible"
+              custom={2.5}
+              transition={{
+                duration: 0.1,
+                type: spring,
+                stiffness: 100,
+              }}
+            >
+              <Form.Group className="mb-3  formLabel">
+                <Form.Label>Description</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={5}
+                  value={formData.description}
+                  onChange={(e) =>
+                    setFormData({ ...formData, description: e.target.value })
+                  }
+                  required
+                />
+              </Form.Group>
             </motion.div>
+            <motion.div
+              variants={InputRight}
+              initial="hidden"
+              animate="visible"
+              custom={2.8}
+              transition={{
+                duration: 0.1,
+                type: spring,
+                stiffness: 100,
+              }}
+            >
+              <Form.Group className="mb-3  formLabel">
+                <Form.Label>Price</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={formData.price}
+                  onChange={(e) =>
+                    setFormData({ ...formData, price: e.target.value })
+                  }
+                  placeholder="£"
+                  required
+                />
+              </Form.Group>
+            </motion.div>
+            <motion.div
+              variants={InputLeft}
+              initial="hidden"
+              animate="visible"
+              custom={3.2}
+              transition={{
+                duration: 0.1,
+                type: "spring",
+                stiffness: 100,
+              }}
+            >
+              <Form.Group className="mb-3  formLabel">
+                <Form.Label>Condition</Form.Label>
+                <Form.Select
+                  aria-label="Default select example"
+                  value={formData.condition}
+                  onChange={(e) =>
+                    setFormData({ ...formData, condition: e.target.value })
+                  }
+                  required
+                >
+                  <option value="">Select</option>
+                  <option value="new">New</option>
+                  <option value="used">Used</option>
+                </Form.Select>
+              </Form.Group>
+            </motion.div>
+            <motion.div
+              variants={InputRight}
+              initial="hidden"
+              animate="visible"
+              custom={3.5}
+              transition={{
+                duration: 0.1,
+                type: "spring",
+                stiffness: 100,
+              }}
+            >
+              <Form.Group className="mb-3  formLabel">
+                <Form.Label>Size</Form.Label>
+                <Form.Select
+                  aria-label="Default select example"
+                  value={formData.size}
+                  onChange={(e) =>
+                    setFormData({ ...formData, size: e.target.value })
+                  }
+                  required
+                >
+                  {formData.category === "shirts" ||
+                  formData.category === "shorts" ||
+                  formData.category === "socks" ? (
+                    <>
+                      <option value="">Select</option>
+                      <option value="XS">XS</option>
+                      <option value="S">S</option>
+                      <option value="M">M</option>
+                      <option value="L">L</option>
+                      <option value="XL">XL</option>
+                      <option value="XXL">XXL</option>
+                    </>
+                  ) : formData.category === "balls" ? (
+                    <>
+                      <option value="">Select</option>
+                      <option value="3">Size 3</option>
+                      <option value="4">Size 4</option>
+                      <option value="5">Size 5</option>
+                    </>
+                  ) : (
+                    <>
+                      <option value="">Select</option>
+                      <option value="36">36</option>
+                      <option value="37">37</option>
+                      <option value="38">38</option>
+                      <option value="39">39</option>
+                      <option value="40">40</option>
+                      <option value="41">41</option>
+                      <option value="42">42</option>
+                      <option value="43">43</option>
+                      <option value="44">44</option>
+                      <option value="45">45</option>
+                      <option value="46">46</option>
+                      <option value="47">47</option>
+                      <option value="48">48</option>
+                    </>
+                  )}
+                </Form.Select>
+              </Form.Group>
+            </motion.div>
+            <motion.div
+              variants={InputLeft}
+              initial="hidden"
+              animate="visible"
+              custom={3.7}
+              transition={{
+                duration: 0.1,
+                type: "spring",
+                stiffness: 100,
+              }}
+            >
+              <Form.Group className="mb-3  formLabel">
+                <Form.Label>Brand</Form.Label>
+                <Form.Select
+                  aria-label="Default select example"
+                  value={formData.brand}
+                  onChange={(e) =>
+                    setFormData({ ...formData, brand: e.target.value })
+                  }
+                  required
+                >
+                  <option value="">Select</option>
+                  <option value="Nike">Nike</option>
+                  <option value="Adidas">Adidas</option>
+                  <option value="Puma">Puma</option>
+                  <option value="Errea">Errea</option>
+                  <option value="Mizuno">Mizuno</option>
+                  <option value="Kappa">Kappa</option>
+                  <option value="Joma">Joma</option>
+                  <option value="Diadora">Diadora</option>
+                  <option value="Diadora">Umbro</option>
+                </Form.Select>
+              </Form.Group>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}>
             <Button className="submit-button my-4" variant="warning" type="submit">
               Publish it!
             </Button>
+            </motion.div>
           </Form>
         </Col>
       </Row>

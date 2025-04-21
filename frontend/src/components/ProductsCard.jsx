@@ -11,33 +11,48 @@ import { useDispatchCart } from "../context/CartContext"; //carrello
 import { useWish } from "../context/WishListContext";
 import { useDispatchWish } from "../context/WishListContext";
 import Toast from "react-bootstrap/Toast";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, inertia } from "framer-motion";
+
+const CardVariants = {
+  initial: {
+    scale: 1,
+    boxShadow: "0px 0px 0px rgba(0,0,0,0)",
+    overflow: "hidden",
+  },
+  whileHover: {
+    transition: {
+      duration: 0.3,
+      when: "beforeChildren",
+      staggerChildren: 0.1,
+    },
+  },
+};
 
 const notificationVariants = {
-  initial: { 
+  initial: {
     opacity: 0,
     y: 50,
-    scale: 0.3
+    scale: 0.3,
   },
-  animate: { 
+  animate: {
     opacity: 1,
-    y: 0,
+    y: -20,
     scale: 1,
     transition: {
       duration: 0.5,
       type: "spring",
-      stiffness: 100
-    }
+      stiffness: 100,
+    },
   },
   exit: {
     opacity: 0,
     y: -50,
     scale: 0.3,
     transition: {
-      duration: 0.3
-    }
-  }
-}
+      duration: 0.3,
+    },
+  },
+};
 
 const ProductsCard = ({ product, showActions }) => {
   const dispatch = useDispatchCart(); //carrello
@@ -96,73 +111,91 @@ const ProductsCard = ({ product, showActions }) => {
   };
 
   return (
-    <Card
-      id="card"
-      style={{ width: "18rem" }}
-      className="mb-4 position-relative d-flex align-items-center pt-3"
+    <motion.div
+      variants={CardVariants}
+      initial="initial"
+      whileHover="whileHover"
     >
-      {/* Pulsante like posizionato in alto a destra */}
-      {showActions && user && user._id !== product.author._id && (
-        <Button
-          variant="link"
-          className="position-absolute top-0 end-0 p-2"
-          onClick={handleLike}
-          disabled={!user}
-          style={{
-            zIndex: 4,
-            backgroundColor: "transparent",
-            border: "none",
-            boxShadow: "none",
-          }}
-        >
-          <GiSoccerBall
+      <Card
+        id="card"
+        className="mb-4 position-relative d-flex align-items-center pt-3"
+      >
+        {showActions && user && user._id !== product.author._id && (
+
+          <>        
+           <Button
+            variant="link"
+            className="position-absolute p-1"
+            onClick={handleLike}
+            disabled={!user}
             style={{
-              fontSize: "30px",
-              color: isLiked ? "#e1ae07 " : "#ffffff",
-              filter: isLiked
-                ? "drop-shadow(0px 0px 3px #e1ae07"
-                : "drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.5))",
-              transition: "all 0.3s ease",
+              zIndex: 4,
+              backgroundColor: "transparent",
+              border: "none",
+              boxShadow: "none",
+              top: "10px",
+              right: "10px",
             }}
-          />
-        </Button>
-      )}
+          >
+            <GiSoccerBall
+              style={{
+                fontSize: "30px",
+                color: isLiked ? "#e1ae07 " : "#ffffff",
+                filter: isLiked
+                  ? "drop-shadow(0px 0px 3px #e1ae07"
+                  : "drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.5))",
+                transition: "all 0.3s ease",
+              }}
+            />
+          </Button>
 
-      <Card.Img
-        variant="top"
-        src={product.image}
-        className="card_img"
-        style={{
-          height: "200px",
-          objectFit: "cover",
-          filter: isLiked ? "brightness(1.2)" : "none",
-          transition: "all 0.3s ease",
-        }}
-      />
-      <Card.Body className="card_data mt-3">
-        <Card.Title className="card_title">{product.title}</Card.Title>
+          <AnimatePresence>
+          {showNotification && (
+            <motion.div
+              variants={notificationVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="bannerWish"
+            >
+              Item added to your Wish List!
+            </motion.div>
+          )}
+        </AnimatePresence>
+        </>
 
-        <div className="mt-2 mb-2 card_price">£ {product.price}</div>
+        )}
+
+        <Card.Img
+          variant="top"
+          src={product.image}
+          className="card_img"
+          style={{ filter: isLiked ? "brightness(1.2)" : "none" }}
+        />
+
+        <Card.Body className="card_data">
+          <Card.Title className="card_title">{product.title}</Card.Title>
+          <div className="card_price">£ {product.price}</div>
+        </Card.Body>
 
         {showActions && (
-          <div className="d-flex justify-content-around">
-            <Button
-              className="card_button"
-              style={{ width: "100px", fontSize: "12px" }}
-              onClick={() => navigate(`/products/${product._id}`)}
-            >
-              Dettagli
-            </Button>
-            {user && user._id !== product.author._id ? (
+          <div className="card_buttons">
+            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+              <Button
+                className="card_button"
+                onClick={() => navigate(`/products/${product._id}`)}
+              >
+                Dettagli
+              </Button>
+            </motion.div>
+            {user && user._id !== product.author._id && (
               <>
-           
-                <Button
-                  className="card_button"
-                  onClick={() => addToCart(product)}
-                  style={{ width: "100px", fontSize: "12px" }}
-                >
-                  <BiCart size={24} />
-                </Button>
+                  <Button
+                    className="card_button"
+                    onClick={() => addToCart(product)}
+                  >
+                    <BiCart size={24} />
+                  </Button>
                 <AnimatePresence>
                   {showNotification && (
                     <motion.div
@@ -170,41 +203,18 @@ const ProductsCard = ({ product, showActions }) => {
                       initial="initial"
                       animate="animate"
                       exit="exit"
-                      style={{
-                        position: 'absolute',
-                        transform: 'translateX(-50%)',
-                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                        bottom: "11rem",
-                        color: 'gold',
-                        padding: '8px 16px',
-                        borderRadius: '4px',
-                        fontSize: '14px',
-                        whiteSpace: 'nowrap',
-                        zIndex: 1000
-                      }}
+                      className="bannerCart"
                     >
-                      Prodotto aggiunto al carrello!
+                      Item added to your cart!
                     </motion.div>
                   )}
                 </AnimatePresence>
-                </>
-
-            ) : (
-             
-                <Button
-                  className="card_button"
-                  as={Link}
-                  style={{ width: "100px", fontSize: "12px" }}
-                  to={`/products/category/${product.category}`}
-                >
-                  Go to {product.category}
-                </Button>
-
+              </>
             )}
           </div>
         )}
-      </Card.Body>
-    </Card>
+      </Card>
+    </motion.div>
   );
 };
 

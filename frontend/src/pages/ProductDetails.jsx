@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Col, Container, Row, Button, Card } from "react-bootstrap";
+import { Col, Container, Row, Button, Card, Pagination } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import "../styles/pDetails.css";
 import Reviews from "../components/Reviews";
 import EditProduct from "../components/EditProduct";
+import { motion } from "framer-motion";
 
 const ProductDetails = () => {
   const [product, setProduct] = useState({});
@@ -48,7 +49,7 @@ const ProductDetails = () => {
 
   const deleteProduct = async () => {
     try {
-      const token = localStorage.getItem("token"); 
+      const token = localStorage.getItem("token");
       const response = await axios.delete(
         `http://localhost:3002/products/${id}`,
         {
@@ -86,31 +87,25 @@ const ProductDetails = () => {
             />
           </Col>
           <Col md={6} className="colDetails">
-            <h1 className="text-center">{product.title}</h1>
+            <h1 className="text-center" style={{ fontFamily: "Anek Odia" }}>
+              {product.title}
+            </h1>
             <div className="mt-3 d-flex justify-content-around">
               <p style={{ fontSize: "20px" }}>
-                <span>
-                  Price:
-                </span>
+                <span>Price:</span>
                 {product.price} £
               </p>
               <p style={{ fontSize: "20px" }}>
-                <span>
-                  Size:
-                </span>
+                <span>Size:</span>
                 {product.size}
               </p>
               <p style={{ fontSize: "20px" }}>
-                <span>
-                  Gender:
-                </span>
+                <span>Gender:</span>
                 {(product.gender ?? "unknown").charAt(0).toUpperCase() +
                   (product.gender ?? "unknown").slice(1)}
               </p>
               <p style={{ fontSize: "20px" }}>
-                <span>
-                  Condition:
-                </span>
+                <span>Condition:</span>
                 {product.condition}
               </p>
             </div>
@@ -133,7 +128,10 @@ const ProductDetails = () => {
               <p>{product.author.email}</p>
             </div>
             <hr />
-            <Reviews productId={product._id} productAuthorId={product.author._id} />
+            <Reviews
+              productId={product._id}
+              productAuthorId={product.author._id}
+            />
 
             {user && user._id !== product.author._id ? null : (
               <>
@@ -144,9 +142,17 @@ const ProductDetails = () => {
                       product={product}
                       style={{ cursor: "pointer", backgroundColor: "blue" }}
                     />
-                    <Button variant="danger" onClick={() => deleteProduct(id)}>
-                      Delete
-                    </Button>
+                    <motion.div
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <Button
+                        variant="danger"
+                        onClick={() => deleteProduct(id)}
+                      >
+                        Delete
+                      </Button>
+                    </motion.div>
                   </div>
                 </div>
               </>
@@ -154,6 +160,7 @@ const ProductDetails = () => {
           </Col>
         </Row>
       )}
+      
     </Container>
   );
 };

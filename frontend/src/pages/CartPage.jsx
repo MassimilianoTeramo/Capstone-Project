@@ -3,6 +3,19 @@ import { useCart, useDispatchCart } from "../context/CartContext";
 import { Col, Container, Row, Image, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { FaTrash, FaPlus, FaMinus } from "react-icons/fa";
+import { motion } from "framer-motion";
+
+const buttonVariants = {
+  whileHover: {
+    scale: 1.1,
+    transition: { duration: 0.2 },
+  },
+  whileTap: {
+    scale: 0.9,
+    transition: { duration: 0.2 },
+  },
+};
+
 
 export default function Store() {
   const items = useCart();
@@ -51,10 +64,10 @@ export default function Store() {
     >
       <Container className="mt-4 d-flex flex-column">
         <div className="mb-4">
-          <h3 className="text-center mb-4 text-warning">Your Cart</h3>
+          <h3 className="text-center mb-4 text-warning" style={{fontFamily:"Anek Odia", fontSize:"40px"}}>Your Cart</h3>
           <hr className="section-divider mt-3 w-100" />
         </div>
-        <div className="d-flex flex-horizontal">
+        <div className="d-flex flex-row">
           <Col md={8}>
             {items.length > 0 ? (
               items.map((product) => (
@@ -86,6 +99,10 @@ export default function Store() {
                         </span>
                       </p>
                       <div className="d-flex align-items-center mt-2">
+                      <motion.div 
+                        variants={buttonVariants}
+                        whileHover="whileHover"
+                        whileTap="whileTap">
                         <Button 
                           variant="warning" 
                           size="sm"
@@ -94,9 +111,14 @@ export default function Store() {
                         >
                           <FaMinus />
                         </Button>
+                        </motion.div>
                         <span className="mx-2" style={{ color: "white" }}>
                           {product.quantity}
                         </span>
+                        <motion.div 
+                        variants={buttonVariants}
+                        whileHover="whileHover"
+                        whileTap="whileTap">
                         <Button 
                           variant="warning" 
                           size="sm"
@@ -104,23 +126,36 @@ export default function Store() {
                         >
                           <FaPlus />
                         </Button>
+                        </motion.div>
                       </div>
                     </Col>
                     <Col md={3}>
+                    <motion.div 
+                    className="d-flex justify-content-center"
+                        variants={buttonVariants}
+                        whileHover="whileHover"
+                        whileTap="whileTap">
                       <Button 
                         variant="warning"
                         onClick={() => navigate(`/products/${product._id}`)}
                       >
                         Details
                       </Button>
+                      </motion.div>
                     </Col>
                     <Col md={3}>
+                    <motion.div 
+                    className="d-flex justify-content-center"
+                        variants={buttonVariants}
+                        whileHover="whileHover"
+                        whileTap="whileTap">
                       <Button 
                         variant="warning"
                         onClick={() => handleRemove(product._id)}
                       >
                         <FaTrash />
                       </Button>
+                      </motion.div>
                     </Col>
                   </Row>
                   <hr style={{ color: "gold" }} />

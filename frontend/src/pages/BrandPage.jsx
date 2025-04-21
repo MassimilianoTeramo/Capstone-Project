@@ -82,10 +82,13 @@ const BrandPage = () => {
              >
                 <h3>{brand.toUpperCase()}</h3>
             </motion.div>
+            <motion.div 
+             whileHover={{ scale: 1.1 }}
+             whileTap={{ scale: 0.9 }}>
                     <Button variant="warning" onClick={handleShowFilter}>
                         Filter
                     </Button>
-                
+             </motion.div>   
                 <FilterComponent 
                     showFilter={showFilter}
                     handleCloseFilter={handleCloseFilter}

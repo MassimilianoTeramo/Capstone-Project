@@ -10,6 +10,7 @@ import { Alert } from "react-bootstrap";
 import api from "../utils/api";
 import {motion} from "framer-motion";
 
+
 const CategoryPage = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -53,19 +54,20 @@ const CategoryPage = () => {
     if (error) return <Container className='mt-4'><Alert variant='danger'>{error}</Alert></Container>;
 
     return (
-        <Container className='mt-4'>
+        <Container className='mt-5'>
             <motion.h3
                 initial={{x:"-100vw", opacity:0, color:"black"}}
                 animate={ {x:0, opacity:1, color:"gold"}}
                 transition={{duration:"2.5", stiffness: 50, type:"spring"}} 
-                className='mb-4 form-label fw-bold' 
+                className='my-4 fw-bold'
+                style={{fontFamily:"Anek Odia", letterSpacing:"5px"}} 
                 >
-                {category}
+                {category.toUpperCase()}
             </motion.h3>
             <Row>
                 {products.length > 0 ? (
                     products.map(product => (
-                        <Col key={product._id} md={4} className='mb-4'>
+                        <Col key={product._id} md={3} className='mb-4'>
                             <ProductsCard
                                 product={product}
                                 showActions={true}

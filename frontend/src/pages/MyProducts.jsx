@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 import ProductsCard from '../components/ProductsCard';
-import { Container, Alert, Row, Col, Button } from 'react-bootstrap';
+import { Container, Alert, Row, Col, Button, Pagination } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import api from '../utils/api' // Assicurati di avere il percorso corretto per l'API
 import {motion} from "framer-motion";
@@ -11,6 +11,8 @@ const MyProducts =  ()=>{
     const [products, setProducts] = useState([]);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
     const {user} = useAuth();
     const {token} = useAuth();
     const {id} = useParams();
@@ -20,6 +22,7 @@ const MyProducts =  ()=>{
             const response = await api.get(`${process.env.REACT_APP_API_URL}/products/myproducts`); // Usa l'istanza Axios configurata
             console.log(response.data);
             return response.data; // Restituisci i prodotti
+            setTotalPages(response.data.totalPages);
         } catch (error) {
             console.error('Errore nel recupero dei prodotti per autore:', error);
             throw error;
@@ -31,6 +34,7 @@ const MyProducts =  ()=>{
             try {
                 setLoading(true);
                 const response = await getMyProducts();
+               
                 setProducts(response);
                 setError('');
             } catch (error) {
@@ -58,14 +62,14 @@ const MyProducts =  ()=>{
              initial={{x:"-100vh", opacity:0}}
              animate={{ fontSize: "50px", x: 0, opacity:1, color:"gold", letterSpacing:"5px" }}
              transition={{duration: 3, type:"spring", stiffness: 50, mass:"2", dumpling:"6" }}
-             className='my-5'
+             className='my-5 fw-bold'
             >
-                <h3>My Products</h3>
+                <h3 style={{fontFamily:"Anek Odia"}}>MY PRODUCTS</h3>
             </motion.div>
             <Row>
                 {products.length > 0 ? (
                     products.map(product => (
-                        <Col key={product._id} md={3} className='mb-4'>
+                        <Col key={product._id} md={4} className='mb-4'>
                             <ProductsCard
                                 product={product}
                                 showActions={true}/>
@@ -80,6 +84,32 @@ const MyProducts =  ()=>{
                 )}
 
             </Row>
+            {totalPages > 1 && (
+          <div>
+            <Pagination className="justify-content-center gap-1">
+              <Pagination.Prev
+                disabled={currentPage === 1}
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                
+              />
+              {[...Array(totalPages)].map((_, index) => (
+                <Pagination.Item
+                  key={index + 1}
+                  active={index + 1 === currentPage}
+                  onClick={() => setCurrentPage(index + 1)}
+                >
+                  {index + 1}
+                </Pagination.Item>
+              ))}
+              <Pagination.Next
+                disabled={currentPage === totalPages}
+                onClick={() =>
+                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                }
+              />
+            </Pagination>
+          </div>
+        )}
 
 
         </Container>

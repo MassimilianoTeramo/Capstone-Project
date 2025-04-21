@@ -9,7 +9,6 @@ import shoesCat from "../uploads/shoes-categoria.png";
 import socksCat from "../uploads/socksHomeP.jpg";
 import ballsCat from "../uploads/bola.jpg";
 import { motion } from "framer-motion";
-
 import { Col, Card, Button, Container } from "react-bootstrap";
 
 const slider = [

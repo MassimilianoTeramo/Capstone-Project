@@ -5,23 +5,44 @@ import { Link } from "react-router-dom";
 import bg1 from "../uploads/bg1.jpg";
 import cardUsed from "../uploads/cardUsed.jpg";
 import cardNU1 from "../uploads/cardNU1.jpg";
-import {motion} from "framer-motion";
+import {motion, AnimatePresence} from "framer-motion";
+
+// Removed the incorrect useRef declaration here
+
 
 
 const CardVariants = {
-  hover: {
+  initial: {
+    scale: 1,
+    boxShadow: "0px 0px 0px rgba(0,0,0,0)",
+  },
+  whileHover: {
     scale: 1.1,
     boxShadow: "0px 0px 28px gold",
     transition: {
-      repeat: 3, // Use 'repeat' instead of 'yoyo'
-      repeatType: "reverse", // Ensures the animation reverses
-      duration: 0.3 // Adjust duration as needed
-    }
-  }
-}
- 
+      duration: 0.3,
+      when: "beforeChildren",
+      staggerChildren: 0.1
+    },
+  },
+};
+
+const DataVariants = {
+  initial: {
+    opacity: 0,
+    y: 30,
+  },
+  whileHover: {
+    opacity: 1,
+    y: -50,
+    transition: {
+      duration: 0.3,
+    },
+  },
+};
 
 const Home = () => {
+  const Data = useRef(null); 
 
   return (
     <>
@@ -74,85 +95,64 @@ const Home = () => {
 
           <Row className="my-5 pb-3 d-flex justify-content-center w-100 ">
             <Col md={5} sm={12} className="d-flex justify-content-center">
-            <motion.div
-              variants={CardVariants}
-              whileHover= "hover"         
+              <motion.div
+                variants={CardVariants}
+                initial="initial"
+                whileHover="whileHover"
               >
-               <Card 
-              className="cardNewUsed"
-              as={Link}
-              to={`/products/condition/new`}
-              style={{
-                backgroundImage: `url(${cardNU1})`,
-                backgroundSize:"cover",
-                backgroundRepeat:"no-repeat",
-                backgroundPosition:"center",
-              }}
-              >
-              
-                <motion.div
-                  initial={{y:-100, visibility:"hidden"}}
-                  animate={{ scale: 1.8, y:190, visibility:"visible"}}
-                
+                <Card 
+                  className="cardNewUsed"
+                  as={Link}
+                  to={`/products/condition/new`}
+                  style={{
+                    backgroundImage: `url(${cardNU1})`,
+                    backgroundSize:"cover",
+                    backgroundRepeat:"no-repeat",
+                    backgroundPosition:"center",
+                  }}
                 >
-                  <p>Explore New Section</p>
-
-                </motion.div>
-                
-               
-              </Card>
-            </motion.div>
-             
+                  <motion.div
+                    variants={DataVariants}
+                    className="card_New_data"
+                  >
+                    <p className="NUsec">Explore New Section</p>
+                  </motion.div>
+                </Card>
+              </motion.div>
             </Col>
 
             <Col md={5} sm={12} className="d-flex justify-content-center">
-            <motion.div
-              variants={CardVariants}
-              whileHover= "hover"         
+              <motion.div
+                variants={CardVariants}
+                initial="initial"
+                whileHover="whileHover"
               >
-               <Card 
-              className="cardNewUsed"
-              as={Link}
-              to={`/products/condition/new`}
-              style={{
-                backgroundImage: `url(${cardUsed})`,
-                backgroundSize:"cover",
-                backgroundRepeat:"no-repeat",
-                backgroundPosition:"center",
-              }}
-              >
-              
-                <motion.div
-                  initial={{y:-100, visibility:"hidden"}}
-                  animate={{ scale: 1.8, y:190, visibility:"visible"}}
-                
+                <Card 
+                  className="cardNewUsed"
+                  as={Link}
+                  to={`/products/condition/used`}
+                  style={{
+                    backgroundImage: `url(${cardUsed})`,
+                    backgroundSize:"cover",
+                    backgroundRepeat:"no-repeat",
+                    backgroundPosition:"center",
+                  }}
                 >
-                  <p>Explore Used Section</p>
-
-                </motion.div>
-                
-               
-              </Card>
-            </motion.div>
-             
+                  <motion.div
+                    variants={DataVariants}
+                    className="card_New_data"
+                  >
+                    <p className="NUsec">Explore Used Section</p>
+                  </motion.div>
+                </Card>
+              </motion.div>
             </Col>
           </Row>
           <img src={bg1} alt="bg1" className="bg1" />
         </section>
 
       </Container>
-    </>
+      </>
   );
 };
 export default Home;
-
-
-/* <div className="card_New_data">
-                  <div
-                    as={Link}
-                    to={`/products/condition/new`}
-                    className="bnNewUsed"
-                  >
-                    New products
-                  </div>
-                </div> */
