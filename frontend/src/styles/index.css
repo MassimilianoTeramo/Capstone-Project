@@ -101,7 +101,6 @@ body::after {
   color: #e1ae07;
 }
 
-
 #products-dropdown {
   color: #d6d6d6 !important;
 }
@@ -127,7 +126,6 @@ body::after {
 .account-icon {
   color: white;
   font-size: 2rem;
-  
 }
 
 .logout-btn {
@@ -176,37 +174,6 @@ body::after {
   font-size: larger;
 }
 
-@media (max-width: 991px) {
-  .nav-link-custom {
-    padding: 0.5rem 0;
-  }
-
-  .logout-btn {
-    margin: 1rem 0;
-    width: 100%;
-  }
-}
-
-@media (max-width: 990px) {
-  .dropdown-item {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    
-  }
-  .cart-user {
-    display: flex;
-    flex-direction: column-reverse;
-    width: 100%;
-  
-  }
-  .user-dropdown {
-    display: flex;
-   
-  }
-  .dropdown-menu{
-    margin-bottom: 1rem;
-  }
-}
 
 /* Remove dropdown arrow */
 .dropdown-toggle::after {
@@ -217,7 +184,6 @@ body::after {
   display: flex;
   flex-direction: row;
 }
-
 /* Fine NAVBAR */
 
 /* fitst sec*/
@@ -230,10 +196,6 @@ body::after {
   background-position: center -220px;
   opacity: 0.7;
   box-shadow: 0 40px 150px rgba(0, 0, 0, 0.5);
-}
-
-.herosection{
-  height: 100%;
 }
 
 .maintitle {
@@ -370,6 +332,12 @@ section h3{
   border-color: gold;
 }
 
+.btnOffcanvas {
+  color:rgb(208, 194, 114);
+}
+.customCloseButton {
+  color:gold !important ;
+}
 /* SECTION NEW USED*/
 
 #NewUsed{
@@ -394,6 +362,7 @@ section h3{
   border: 2px solid #ffd22e;
   text-align: center;
   padding: 0;
+  width:18rem;
 }
 
 
@@ -446,24 +415,6 @@ section h3{
   text-transform: uppercase;
   letter-spacing: 2px;
 }
-
-
-/*DETAIL*/
-
-.imageDetail:hover{
-    scale: 2.0;
-    transition: 1s ease-in-out;
-  }
-
-  .imageDetail {
-    transition: 1s ease-in-out;
-}
-
-.imageDetail:hover::after{
-  scale:1;
-  transition: 1s ease-out;
-}
-
 
 /*FOOTER*/
 
@@ -564,6 +515,19 @@ section h3{
   z-index: 1000;
 }
 
+.bannerOnMouse {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  z-index: 10;
+}
+
 
 .formLabel {
   color: #ffffffcc;
@@ -618,12 +582,28 @@ section h3{
 }
  /*HOME PAGE MEDIUM DEVICES*/
 @media (max-width: 991px) {
+
+ .container-fluid {
+    padding: 0;
+  }
+.SectionCarousel {
+  position: sticky;
+  top:1rem;
+  height: 50rem;
+  scroll-margin-top: 10;
+  z-index: 1;
+
+  }
+
+
 .noShowmd {
     display: none;
+    height: auto;
   }
+
 .carousel-content {
   margin-right: 0 !important;
-  height: 35rem !important;
+  height: 30rem !important;
   width: 100%;
   padding-top: 2rem;
 }
@@ -635,19 +615,140 @@ section h3{
   width: 64%;
   margin: 0 auto;
  }
- .herosection {
-  height: 25rem;
- }
 
- #FirstSec {
-  height:20rem;
+#FirstSec {
+  height: 20rem;
   background-position: center -150px;
-  background-blend-mode:color-burn;
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  box-shadow: 0 0 200px rgba(0, 0, 0, 0.5);
+  opacity: 1;
+  scroll-margin-top: 0; /* Adjust this if needed */
+}
+ .herosection {
+  height:15rem;
  }
  .myswiper {
   width: 100%;
   height: 100%;
   margin: 0 auto;
  }
+ .card_img {
+  width: 100%;
+  height: 10rem;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(5px 10px 15px rgba(8, 9, 13, 0.4));
+  z-index: 3;
+  transition: all 0.3s ease;
+ }
+ .card_buttons {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1rem;
+  opacity: 0;
+  transition: all 0.3s ease;
+  flex-direction: column;
+ }
+ .bannerCart {
+  position: absolute;
+  bottom: 7rem;
+  left: -20%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: gold;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: nowrap;
+  z-index: 1000;
+ }
 
+ .bannerWish {
+  position: absolute;
+  bottom: 8rem;
+  left:-5%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: gold;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: nowrap;
+  z-index: 1000;
+ }
+
+
+.myswiper-slider {
+  scale: 0.9;
+  margin-left: 50%;
+  height: 100%;
+}
+.titleCategory {
+  font-size: 2.5rem;
+}
+
+.card_New_data {
+  bottom: 5rem;
+  left: 10%;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 1rem 2rem;
+  border-radius: 4px;
+  width: 80%;
+  text-align: center;
+  opacity: 1 !important;
+
+}
+.titleProfile {
+  font-size: 1rem;
+  margin-bottom: 10rem; 
+}
+
+#NewUsed{
+  z-index: 5;
+  background-image: url(../uploads/b7.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+  width: auto;
+  height: auto;
+
+}
+}
+
+@media (max-width: 991px) {
+  .nav-link-custom {
+    padding: 0.5rem 0;
+  }
+
+  .logout-btn {
+    margin: 1rem 0;
+    width: 100%;
+  }
+}
+
+@media (max-width: 990px) {
+  .dropdown-item {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    
+  }
+  .cart-user {
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+  
+  }
+  .user-dropdown {
+    display: flex;
+   
+  }
+  .dropdown-menu{
+    margin-bottom: 1rem;
+  }
 }

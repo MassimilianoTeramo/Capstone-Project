@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './styles/index.css';
 import './styles/carousel.css';
 import './styles/index.css';
-import './styles/cartPage.css'
+import './styles/cartPage.css';
+import './styles/mediaquery.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { CartProvider } from './context/CartContext';

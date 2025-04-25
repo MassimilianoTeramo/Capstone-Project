@@ -5,6 +5,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../styles/pDetails.css";
 import { motion, spring } from "framer-motion";
+import { FaHome } from "react-icons/fa";
+
 
 const TitleAn = {
   initial: { y: "-200vh", opacity: 0 },
@@ -109,7 +111,7 @@ const Profile = () => {
         variants={TitleAn}
         initial="initial"
         animate="animate"
-        className="mb-4"
+        className="mb-4 titleProfile"
       >
         Manage your Profile
       </motion.h2>
@@ -228,6 +230,7 @@ const Profile = () => {
               />
             </Form.Group>
             </motion.div>
+            <div className="d-flex justify-content-center gap-4">
             <motion.div
               variants={InputRight}
               initial="hidden"
@@ -238,7 +241,19 @@ const Profile = () => {
               Submit
             </Button>
             </motion.div>
-          </Form>
+            <motion.div
+              variants={InputLeft}
+              initial="hidden"
+              animate="visible"
+              transition={{ delay: 3.2, duration: 0.1, type:"spring", stiffness:100 }}
+            ><div className="d-flex justify-content-center">
+            <Button variant="warning" className="my-4"
+               onClick={() => navigate("/")} >
+             <FaHome style={{fontSize: "25px"}}/>
+              </Button>
+              </div></motion.div>
+              </div>
+              </Form>
         </Col>
       </Row>
     </Container>

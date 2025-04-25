@@ -9,7 +9,7 @@ import { Card } from "react-bootstrap";
 import { useDispatchCart } from "../context/CartContext"; //carrello
 import { useWish } from "../context/WishListContext";
 import { useDispatchWish } from "../context/WishListContext";
-import { motion, AnimatePresence, inertia } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const CardVariants = {
   initial: {

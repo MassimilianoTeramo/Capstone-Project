@@ -99,7 +99,7 @@ const Products = () => {
         <Row>
           {!loading && !error && products.length > 0 ? (
             products.map((product) => (
-              <Col key={product._id} md={3} className="mb-4">
+              <Col key={product._id} lg={3} md={4} className="mb-4">
                 <ProductsCard product={product} showActions={true} />
               </Col>
             ))

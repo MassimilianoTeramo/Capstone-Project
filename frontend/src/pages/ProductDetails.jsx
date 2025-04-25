@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import "../styles/pDetails.css";
 import Reviews from "../components/Reviews";
 import EditProduct from "../components/EditProduct";
-import { motion } from "framer-motion";
+import { color, motion } from "framer-motion";
 
 const ProductDetails = () => {
   const [product, setProduct] = useState({});
@@ -78,6 +78,14 @@ const ProductDetails = () => {
       {error && <p>An error occurred: {error.message}</p>}
       {!loading && !error && (
         <Row className="d-flex justify-content-between">
+          
+          <div>
+        <Button variant="warning" 
+           onClick={() => navigate("/products")} >
+          Back to Products
+          </Button>
+          </div>
+
           <Col md={4} className="d-flex align-items-center mt-5">
             <img
               src={product.image}

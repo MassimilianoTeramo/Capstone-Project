@@ -5,7 +5,7 @@
   border: 1px solid #e1ae07;
   border-radius: 15px;
   padding: 2rem;
-  color: rgba(255, 255, 255, 0.673);
+  color: #fffffff3;
   
 }
 
@@ -145,4 +145,20 @@
 .review-item {
   background-color: #2a2a2a;
   border-color: #e1ae07;
+}
+
+/*DETAIL*/
+
+.imageDetail:hover{
+  scale: 2.0;
+  transition: 1s ease-in-out;
+}
+
+.imageDetail {
+  transition: 1s ease-in-out;
+}
+
+.imageDetail:hover::after{
+scale:1;
+transition: 1s ease-out;
 }

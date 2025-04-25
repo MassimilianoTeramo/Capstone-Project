@@ -195,7 +195,7 @@ const Reviews = ({ productId, productAuthorId }) => {
             </div>
             <div className="review-text" style={{ color: "#ffffff" }}>
               {review.content}
-              <div className="text-muted small pt-2 pb-2">
+              <div className="small pt-2 pb-2" style={{ color: "#ffffff9a" }}>
                 {new Date(review.createdAt).toLocaleString()}
               </div>
             </div>
@@ -204,7 +204,7 @@ const Reviews = ({ productId, productAuthorId }) => {
                 variant="danger"
                 size="sm"
                 onClick={() => handleDelete(review._id)}
-                className="mt-2"
+                className="my-2"
               >
                 Delete
               </Button>

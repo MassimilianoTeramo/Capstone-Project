@@ -84,10 +84,10 @@ const Home = () => {
 
   return (
     <>
-      <section id="FirstSec" className="d-flex justify content between ">
-        <Col className="noShowmd" md={7}></Col>
+      <section id="FirstSec" className="d-flex justify-content-between ">
+        <Col className="noShowmd" lg={7}></Col>
         <Col lg={5} md={12} sm={12} className="herosection">
-          <div className="carousel-content text-center mt-5 herosection">
+          <div className="carousel-content text-center mt-5">
             <motion.p 
               initial={{ y:'-200vw' }}
               animate={{ y: 0 }}
@@ -117,7 +117,7 @@ const Home = () => {
 
       <Container fluid>
 
-        <section className="d-flex flex-column align-items-center firstSecHome">
+        <section className="SectionCarousel">
           <Carousel />
         </section>
 
@@ -131,7 +131,7 @@ const Home = () => {
                </motion.h3>
 
           <Row className="my-5 pb-3 d-flex justify-content-center w-100 ">
-            <Col md={3} lg={3} sm={12} className="d-flex justify-content-center">
+            <Col md={6} lg={3} sm={12} className="d-flex justify-content-center">
               <motion.div
                 variants={CardVariants}
                 initial="initial"
@@ -167,7 +167,7 @@ const Home = () => {
               </motion.div>
             </Col>
 
-            <Col md={5} sm={12} className="d-flex justify-content-center">
+            <Col md={6} lg={3} sm={12} className="d-flex justify-content-center">
             <motion.div
                 variants={CardVariants}
                 initial="initial"
@@ -190,7 +190,6 @@ const Home = () => {
                     backgroundSize:"cover",
                     backgroundRepeat:"no-repeat",
                     backgroundPosition:"center",
-                    width:"18rem"
                   }}
                 >
                   <motion.div

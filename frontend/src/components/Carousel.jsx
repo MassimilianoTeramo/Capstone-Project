@@ -45,7 +45,8 @@ const Carousel = () => {
       
       <motion.h3
         initial={{x:"-100vh"}}
-        animate={{ fontSize: "50px", x: 0 }}
+        animate={{x: 0 }}
+        className="titleCategory"
         transition={{duration: 3, type:"spring", stiffness: 50, mass:"2", dumpling:"10" }}
         >
           EXPLORE CATEGORIES
@@ -53,7 +54,7 @@ const Carousel = () => {
         <Swiper
           className="myswiper ms-4"
           initialSlide={3}
-          modules={[Pagination, EffectCoverflow, Autoplay]}
+          modules={[EffectCoverflow, Autoplay]}
           effect={"coverflow"}
           grabCursor={true}
           centeredSlides={true}
@@ -77,10 +78,10 @@ const Carousel = () => {
               slidesPerView: 2,
             },
             768: {
-              slidesPerView: 1,
+              slidesPerView: 2,
             },
             1024: {
-              slidesPerView: 2,
+              slidesPerView: 3,
             },
             1560: {
               slidesPerView: 3,

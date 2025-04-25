@@ -55,6 +55,7 @@ const CategoryPage = () => {
 
     return (
         <Container className='mt-5'>
+            <div className="d-flex justify-content-between align-items-center">
             <motion.h3
                 initial={{x:"-100vw", opacity:0, color:"black"}}
                 animate={ {x:0, opacity:1, color:"gold"}}
@@ -64,10 +65,17 @@ const CategoryPage = () => {
                 >
                 {category.toUpperCase()}
             </motion.h3>
+            <div>
+        <Button variant="warning" 
+           onClick={() => navigate("/")} >
+          Back to Home
+          </Button>
+          </div>
+          </div>
             <Row>
                 {products.length > 0 ? (
                     products.map(product => (
-                        <Col key={product._id} md={3} className='mb-4'>
+                        <Col key={product._id} lg={3} md={4} sm={12} className='mb-4'>
                             <ProductsCard
                                 product={product}
                                 showActions={true}

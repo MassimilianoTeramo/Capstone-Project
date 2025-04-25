@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Col, Container, Row, Button } from "react-bootstrap";
+import { Col, Container, Row, Button, Pagination } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import EditProduct from "../components/EditProduct";
@@ -16,6 +16,8 @@ const BrandPage = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
     const [allProducts, setAllProducts] = useState([]);
     const [showFilter, setShowFilter] = useState(false);
     const { brand } = useParams();
@@ -30,6 +32,7 @@ const BrandPage = () => {
             const response = await api.get(`${process.env.REACT_APP_API_URL}/products/brand/${brand}`);
             setProducts(response.data);
             setAllProducts(response.data);
+            setTotalPages(response.data.totalPages);
             setError(null);
             setLoading(false);
             return response.data;
@@ -46,6 +49,7 @@ const BrandPage = () => {
                 setProducts(data);
                 setAllProducts(data);
                 setLoading(false);
+
                 setError('');
             } catch (err) {
                 setError('Errore nel recupero dei prodotti');
@@ -72,7 +76,7 @@ const BrandPage = () => {
             height:"auto",
             marginTop:"-10px"
           }}>
-        <Container className="mt-5 py-2">
+        <Container className="py-2">
           
             <div className="d-flex gap-3 justify-content-between align-items-center my-5">
                   <motion.div
@@ -100,7 +104,7 @@ const BrandPage = () => {
             <Row>
                 {products.length > 0 ? (
                     products.map((product) => (
-                        <Col key={product._id} md={3} sm={12} lg={3} className="mb-4">
+                        <Col key={product._id} md={4} sm={12} lg={3} className="mb-4">
                             <ProductsCard product={product} showActions={true} />
                         </Col>
                     ))
@@ -108,6 +112,32 @@ const BrandPage = () => {
                     <p>No products available</p>
                 )}
             </Row>
+            {totalPages > 1 && (
+          <div>
+            <Pagination className="justify-content-center gap-1">
+              <Pagination.Prev
+                disabled={currentPage === 1}
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                
+              />
+              {[...Array(totalPages)].map((_, index) => (
+                <Pagination.Item
+                  key={index + 1}
+                  active={index + 1 === currentPage}
+                  onClick={() => setCurrentPage(index + 1)}
+                >
+                  {index + 1}
+                </Pagination.Item>
+              ))}
+              <Pagination.Next
+                disabled={currentPage === totalPages}
+                onClick={() =>
+                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                }
+              />
+            </Pagination>
+          </div>
+        )}
         </Container>
         </div>
     );

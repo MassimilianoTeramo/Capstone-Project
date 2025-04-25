@@ -14,7 +14,7 @@ const TitleAn = {
     color: "gold",
     letterSpacing: "5px",
   },
-  transition: { duration: 1, type: "spring", bounceStiffness: 10 },
+  transition: { duration: 1, type: "spring", bounceStiffness: 20 },
   when: "beforeChildren",
 };
 
@@ -38,6 +38,22 @@ const InputRight = {
     opacity: 1,
   },
 };
+
+const Popup = {
+  hidden: {
+    opacity: 0,
+    scale: 0.4,
+  },
+  visible: (custom) => ({
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.5,
+      delay: custom
+    }
+  }),
+};
+
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -124,7 +140,7 @@ const Register = () => {
               initial="hidden"
               animate="visible"
               transition={{
-                delay: 1,
+                delay: 0.5,
                 duration: 0.1,
                 type: spring,
                 stiffness: 100,
@@ -145,7 +161,7 @@ const Register = () => {
               initial="hidden"
               animate="visible"
               transition={{
-                delay: 1.5,
+                delay: 1,
                 duration: 0.1,
                 type: spring,
                 stiffness: 100,
@@ -166,7 +182,7 @@ const Register = () => {
               initial="hidden"
               animate="visible"
               transition={{
-                delay: 2,
+                delay: 1.4,
                 duration: 0.1,
                 type: spring,
                 stiffness: 100,
@@ -190,7 +206,7 @@ const Register = () => {
               initial="hidden"
               animate="visible"
               transition={{
-                delay: 2.5,
+                delay: 1.8,
                 duration: 0.1,
                 type: spring,
                 stiffness: 100,
@@ -210,7 +226,7 @@ const Register = () => {
                           variants={InputLeft}
                           initial="hidden"
                           animate="visible"
-                          transition={{ delay: 3, duration: 0.1, type:"spring", stiffness:100 }}
+                          transition={{ delay: 2.4, duration: 0.1, type:"spring", stiffness:100 }}
                         >
             <Form.Group className="mb-3  formLabel">
               <Form.Label>Confirm Password</Form.Label>
@@ -223,9 +239,16 @@ const Register = () => {
               />
             </Form.Group>
             </motion.div>
+            <motion.div
+              variants={Popup}
+              initial="hidden"
+              animate="visible"
+              custom={2.9}
+              transition={{ duration: 0.5 }}>
             <Button type="submit" className="submit-button mt-4" variant="warning">
               Register
             </Button>
+            </motion.div>
           </Form>
         </Col>
       </Row>

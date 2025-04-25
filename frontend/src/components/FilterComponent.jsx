@@ -13,7 +13,7 @@ const FilterComponent = ({ showFilter, handleCloseFilter, allProducts, setProduc
       placement="start"
       className="offcanvasCustom"
     >
- <Offcanvas.Header>
+      <Offcanvas.Header closeButton>
         <Offcanvas.Title>Filtra per Genere</Offcanvas.Title>
       </Offcanvas.Header>
       <div className="d-flex justify-content-center mb-4">
@@ -49,7 +49,7 @@ const FilterComponent = ({ showFilter, handleCloseFilter, allProducts, setProduc
         </Button>
       </div>
 
-      <Offcanvas.Header closeButton>
+      <Offcanvas.Header>
         <Offcanvas.Title>Filtra per Categoria</Offcanvas.Title>
       </Offcanvas.Header>
       <Offcanvas.Body>
