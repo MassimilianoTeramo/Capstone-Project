@@ -65,6 +65,7 @@ const ProductsCard = ({ product, showActions }) => {
   const likedProducts = useWish();
   const dispatchWish = useDispatchWish();
   const [showNotification, setShowNotification] = useState(false);
+  const [showWishMex, setShowWishMex] = useState(false);
 
   //carrello
   const addToCart = (item) => {
@@ -81,10 +82,21 @@ const ProductsCard = ({ product, showActions }) => {
         const isProductLiked =
           likedProducts.find((p) => p?._id === product._id) !== undefined;
         setIsLiked(isProductLiked);
+        
       }
     };
     checkIfLiked();
   }, [user, product._id]);
+
+  const handleIconClick = () => {
+    setShowWishMex(true);
+    setTimeout(() => {
+        setShowWishMex(false);
+    }, 2000);
+    if (!user) {
+      return;
+    }
+};
 
   const handleLike = async () => {
     if (!user) {
@@ -124,7 +136,7 @@ const ProductsCard = ({ product, showActions }) => {
            <Button
             variant="link"
             className="position-absolute p-1"
-            onClick={handleLike}
+            onClick={() => { handleLike(); handleIconClick(); }}
             disabled={!user}
             style={{
               zIndex: 4,
@@ -148,7 +160,7 @@ const ProductsCard = ({ product, showActions }) => {
           </Button>
 
           <AnimatePresence>
-          {showNotification && (
+          {showWishMex && (
             <motion.div
               variants={notificationVariants}
               initial="initial"

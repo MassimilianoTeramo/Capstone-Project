@@ -69,7 +69,7 @@ const MyProducts =  ()=>{
             <Row>
                 {products.length > 0 ? (
                     products.map(product => (
-                        <Col key={product._id} md={4} className='mb-4'>
+                        <Col key={product._id} md={3} className='mb-4'>
                             <ProductsCard
                                 product={product}
                                 showActions={true}/>

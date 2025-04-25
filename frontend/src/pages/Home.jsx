@@ -1,11 +1,13 @@
-import { useState, useEffect, useLayoutEffect, useRef} from "react";
+import React, {useRef, useMotionValue, useState} from "react";
 import { Container, Row, Col, Pagination, Card, Button } from "react-bootstrap";
 import Carousel from "../components/Carousel";
 import { Link } from "react-router-dom";
 import bg1 from "../uploads/bg1.jpg";
 import cardUsed from "../uploads/cardUsed.jpg";
 import cardNU1 from "../uploads/cardNU1.jpg";
-import {motion, AnimatePresence} from "framer-motion";
+import {motion, AnimatePresence, useTransform, useSpring} from "framer-motion";
+import {MouseEventHandler} from "react";
+
 
 // Removed the incorrect useRef declaration here
 
@@ -13,11 +15,9 @@ import {motion, AnimatePresence} from "framer-motion";
 
 const CardVariants = {
   initial: {
-    scale: 1,
     boxShadow: "0px 0px 0px rgba(0,0,0,0)",
   },
   whileHover: {
-    scale: 1.1,
     boxShadow: "0px 0px 28px gold",
     transition: {
       duration: 0.2,
@@ -44,13 +44,50 @@ const DataVariants = {
 const Home = () => {
   const Data = useRef(null); 
 
+  const [rotateX, setRotateX] = useState(0);
+  const [rotateY, setRotateY] = useState(0);
+  const [scale, setScale] = useState(1);
+
+  const handleMouseMove = (e, setState) => {
+    const { offsetX, offsetY, target } = e.nativeEvent;
+    const { clientWidth, clientHeight } = target;
+
+    const x = (offsetX / clientWidth) - 0.5;
+    const y = (offsetY / clientHeight) - 0.5;
+
+    setState({ rotateX: y * 20, rotateY: x * 20, scale: 1.1 });
+  };
+
+  //ANIMATION NEW CARD
+
+  const handleMouseEnter = (setState) => setState((prev) => ({ ...prev, scale: 1.1 }));
+  const handleMouseLeave = (setState) => setState({ rotateX: 0, rotateY: 0, scale: 1 });
+
+
+  const [card1State, setCard1State] = useState({ rotateX: 0, rotateY: 0, scale: 1 });
+  const [card2State, setCard2State] = useState({ rotateX: 0, rotateY: 0, scale: 1 });
+
+  //ANIMATION USED CARD
+
+  const handleMouseMoveUsed = (e, setState) => {
+    const { offsetX, offsetY, target } = e.nativeEvent;
+    const { clientWidth, clientHeight } = target;
+
+    const x = (offsetX / clientWidth) - 0.5;
+    const y = (offsetY / clientHeight) - 0.5;
+
+    setState({ rotateX: y * 20, rotateY: x * 20, scale: 1.1 });
+  };
+
+  const handleMouseEnterUsed = (setState) => setState((prev) => ({ ...prev, scale: 1.1 }));
+  const handleMouseLeaveUsed = (setState) => setState({ rotateX: 0, rotateY: 0, scale: 1 });
+
   return (
     <>
-      <section id="FirstSec" className="d-flex justify content between">
-        <Col md={7}></Col>
-        <Col md={5} sm={12} className="h-100">
-          <div 
-            className="carousel-content text-center mt-5 me-5">
+      <section id="FirstSec" className="d-flex justify content between ">
+        <Col className="noShowmd" md={7}></Col>
+        <Col lg={5} md={12} sm={12} className="herosection">
+          <div className="carousel-content text-center mt-5 herosection">
             <motion.p 
               initial={{ y:'-200vw' }}
               animate={{ y: 0 }}
@@ -80,7 +117,7 @@ const Home = () => {
 
       <Container fluid>
 
-        <section className="d-flex flex-column align-items-center">
+        <section className="d-flex flex-column align-items-center firstSecHome">
           <Carousel />
         </section>
 
@@ -94,11 +131,19 @@ const Home = () => {
                </motion.h3>
 
           <Row className="my-5 pb-3 d-flex justify-content-center w-100 ">
-            <Col md={5} sm={12} className="d-flex justify-content-center">
+            <Col md={3} lg={3} sm={12} className="d-flex justify-content-center">
               <motion.div
                 variants={CardVariants}
                 initial="initial"
                 whileHover="whileHover"
+               onMouseEnter={() => handleMouseEnter(setCard1State)}
+               onMouseLeave={() => handleMouseLeave(setCard1State)}
+               onMouseMove={(e) => handleMouseMove(e, setCard1State)}
+               style={{
+                 transformStyle: "preserve-3d",
+                 perspective: "1000px",
+                 transform: `rotateX(${card1State.rotateX}deg) rotateY(${card1State.rotateY}deg) scale(${card1State.scale})`,
+               }}
               >
                 <Card 
                   className="cardNewUsed"
@@ -109,6 +154,7 @@ const Home = () => {
                     backgroundSize:"cover",
                     backgroundRepeat:"no-repeat",
                     backgroundPosition:"center",
+                    width:"18rem"
                   }}
                 >
                   <motion.div
@@ -122,10 +168,18 @@ const Home = () => {
             </Col>
 
             <Col md={5} sm={12} className="d-flex justify-content-center">
-              <motion.div
+            <motion.div
                 variants={CardVariants}
                 initial="initial"
                 whileHover="whileHover"
+               onMouseEnter={() => handleMouseEnterUsed(setCard2State)}
+               onMouseLeave={() => handleMouseLeaveUsed(setCard2State)}
+               onMouseMove={(e) => handleMouseMoveUsed(e, setCard2State)}
+               style={{
+                 transformStyle: "preserve-3d",
+                 perspective: "1000px",
+                 transform: `rotateX(${card2State.rotateX}deg) rotateY(${card2State.rotateY}deg) scale(${card2State.scale})`,
+               }}
               >
                 <Card 
                   className="cardNewUsed"
@@ -136,6 +190,7 @@ const Home = () => {
                     backgroundSize:"cover",
                     backgroundRepeat:"no-repeat",
                     backgroundPosition:"center",
+                    width:"18rem"
                   }}
                 >
                   <motion.div

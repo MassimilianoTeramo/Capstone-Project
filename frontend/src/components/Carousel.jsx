@@ -92,7 +92,7 @@ const Carousel = () => {
               key={index}
               className="myswiper-slider mt-3 mb-3 text-center h-100"
             >
-              <Col md={4} sm={12} className="col-12 col-md-6 col-lg-3">
+              <Col md={4} sm={12} lg={3} className="mb-4 ">
                 <Card
                   className="h-100 card-swiper shadow-sm"
                   style={{
@@ -100,6 +100,7 @@ const Carousel = () => {
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     border: "5px solid rgb(255, 224, 46)",
+                    width: "20rem",
 
                   }}
                 >

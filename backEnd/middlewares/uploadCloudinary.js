@@ -11,7 +11,8 @@ const storageCloudinary = new CloudinaryStorage({
         folder: 'epicode',
         cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
         api_key: process.env.CLAUDINARY_API_KEY,
-        api_secret: process.env.CLAUDINARY_API_SECRET// 
+        api_secret: process.env.CLAUDINARY_API_SECRET,
+        allowed_formats :['jpg', 'png', 'jpeg', 'webp', 'heic']
     }
 })
 
