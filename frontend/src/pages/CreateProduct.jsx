@@ -188,7 +188,7 @@ const CreateProduct = () => {
                 controlId="formBasicCheckbox"
               >
                 <Form.Label>Gender</Form.Label>
-                <div className="d-flex justify-content-center gap-5">
+                <div className="d-flex justify-content-center gap-5 genderCheckbox">
                   {["Male", "Female", "Kids", "Unisex"].map((label, index) => (
                     <motion.div
                       key={label}

@@ -86,11 +86,12 @@ const Home = () => {
     <>
       <section id="FirstSec" className="d-flex justify-content-between ">
         <Col className="noShowmd" lg={7}></Col>
-        <Col lg={5} md={12} sm={12} className="herosection">
+        <Col lg={5} md={12} sm={12} className="content">
           <div className="carousel-content text-center mt-5">
             <motion.p 
               initial={{ y:'-200vw' }}
               animate={{ y: 0 }}
+              className="small-text"
               transition={{delay:0.2, duration: 1, stiffness: 50, type:"spring"}}>
               For the real supporter
               </motion.p>
@@ -126,7 +127,8 @@ const Home = () => {
                  initial={{x:"-100vh"}}
                  animate={{ fontSize: "50px", x: 0 }}
                  transition={{duration: 3, type:"spring", stiffness: 50, mass:"2", dumpling:"10" }}
-                 >
+                className="text-center mt-5 mb-4 titleNewUsed"
+                >
                    NEW OR USED?
                </motion.h3>
 
@@ -154,7 +156,8 @@ const Home = () => {
                     backgroundSize:"cover",
                     backgroundRepeat:"no-repeat",
                     backgroundPosition:"center",
-                    width:"18rem"
+                    width:"18rem",
+                    maxWidth: "18rem"
                   }}
                 >
                   <motion.div

@@ -98,21 +98,21 @@ const ProductDetails = () => {
             <h1 className="text-center" style={{ fontFamily: "Anek Odia" }}>
               {product.title}
             </h1>
-            <div className="mt-3 d-flex justify-content-around">
-              <p style={{ fontSize: "20px" }}>
+            <div className="mt-3 d-flex justify-content-around infosDetails">
+              <p >
                 <span>Price:</span>
                 {product.price} £
               </p>
-              <p style={{ fontSize: "20px" }}>
+              <p >
                 <span>Size:</span>
                 {product.size}
               </p>
-              <p style={{ fontSize: "20px" }}>
+              <p >
                 <span>Gender:</span>
                 {(product.gender ?? "unknown").charAt(0).toUpperCase() +
                   (product.gender ?? "unknown").slice(1)}
               </p>
-              <p style={{ fontSize: "20px" }}>
+              <p >
                 <span>Condition:</span>
                 {product.condition}
               </p>

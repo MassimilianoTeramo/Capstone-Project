@@ -149,11 +149,6 @@
 
 /*DETAIL*/
 
-.imageDetail:hover{
-  scale: 2.0;
-  transition: 1s ease-in-out;
-}
-
 .imageDetail {
   transition: 1s ease-in-out;
 }
@@ -161,4 +156,8 @@
 .imageDetail:hover::after{
 scale:1;
 transition: 1s ease-out;
+}
+
+.colDetails span {
+  font-size: 20px;
 }

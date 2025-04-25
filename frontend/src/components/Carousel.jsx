@@ -75,7 +75,7 @@ const Carousel = () => {
           }}
           breakpoints={{
             640: {
-              slidesPerView: 2,
+              slidesPerView: 1,
             },
             768: {
               slidesPerView: 2,
@@ -102,7 +102,6 @@ const Carousel = () => {
                     backgroundPosition: "center",
                     border: "5px solid rgb(255, 224, 46)",
                     width: "20rem",
-
                   }}
                 >
                   <Card.Body className="d-flex flex-column align-items-center justify-content-center">

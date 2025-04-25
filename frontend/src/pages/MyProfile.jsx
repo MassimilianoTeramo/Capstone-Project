@@ -112,6 +112,7 @@ const Profile = () => {
         initial="initial"
         animate="animate"
         className="mb-4 titleProfile"
+        style={{color:"#ffffffcc"}}
       >
         Manage your Profile
       </motion.h2>
