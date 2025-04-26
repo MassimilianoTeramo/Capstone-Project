@@ -125,6 +125,7 @@ const ProductsCard = ({ product, showActions }) => {
       variants={CardVariants}
       initial="initial"
       whileHover="whileHover"
+      
     >
       <Card
         id="card"
@@ -184,7 +185,11 @@ const ProductsCard = ({ product, showActions }) => {
         />
 
         <Card.Body className="card_data">
-          <Card.Title className="card_title">{product.title}</Card.Title>
+          <Card.Title className="card_title">
+            {product.title.length > 20
+              ? `${product.title.substring(0, 20)}...`
+              : product.title}
+          </Card.Title>
           <div className="card_price">£ {product.price}</div>
         </Card.Body>
 
@@ -195,7 +200,7 @@ const ProductsCard = ({ product, showActions }) => {
                 className="card_button"
                 onClick={() => navigate(`/products/${product._id}`)}
               >
-                Dettagli
+                Details
               </Button>
             </motion.div>
             {user && user._id !== product.author._id && (

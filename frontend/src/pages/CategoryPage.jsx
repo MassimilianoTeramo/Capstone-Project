@@ -68,7 +68,7 @@ const CategoryPage = () => {
             <div>
         <Button variant="warning" 
            onClick={() => navigate("/")} >
-          Back to Home
+          Back Home
           </Button>
           </div>
           </div>
@@ -85,7 +85,7 @@ const CategoryPage = () => {
                     ))
                 ) : (
                     <Col>
-                        <p>Non ci sono prodotti in questa categoria!</p>
+                        <p>No products in this category!</p>
                     </Col>
                 )}
             </Row>

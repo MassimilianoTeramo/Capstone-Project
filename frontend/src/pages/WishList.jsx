@@ -11,9 +11,6 @@ import { useDispatchWish } from "../context/WishListContext";
 import { FaTrash } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-
-
-
 const WishList = () => {
   const dispatch = useDispatchCart(); //carrello
   const [loading, setLoading] = useState(true);
@@ -51,12 +48,15 @@ const WishList = () => {
     }
   };
 
- 
-
   return (
     <Container className="mt-5 wishListContainer">
-          <h3 className="text-center text-warning" style={{fontFamily:"Anek Odia", fontSize:"40px"}}>My Wish List</h3>
-      <Row className="text-center mt-5">
+      <h3
+        className="text-center text-warning"
+        style={{ fontFamily: "Anek Odia", fontSize: "40px" }}
+      >
+        My Wish List
+      </h3>
+      <Row className="text-center mt-5 noShowsm">
         <Col md={3}>
           <strong>Product</strong>
         </Col>
@@ -84,57 +84,58 @@ const WishList = () => {
                       £ {product.price.toFixed(2)}
                     </span>
                   </Col>
-                  <Col md={3} className="mb-3">
-                    <motion.div
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                    >
-                      <Button
-                        className="card_button"
-                        onClick={() => navigate(`/products/${product._id}`)}
+                
+                    <Col md={3} className="mb-3">
+                      <motion.div
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
                       >
-                        Dettagli
-                      </Button>
-                    </motion.div>
-                  </Col>
-                  <Col className="mb-3 d-flex justify-content-center gap-4">
-                    <motion.div
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      
-                    >
-                      <Button
-                        className="card_button align-items-center"
-                        style={{
-                          paddingLeft: "0.6rem",
-                          width: "3rem",
-                          borderRadius: "10%",
-                        }}
-                        onClick={() => addToCart(product)}
+                        <Button
+                          className="card_button "
+                          onClick={() => navigate(`/products/${product._id}`)}
+                        >
+                          Details
+                        </Button>
+                      </motion.div>
+                    </Col>
+                    <Col className="mb-3 d-flex justify-content-center gap-4">
+                      <motion.div
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
                       >
-                        <BiCart size={24} />
-                      </Button>
-                    </motion.div>
+                        <Button
+                          className="card_button align-items-center "
+                          style={{
+                            paddingLeft: "0.6rem",
+                            width: "3rem",
+                            borderRadius: "10%",
+                          }}
+                          onClick={() => addToCart(product)}
+                        >
+                          <BiCart size={24} />
+                        </Button>
+                      </motion.div>
 
-                    <motion.div
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}>
-                      <Button
-                        className="card_button align-items-center"
-                        style={{
-                          width: "3rem",
-                          borderRadius: "10%",
-                          marginLeft: "1rem",
-                          paddingLeft: "0.9rem",
-                        }}
-                        onClick={() => handleLike(product._id)}
-
+                      <motion.div
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
                       >
-                        <FaTrash />
-                      </Button>
-                    </motion.div>
-                   
-                  </Col>
+                        <Button
+                          className="card_button align-items-center"
+                          style={{
+                            width: "3rem",
+                            borderRadius: "10%",
+                            marginLeft: "1rem",
+                            paddingLeft: "0.9rem",
+                          }}
+                          onClick={() => handleLike(product._id)}
+                        >
+                          <FaTrash />
+                        </Button>
+                      </motion.div>
+                    </Col>
+                  
+                  <hr className="noShowlg" style={{width:"80%", margin:"10px auto", color:"gold"}}></hr>
                 </Row>
               )
           )

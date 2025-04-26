@@ -83,3 +83,64 @@ flex-direction: column;
   font-size: 25px;
   text-align: center;
 }
+
+.noShowlg {
+  display: none;
+}
+
+.btnDetTrash {
+  display: flex;
+  
+}
+
+
+@media (max-width: 768px) {
+  .containerCart {
+    display: flex;
+    flex-direction: column !important;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .btnQuantity {
+   display: flex;
+   justify-content: center;
+    align-items: center;
+  }
+  .btnDetTrash {
+    display: flex;
+    justify-content: center;
+     align-items: center;
+    gap:1rem;
+    margin-bottom: 2rem;
+   }
+   .noShowsm {
+    display: none;
+   }
+   .stickyBox {
+    margin: 0 auto !important;
+    width: 100%;
+   }
+   .detailsCardsm {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+   }
+   .titleCartsm{
+    margin-bottom: 1rem !important; 
+   }
+ /* whishlist*/
+
+  .wishListContainer {
+    margin-bottom: 3rem;
+  }
+ .card_button {
+  scale: 0.8;
+  margin-top: 1rem;
+ }
+ .noShowlg {
+  display: block;
+ }
+
+
+}

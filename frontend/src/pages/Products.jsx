@@ -66,6 +66,17 @@ const Products = () => {
     fetchProducts();
   }, [user, currentPage]);
 
+
+  useEffect(() => {
+   const itemsPerPage = 12; // Number of items per page
+    // Update totalPages whenever products change
+    setTotalPages(Math.ceil(products.length / itemsPerPage));
+    // Reset currentPage to 1 if products change
+    if (products.length > 0 && currentPage > Math.ceil(products.length / itemsPerPage)) {
+      setCurrentPage(1);
+    }
+  }, [products]);
+
   return (
     <>
       <Container className="mt-5">

@@ -41,19 +41,19 @@ const InputRight = {
 };
 
 const Popup = {
-    hidden: {
-      opacity: 0,
-      scale: 0.8,
+  hidden: {
+    opacity: 0,
+    scale: 0.8,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.5,
+      delay: 1.2,
     },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.5,
-        delay: 1.2,
-      },
-    },
-  };
+  },
+};
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -133,7 +133,7 @@ const Login = () => {
             initial="initial"
             animate="animate"
             className="text-center mt-4"
-            style={{fontFamily:"Anek Odia", fontSize:"40px"}}
+            style={{ fontFamily: "Anek Odia", fontSize: "40px" }}
           >
             Login
           </motion.h2>
@@ -212,27 +212,32 @@ const Login = () => {
                 Login
               </Button>
             </motion.div>
-             <motion.div
-               variants={Popup}
-               initial="hidden"
-               animate="visible"
-               transition={{ delay: 1.9, duration: 0.1, type:spring, stiffness:100}}
-              >
-            <Button
-              onClick={handleGoogleLogin}
-              className="submit-button mb-5 mt-2"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                backgroundColor: "red",
-                gap: "10px",
-                width:"100%",
+            <motion.div
+              variants={Popup}
+              initial="hidden"
+              animate="visible"
+              transition={{
+                delay: 1.9,
+                duration: 0.1,
+                type: spring,
+                stiffness: 100,
               }}
             >
-              <FaGoogle />
-              Accedi con Google
-            </Button>
+              <Button
+                onClick={handleGoogleLogin}
+                className="submit-button mb-5 mt-2"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: "red",
+                  gap: "10px",
+                  width: "100%",
+                }}
+              >
+                <FaGoogle />
+                Accedi con Google
+              </Button>
             </motion.div>
           </Form>
         </Col>

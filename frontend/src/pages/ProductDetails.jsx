@@ -78,12 +78,10 @@ const ProductDetails = () => {
       {error && <p>An error occurred: {error.message}</p>}
       {!loading && !error && (
         <Row className="d-flex justify-content-between">
-          
           <div>
-        <Button variant="warning" 
-           onClick={() => navigate("/products")} >
-          Back to Products
-          </Button>
+            <Button variant="warning" onClick={() => navigate("/products")}>
+              Back to Products
+            </Button>
           </div>
 
           <Col md={4} className="d-flex align-items-center mt-5">
@@ -99,20 +97,20 @@ const ProductDetails = () => {
               {product.title}
             </h1>
             <div className="mt-3 d-flex justify-content-around infosDetails">
-              <p >
+              <p>
                 <span>Price:</span>
                 {product.price} £
               </p>
-              <p >
+              <p>
                 <span>Size:</span>
                 {product.size}
               </p>
-              <p >
+              <p>
                 <span>Gender:</span>
                 {(product.gender ?? "unknown").charAt(0).toUpperCase() +
                   (product.gender ?? "unknown").slice(1)}
               </p>
-              <p >
+              <p>
                 <span>Condition:</span>
                 {product.condition}
               </p>
@@ -168,7 +166,6 @@ const ProductDetails = () => {
           </Col>
         </Row>
       )}
-      
     </Container>
   );
 };

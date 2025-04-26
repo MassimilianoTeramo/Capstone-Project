@@ -49,11 +49,10 @@ const Popup = {
     scale: 1,
     transition: {
       duration: 0.5,
-      delay: custom
-    }
+      delay: custom,
+    },
   }),
 };
-
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -108,7 +107,7 @@ const Register = () => {
             initial="initial"
             animate="animate"
             className="mb-4"
-            style={{fontFamily:"Anek Odia"}}
+            style={{ fontFamily: "Anek Odia" }}
           >
             Register
           </motion.h2>
@@ -222,32 +221,42 @@ const Register = () => {
                 />
               </Form.Group>
             </motion.div>
-             <motion.div
-                          variants={InputLeft}
-                          initial="hidden"
-                          animate="visible"
-                          transition={{ delay: 2.4, duration: 0.1, type:"spring", stiffness:100 }}
-                        >
-            <Form.Group className="mb-3  formLabel">
-              <Form.Label>Confirm Password</Form.Label>
-              <Form.Control
-                type="password"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
+            <motion.div
+              variants={InputLeft}
+              initial="hidden"
+              animate="visible"
+              transition={{
+                delay: 2.4,
+                duration: 0.1,
+                type: "spring",
+                stiffness: 100,
+              }}
+            >
+              <Form.Group className="mb-3  formLabel">
+                <Form.Label>Confirm Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  required
+                />
+              </Form.Group>
             </motion.div>
             <motion.div
               variants={Popup}
               initial="hidden"
               animate="visible"
               custom={2.9}
-              transition={{ duration: 0.5 }}>
-            <Button type="submit" className="submit-button mt-4" variant="warning">
-              Register
-            </Button>
+              transition={{ duration: 0.5 }}
+            >
+              <Button
+                type="submit"
+                className="submit-button mt-4"
+                variant="warning"
+              >
+                Register
+              </Button>
             </motion.div>
           </Form>
         </Col>

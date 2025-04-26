@@ -161,3 +161,17 @@ transition: 1s ease-out;
 .colDetails span {
   font-size: 20px;
 }
+
+@media (max-width: 768px) {
+  .colDetails{
+    p {
+   font-size: 15px;
+ }
+}
+.infosDetails {
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   gap: 1rem;
+}
+}

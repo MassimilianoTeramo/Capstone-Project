@@ -1,7 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { Form, Button, Container, Row, Col, Alert, FormLabel} from "react-bootstrap";
+import {
+  Form,
+  Button,
+  Container,
+  Row,
+  Col,
+  Alert,
+  FormLabel,
+} from "react-bootstrap";
 import axios from "axios";
 import api from "../utils/api";
 import { delay, motion, spring } from "framer-motion";
@@ -38,7 +46,7 @@ const InputRight = {
     x: "100vw",
     opacity: 0,
   },
-  visible:(custom) => ({
+  visible: (custom) => ({
     x: 0,
     opacity: 1,
     transition: {
@@ -60,8 +68,8 @@ const Popup = {
     scale: 1,
     transition: {
       duration: 0.5,
-      delay: custom
-    }
+      delay: custom,
+    },
   }),
 };
 
@@ -182,7 +190,12 @@ const CreateProduct = () => {
                 />
               </Form.Group>
             </motion.div>
-            <motion.div variants={Popup} initial="hidden" animate="visible" exit={"hidden"}>
+            <motion.div
+              variants={Popup}
+              initial="hidden"
+              animate="visible"
+              exit={"hidden"}
+            >
               <Form.Group
                 className="my-4 d-flex flex-column justify-content-center formLabel"
                 controlId="formBasicCheckbox"
@@ -195,7 +208,7 @@ const CreateProduct = () => {
                       variants={Popup}
                       initial="hidden"
                       animate="visible"
-                      custom={(index +1) * 0.4}
+                      custom={(index + 1) * 0.4}
                     >
                       <Form.Check
                         type="checkbox"
@@ -439,12 +452,14 @@ const CreateProduct = () => {
                 </Form.Select>
               </Form.Group>
             </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}>
-            <Button className="submit-button my-4" variant="warning" type="submit">
-              Publish it!
-            </Button>
+            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+              <Button
+                className="submit-button my-4"
+                variant="warning"
+                type="submit"
+              >
+                Publish it!
+              </Button>
             </motion.div>
           </Form>
         </Col>

@@ -8,7 +8,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Products from "./pages/Products";
-import './App.css';
+import './styles/App.css';
 import CreateProduct from "./pages/CreateProduct";
 import ProductsCard from "./components/ProductsCard";
 import MyProducts from "./pages/MyProducts";

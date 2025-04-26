@@ -4,8 +4,7 @@ import { Form, Button, Row, Col, Modal } from "react-bootstrap";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../utils/api";
-import {motion} from "framer-motion";
-
+import { motion } from "framer-motion";
 
 const EditProduct = () => {
   const { id } = useParams();
@@ -87,7 +86,7 @@ const EditProduct = () => {
       editedForm.append("condition", formData.condition);
       editedForm.append("size", formData.size);
       editedForm.append("brand", formData.brand);
-      editedForm.append('gender', formData.gender);
+      editedForm.append("gender", formData.gender);
 
       if (productImg) {
         editedForm.append("image", productImg);
@@ -139,13 +138,11 @@ const EditProduct = () => {
 
   return (
     <>
-      <motion.div 
-             whileHover={{ scale: 1.1 }}
-             whileTap={{ scale: 0.9 }}>
-      <Button className="" onClick={handleShow} variant="warning">
-        Edit Product
-      </Button>
-</motion.div>
+      <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+        <Button className="" onClick={handleShow} variant="warning">
+          Edit Product
+        </Button>
+      </motion.div>
       <Modal show={show} onHide={handleClose} className="modal-dark">
         <Modal.Header closeButton className="border-0">
           <Modal.Title className="form-title">Edit your product</Modal.Title>
@@ -162,9 +159,9 @@ const EditProduct = () => {
                 }
                 required
               />
-              </Form.Group>
+            </Form.Group>
             <Form.Group className="mb-3">
-            <Form.Label>Gender</Form.Label>
+              <Form.Label>Gender</Form.Label>
               <Form.Group
                 className="mb-3 d-flex justify-content-center gap-5"
                 controlId="formBasicCheckbox"
@@ -199,7 +196,7 @@ const EditProduct = () => {
                     setFormData({ ...formData, gender: e.target.value })
                   }
                 />
-                 <Form.Check
+                <Form.Check
                   type="radio"
                   name="gender"
                   label="Unisex"
@@ -209,7 +206,7 @@ const EditProduct = () => {
                     setFormData({ ...formData, gender: e.target.value })
                   }
                 />
-            </Form.Group>
+              </Form.Group>
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label className="form-label">Category</Form.Label>
@@ -345,7 +342,9 @@ const EditProduct = () => {
               <Form.Select
                 aria-label="Default select example"
                 value={formData.brand}
-                onChange={(e) => setFormData({ ...formData, brand: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, brand: e.target.value })
+                }
                 required
               >
                 <option value="">Select</option>

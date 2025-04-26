@@ -53,18 +53,18 @@ const CustomNavbar = () => {
   }, [user]);
 
   return (
-     <Navbar bg="dark" expand="lg" className="custom-navbar">
+    <Navbar bg="dark" expand="lg" className="custom-navbar">
       <Container>
-        <motion.div style={{width:"5rem"}}>
-          <motion.img 
+        <motion.div style={{ width: "5rem" }}>
+          <motion.img
             variants={svgVariants}
             initial="hidden"
             animate="visible"
-            src={logo1} 
-            alt="logo" 
+            src={logo1}
+            alt="logo"
             className="logo"
-            />
-          </motion.div>
+          />
+        </motion.div>
         <Navbar.Brand as={Link} to="/" className="brand-text">
           FootballShop
         </Navbar.Brand>
@@ -141,10 +141,11 @@ const CustomNavbar = () => {
           </Nav>
 
           <Nav className="ms-auto d-flex">
-            <motion.div 
-             whileHover={{ scale: 1.1 }}
-             whileTap={{ scale: 0.9 }}
-            className="mt-1">
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="mt-1"
+            >
               <Button
                 className="cart-button me-3"
                 variant="warning"

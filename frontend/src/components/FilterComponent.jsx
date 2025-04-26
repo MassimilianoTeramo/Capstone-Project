@@ -1,7 +1,13 @@
 import { Button, Offcanvas } from "react-bootstrap";
 import { handleFilter } from "../utils/filterUtils";
 
-const FilterComponent = ({ showFilter, handleCloseFilter, allProducts, setProducts, hideBrandFilter }) => {
+const FilterComponent = ({
+  showFilter,
+  handleCloseFilter,
+  allProducts,
+  setProducts,
+  hideBrandFilter,
+}) => {
   const handleBtns = (e) => {
     handleFilter(e, allProducts, setProducts);
   };
@@ -14,7 +20,7 @@ const FilterComponent = ({ showFilter, handleCloseFilter, allProducts, setProduc
       className="offcanvasCustom"
     >
       <Offcanvas.Header closeButton>
-        <Offcanvas.Title>Filtra per Genere</Offcanvas.Title>
+        <Offcanvas.Title>Filter per gender</Offcanvas.Title>
       </Offcanvas.Header>
       <div className="d-flex justify-content-center mb-4">
         <Button
@@ -50,7 +56,7 @@ const FilterComponent = ({ showFilter, handleCloseFilter, allProducts, setProduc
       </div>
 
       <Offcanvas.Header>
-        <Offcanvas.Title>Filtra per Categoria</Offcanvas.Title>
+        <Offcanvas.Title>Filter per category</Offcanvas.Title>
       </Offcanvas.Header>
       <Offcanvas.Body>
         <div className="d-flex flex-column gap-2 mb-2">
@@ -62,7 +68,7 @@ const FilterComponent = ({ showFilter, handleCloseFilter, allProducts, setProduc
               handleCloseFilter();
             }}
           >
-            Tutti i Prodotti
+            All products
           </Button>
           <Button
             className="btnOffcanvas"
@@ -72,7 +78,7 @@ const FilterComponent = ({ showFilter, handleCloseFilter, allProducts, setProduc
               handleCloseFilter();
             }}
           >
-            Maglie
+            T-Shirts
           </Button>
           <Button
             className="btnOffcanvas"
@@ -82,7 +88,7 @@ const FilterComponent = ({ showFilter, handleCloseFilter, allProducts, setProduc
               handleCloseFilter();
             }}
           >
-            Pantaloncini
+            Shorts
           </Button>
           <Button
             className="btnOffcanvas"
@@ -92,7 +98,7 @@ const FilterComponent = ({ showFilter, handleCloseFilter, allProducts, setProduc
               handleCloseFilter();
             }}
           >
-            Scarpe
+            Shoes
           </Button>
           <Button
             className="btnOffcanvas"
@@ -102,7 +108,7 @@ const FilterComponent = ({ showFilter, handleCloseFilter, allProducts, setProduc
               handleCloseFilter();
             }}
           >
-            Palloni
+            Balls
           </Button>
           <Button
             className="btnOffcanvas"
@@ -112,17 +118,15 @@ const FilterComponent = ({ showFilter, handleCloseFilter, allProducts, setProduc
               handleCloseFilter();
             }}
           >
-            Calzini
+            Socks
           </Button>
         </div>
       </Offcanvas.Body>
 
-     
-
       {!hideBrandFilter && (
         <>
           <Offcanvas.Header>
-            <Offcanvas.Title>Filtra per Brand</Offcanvas.Title>
+            <Offcanvas.Title>Filter per brand</Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
             <div className="d-flex flex-column gap-2">
@@ -134,7 +138,7 @@ const FilterComponent = ({ showFilter, handleCloseFilter, allProducts, setProduc
                   handleCloseFilter();
                 }}
               >
-                Tutti i Brand
+                All brands
               </Button>
               <Button
                 className="btnOffcanvas"
@@ -234,4 +238,4 @@ const FilterComponent = ({ showFilter, handleCloseFilter, allProducts, setProduc
   );
 };
 
-export default FilterComponent; 
+export default FilterComponent;

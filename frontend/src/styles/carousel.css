@@ -7,6 +7,8 @@
   width: 100%;
   min-height: 80vh;
   column-gap: 0.5rem;
+  background-blend-mode: darken  !important;
+  background-color: #0000006e;
 }
 
 .carousel h3 {
@@ -23,8 +25,8 @@
   -webkit-text-fill-color: transparent;
 }
 
-.carousel-content{
-  margin-right: 6rem;
+.swiper{
+  transform: translateX(2.7%);
 }
 
 .carousel-content span {
@@ -165,10 +167,15 @@ margin-right:2.5rem;
 
 
 
-@media screen and (min-width: 48rem) {
+@media (max-width: 768px) {
   .carousel {
     display: flex;
     align-items: center;
-    padding: 2rem 0;
+  }
+  .myswiper {
+   transform: translateX(-22%) !important;
+  }
+  .SectionCarousel {
+   height: auto !important; 
   }
 }

@@ -4,27 +4,27 @@ const AuthContext = createContext();
 
 export const useAuth = () => {
   return useContext(AuthContext);
-};  
+};
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(()=> {
+  const [user, setUser] = useState(() => {
     const savedUser = localStorage.getItem("user");
     return savedUser ? JSON.parse(savedUser) : null;
   });
-  const [token, setToken] = useState(()=> {
+  const [token, setToken] = useState(() => {
     return localStorage.getItem("token");
   });
 
- const login = async (userData, userToken) => {
+  const login = async (userData, userToken) => {
     try {
-        await Promise.all([
-            localStorage.setItem("user", JSON.stringify(userData)),
-            localStorage.setItem("token", userToken),
-            setUser(userData),
-            setToken(userToken),
-        ]);
+      await Promise.all([
+        localStorage.setItem("user", JSON.stringify(userData)),
+        localStorage.setItem("token", userToken),
+        setUser(userData),
+        setToken(userToken),
+      ]);
     } catch (error) {
-        console.error("Error during login:", error);
+      console.error("Error during login:", error);
     }
   };
 
@@ -35,27 +35,24 @@ export const AuthProvider = ({ children }) => {
       setUser(null);
       setToken(null);
     } catch (error) {
-      console.error('Something wrong during the log out', error);
+      console.error("Something wrong during the log out", error);
       throw error;
     }
   };
 
-
-
-
-useEffect(() => {
+  useEffect(() => {
     const initAuth = async () => {
       try {
         const savedUser = localStorage.getItem("user");
         const savedToken = localStorage.getItem("token");
-        
+
         if (savedUser && savedToken) {
-         await setUser(JSON.parse(savedUser));
-         await  setToken(savedToken);
+          await setUser(JSON.parse(savedUser));
+          await setToken(savedToken);
         }
       } catch (error) {
-        console.error('Error during the initialization', error);
-       await logout();
+        console.error("Error during the initialization", error);
+        await logout();
       }
     };
 
@@ -70,7 +67,6 @@ useEffect(() => {
 };
 
 export default AuthProvider;
-
 
 // unsuscribe
 //   useEffect(() => {

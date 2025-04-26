@@ -65,25 +65,26 @@ export default function Store() {
       <Container className="mt-4 d-flex flex-column">
         <div className="mb-4">
           <h3 className="text-center mb-4 text-warning" style={{fontFamily:"Anek Odia", fontSize:"40px"}}>Your Cart</h3>
-          <hr className="section-divider mt-3 w-100" />
+          <hr className="section-divider mt-3 w-100 noShowsm" />
         </div>
-        <div className="d-flex flex-row">
-          <Col md={8}>
+        <div className="d-flex flex-row containerCart">
+          <Col md={8} sm={12}>
             {items.length > 0 ? (
               items.map((product) => (
                 <div key={product._id}>
                   <Row className="d-flex align-items-center mt-4">
-                    <Col md={3}>
+                    <Col md={3} className="titleCartsm">
                       <Image src={product.image} style={{ width: "60%" }} />
                     </Col>
-                    <Col md={3} className="mb-4">
+                    <Col md={3} className="mb-4 ">
                       <h4 className="mb-3" style={{ color: "#ffd22e" }}>
                         {product.title}
                       </h4>
+                      <div className="detailsCardsm">
                       <p style={{ color: "white" }}>
                         Price:
                         <span className="card_price my-0 mx-1">
-                          £ {product.price}
+                          £ {product.price.toFixed(2)}
                         </span>
                       </p>
                       <p style={{ color: "white" }}>
@@ -98,11 +99,14 @@ export default function Store() {
                           {product.gender}
                         </span>
                       </p>
-                      <div className="d-flex align-items-center mt-2">
+                      </div>
+                      <div className="d-flex align-items-center mt-2 btnQuantity ">
                       <motion.div 
                         variants={buttonVariants}
                         whileHover="whileHover"
-                        whileTap="whileTap">
+                        whileTap="whileTap"
+                       
+                        >
                         <Button 
                           variant="warning" 
                           size="sm"
@@ -129,7 +133,9 @@ export default function Store() {
                         </motion.div>
                       </div>
                     </Col>
+                    <div className="btnDetTrash col-md-3 d-flex justify-content-center gap-5">
                     <Col md={3}>
+                    
                     <motion.div 
                     className="d-flex justify-content-center"
                         variants={buttonVariants}
@@ -156,7 +162,9 @@ export default function Store() {
                         <FaTrash />
                       </Button>
                       </motion.div>
+                      
                     </Col>
+                    </div>
                   </Row>
                   <hr style={{ color: "gold" }} />
                 </div>
@@ -167,7 +175,7 @@ export default function Store() {
               </div>
             )}
           </Col>
-          <Col md={4} className="ms-3 stickyBox">
+          <Col md={4}  sm={12} className="ms-3 stickyBox">
             <h4 className="ms-2 text-warning mb-3">Cart Details</h4>
             <div id="listaCart">
               <div className="d-flex justify-content-between">

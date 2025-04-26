@@ -5,15 +5,15 @@ import { useAuth } from "../context/AuthContext";
 import Rating from "@mui/material/Rating";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFutbol } from "@fortawesome/free-solid-svg-icons";
-import { styled } from '@mui/material/styles';
+import { styled } from "@mui/material/styles";
 import { motion } from "framer-motion";
 
 const StyledRating = styled(Rating)({
-  '& .MuiRating-iconFilled': {
-    color: 'gold',
+  "& .MuiRating-iconFilled": {
+    color: "gold",
   },
-  '& .MuiRating-iconEmpty': {
-    color: 'gray',
+  "& .MuiRating-iconEmpty": {
+    color: "gray",
   },
 });
 
@@ -134,8 +134,12 @@ const Reviews = ({ productId, productAuthorId }) => {
               name="simple-controlled"
               value={newRate}
               onChange={(e) => setNewRate(e.target.value)}
-              icon={<FontAwesomeIcon icon={faFutbol} style={{ fontSize: '24px' }} />}
-              emptyIcon={<FontAwesomeIcon icon={faFutbol} style={{ fontSize: '24px' }} />}
+              icon={
+                <FontAwesomeIcon icon={faFutbol} style={{ fontSize: "24px" }} />
+              }
+              emptyIcon={
+                <FontAwesomeIcon icon={faFutbol} style={{ fontSize: "24px" }} />
+              }
               max={5}
             />
           </Form.Group>
@@ -149,18 +153,18 @@ const Reviews = ({ productId, productAuthorId }) => {
               className="form-control"
             />
           </Form.Group>
-          <motion.div 
+          <motion.div
             className="d-flex justify-content-center"
-             whileHover={{ scale: 1.1 }}
-             whileTap={{ scale: 0.9 }}>
-          <Button
-            variant="warning"
-            type="submit"
-            className="mt-4 submit-button"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
           >
-           
-            Submit
-          </Button> 
+            <Button
+              variant="warning"
+              type="submit"
+              className="mt-4 submit-button"
+            >
+              Submit
+            </Button>
           </motion.div>
         </Form>
       ) : !user ? (
@@ -169,7 +173,10 @@ const Reviews = ({ productId, productAuthorId }) => {
         isProductAuthor && null
       )}
 
-      <ListGroup className="mt-4 review_container" style={{ borderRadius: "15px" }}>
+      <ListGroup
+        className="mt-4 review_container"
+        style={{ borderRadius: "15px" }}
+      >
         {reviews.map((review) => (
           <ListGroup.Item
             key={review._id}
@@ -187,8 +194,18 @@ const Reviews = ({ productId, productAuthorId }) => {
                 <StyledRating
                   value={review.rate}
                   readOnly
-                  icon={<FontAwesomeIcon icon={faFutbol} style={{ fontSize: '20px' }} />}
-                  emptyIcon={<FontAwesomeIcon icon={faFutbol} style={{ fontSize: '20px' }} />}
+                  icon={
+                    <FontAwesomeIcon
+                      icon={faFutbol}
+                      style={{ fontSize: "20px" }}
+                    />
+                  }
+                  emptyIcon={
+                    <FontAwesomeIcon
+                      icon={faFutbol}
+                      style={{ fontSize: "20px" }}
+                    />
+                  }
                   max={5}
                 />
               </span>
