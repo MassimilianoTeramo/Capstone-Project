@@ -7,6 +7,7 @@ import { useWish } from "../context/WishListContext";
 import { useDispatchWish } from "../context/WishListContext";
 import FilterComponent from "../components/FilterComponent";
 import {motion} from "framer-motion";
+import brandBg from "../uploads/b7.jpg";
 
 
 const Products = () => {
@@ -78,8 +79,19 @@ const Products = () => {
   }, [products]);
 
   return (
-    <>
-      <Container className="mt-5">
+    <div
+         style={{
+           backgroundImage: `url(${brandBg})`,
+           backgroundSize: "cover",
+           backgroundRepeat: "no-repeat",
+           backgroundPosition: "center",
+           backgroundBlendMode: "darken",
+           width: "auto",
+           height: "auto",
+           marginTop: "-10px",
+         }}
+       >
+            <Container className="pt-5">
         {loading && <p>Loading products...</p>}
         {error && <p>An error occurred: {error.message}</p>}
         <div className="d-flex gap-3 mb-4 justify-content-between">
@@ -145,7 +157,8 @@ const Products = () => {
           </div>
         )}
       </Container>
-    </>
+      </div>
+
   );
 };
 

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import "../styles/pDetails.css";
 import { motion, spring } from "framer-motion";
 import { FaHome } from "react-icons/fa";
+import bgform from "../uploads/bgform.jpg";
 
 const TitleAn = {
   initial: { y: "-200vh", opacity: 0 },
@@ -105,6 +106,19 @@ const Profile = () => {
   };
 
   return (
+
+        <div
+          style={{
+            backgroundImage: `url(${bgform})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            backgroundBlendMode: "darken",
+            width: "auto",
+            height: "auto",
+            marginTop: "-10px",
+          }}
+        >
     <Container className="mt-4 text-center">
       <motion.h2
         variants={TitleAn}
@@ -320,6 +334,7 @@ const Profile = () => {
         </Col>
       </Row>
     </Container>
+    </div>
   );
 };
 

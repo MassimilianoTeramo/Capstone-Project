@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { Col, Container, Row, Button, Pagination } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import axios from "axios";
-import EditProduct from "../components/EditProduct";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import ProductsCard from "../components/ProductsCard";

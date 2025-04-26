@@ -65,9 +65,8 @@ flex-direction: column;
 
 
 /* WISHLIST PAGE*/
-.wishListContainer {
-  margin-bottom: 20rem;
-
+.wishListContainer{
+  margin-bottom: 0;
 }
 
 
@@ -79,7 +78,6 @@ flex-direction: column;
 .wishListContainer p {
   color: white;
   margin-top: 3rem;
-  margin-bottom: 20rem;
   font-size: 25px;
   text-align: center;
 }

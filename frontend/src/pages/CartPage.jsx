@@ -4,6 +4,9 @@ import { Col, Container, Row, Image, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { FaTrash, FaPlus, FaMinus } from "react-icons/fa";
 import { motion } from "framer-motion";
+import bgCart from "../uploads/bgcart.jpg";
+
+
 
 const buttonVariants = {
   whileHover: {
@@ -51,7 +54,7 @@ export default function Store() {
   return (
     <div
       style={{
-        backgroundImage: `url()`,
+        backgroundImage: `url(${bgCart})`,
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
@@ -60,7 +63,7 @@ export default function Store() {
         minHeight: "35rem",
         marginTop: "-10px",
       }}
-      className="my-5"
+      className="py-5"
     >
       <Container className="mt-4 d-flex flex-column">
         <div className="mb-4">

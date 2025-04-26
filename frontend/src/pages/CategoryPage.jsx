@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import { Col, Container, Row, Button, Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import axios from "axios";
-import EditProduct from "../components/EditProduct";
 import { useAuth } from '../context/AuthContext'
 import { useNavigate } from "react-router-dom";
 import ProductsCard from "../components/ProductsCard";
 import { Alert } from "react-bootstrap";
 import api from "../utils/api";
 import {motion} from "framer-motion";
+import brandBg from "../uploads/b7.jpg";
 
 
 const CategoryPage = () => {
@@ -54,7 +53,19 @@ const CategoryPage = () => {
     if (error) return <Container className='mt-4'><Alert variant='danger'>{error}</Alert></Container>;
 
     return (
-        <Container className='mt-5'>
+        <div
+             style={{
+               backgroundImage: `url(${brandBg})`,
+               backgroundSize: "cover",
+               backgroundRepeat: "no-repeat",
+               backgroundPosition: "center",
+               backgroundBlendMode: "darken",
+               width: "auto",
+               height: "auto",
+               marginTop: "-10px",
+             }}
+           >
+        <Container className='pt-5'>
             <div className="d-flex justify-content-between align-items-center">
             <motion.h3
                 initial={{x:"-100vw", opacity:0, color:"black"}}
@@ -90,6 +101,7 @@ const CategoryPage = () => {
                 )}
             </Row>
         </Container>
+        </div>
     );
 };
 

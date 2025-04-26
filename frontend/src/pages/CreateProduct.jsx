@@ -13,6 +13,7 @@ import {
 import axios from "axios";
 import api from "../utils/api";
 import { delay, motion, spring } from "framer-motion";
+import bgform1 from "../uploads/bgform1.jpg";
 
 const TitleAn = {
   initial: { y: "-200vh", opacity: 0 },
@@ -159,8 +160,21 @@ const CreateProduct = () => {
     }
   };
   return (
+
+            <div
+              style={{
+                backgroundImage: `url(${bgform1})`,
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center",
+                backgroundBlendMode: "darken",
+                width: "auto",
+                height: "auto",
+                marginTop: "-10px",
+              }}
+            >
     <Container className="text-center">
-      <Row className="justify-content-center mt-5">
+      <Row className="justify-content-center pt-5">
         <Col xs={12} md={6}>
           <motion.h2
             variants={TitleAn}
@@ -465,6 +479,7 @@ const CreateProduct = () => {
         </Col>
       </Row>
     </Container>
+    </div>
   );
 };
 

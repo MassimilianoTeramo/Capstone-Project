@@ -125,56 +125,55 @@ const ProductsCard = ({ product, showActions }) => {
       variants={CardVariants}
       initial="initial"
       whileHover="whileHover"
-      
     >
       <Card
         id="card"
         className="mb-4 position-relative d-flex align-items-center pt-3"
       >
         {showActions && user && user._id !== product.author._id && (
-
-          <>        
-           <Button
-            variant="link"
-            className="position-absolute p-1"
-            onClick={() => { handleLike(); handleIconClick(); }}
-            disabled={!user}
-            style={{
-              zIndex: 4,
-              backgroundColor: "transparent",
-              border: "none",
-              boxShadow: "none",
-              top: "10px",
-              right: "10px",
-            }}
-          >
-            <GiSoccerBall
+          <>
+            <Button
+              variant="link"
+              className="position-absolute p-1"
+              onClick={() => { handleLike(); handleIconClick(); }}
+              disabled={!user}
               style={{
-                fontSize: "30px",
-                color: isLiked ? "#e1ae07 " : "#ffffff",
-                filter: isLiked
-                  ? "drop-shadow(0px 0px 3px #e1ae07"
-                  : "drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.5))",
-                transition: "all 0.3s ease",
+                zIndex: 4,
+                backgroundColor: "transparent",
+                border: "none",
+                boxShadow: "none",
+                top: "10px",
+                right: "10px",
               }}
-            />
-          </Button>
-
-          <AnimatePresence>
-          {showWishMex && (
-            <motion.div
-              variants={notificationVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              className="bannerWish"
             >
-              Item added to your Wish List!
-            </motion.div>
-          )}
-        </AnimatePresence>
-        </>
+              <GiSoccerBall
+                style={{
+                  fontSize: "30px",
+                  color: isLiked ? "#e1ae07 " : "#ffffff",
+                  filter: isLiked
+                    ? "drop-shadow(0px 0px 3px #e1ae07"
+                    : "drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.5))",
+                  transition: "all 0.3s ease",
+                }}
+              />
+            </Button>
 
+            <AnimatePresence>
+              {showWishMex && (
+                <motion.div
+                  variants={notificationVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  className="bannerWish"
+                >
+                  {isLiked
+                    ? "Item added to your Wish List!"
+                    : "Item removed from your Wish List!"}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </>
         )}
 
         <Card.Img
@@ -205,12 +204,12 @@ const ProductsCard = ({ product, showActions }) => {
             </motion.div>
             {user && user._id !== product.author._id && (
               <>
-                  <Button
-                    className="card_button"
-                    onClick={() => addToCart(product)}
-                  >
-                    <BiCart size={24} />
-                  </Button>
+                <Button
+                  className="card_button"
+                  onClick={() => addToCart(product)}
+                >
+                  <BiCart size={24} />
+                </Button>
                 <AnimatePresence>
                   {showNotification && (
                     <motion.div
@@ -220,6 +219,7 @@ const ProductsCard = ({ product, showActions }) => {
                       exit="exit"
                       className="bannerCart"
                     >
+                      
                       Item added to your cart!
                     </motion.div>
                   )}

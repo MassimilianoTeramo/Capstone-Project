@@ -1,18 +1,11 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import axios from "axios";
 import ProductsCard from "../components/ProductsCard";
-import {
-  Container,
-  Alert,
-  Row,
-  Col,
-  Button,
-  Pagination,
-} from "react-bootstrap";
+import { Container, Alert, Row, Col, Pagination} from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import api from "../utils/api"; // Assicurati di avere il percorso corretto per l'API
 import { motion } from "framer-motion";
+import brandBg from "../uploads/b7.jpg";
 
 const MyProducts = () => {
   const [products, setProducts] = useState([]);
@@ -72,7 +65,21 @@ const MyProducts = () => {
     );
 
   return (
-    <Container className="mt-4">
+   <div
+         style={{
+           backgroundImage: `url(${brandBg})`,
+           backgroundSize: "cover",
+           backgroundRepeat: "no-repeat",
+           backgroundPosition: "center",
+           backgroundOpacity: "0.2",
+           backgroundBlendMode: "darken",
+           width: "auto",
+           height: "auto",
+           marginTop: "-10px",
+           
+         }}
+       >
+    <Container className="pt-4">
       <motion.div
         initial={{ x: "-100vh", opacity: 0 }}
         animate={{
@@ -132,6 +139,7 @@ const MyProducts = () => {
         </div>
       )}
     </Container>
+    </div>
   );
 };
 export default MyProducts;

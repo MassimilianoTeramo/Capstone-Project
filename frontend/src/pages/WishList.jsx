@@ -10,6 +10,7 @@ import { useWish } from "../context/WishListContext";
 import { useDispatchWish } from "../context/WishListContext";
 import { FaTrash } from "react-icons/fa";
 import { motion } from "framer-motion";
+import bgform2 from "../uploads/bgform2.jpg";
 
 const WishList = () => {
   const dispatch = useDispatchCart(); //carrello
@@ -49,14 +50,26 @@ const WishList = () => {
   };
 
   return (
-    <Container className="mt-5 wishListContainer">
+      <div
+              style={{
+                backgroundImage: `url(${bgform2})`,
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center",
+                backgroundBlendMode: "darken",
+                width: "auto",
+                height: "100%",
+                marginTop: "-10px",
+              }}
+            >
+    <Container className="pt-5 mb-0 wishListContainer">
       <h3
         className="text-center text-warning"
         style={{ fontFamily: "Anek Odia", fontSize: "40px" }}
       >
         My Wish List
       </h3>
-      <Row className="text-center mt-5 noShowsm">
+      <Row className="text-center py-5 noShowsm">
         <Col md={3}>
           <strong>Product</strong>
         </Col>
@@ -67,7 +80,7 @@ const WishList = () => {
           <strong>Go to Details</strong>
         </Col>
       </Row>
-      <Row>
+      <Row className="pb-5">
         {products.length > 0 ? (
           products.map(
             (product) =>
@@ -77,7 +90,7 @@ const WishList = () => {
                   className="d-flex align-items-center text-center mt-4"
                 >
                   <Col md={3} className="mb-4">
-                    <Image src={product.image} style={{ width: "60%" }} />
+                    <Image src={product.image} style={{ width: "50%" }} />
                   </Col>
                   <Col md={2}>
                     <span className="card_price">
@@ -146,6 +159,7 @@ const WishList = () => {
         )}
       </Row>
     </Container>
+    </div>
   );
 };
 

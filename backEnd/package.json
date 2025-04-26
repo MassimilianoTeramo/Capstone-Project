@@ -28,7 +28,8 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-session": "^1.0.2",
     "prettier": "^3.5.3",
-    "react-bootstrap": "^2.10.9"
+    "react-bootstrap": "^2.10.9",
+    "stripe": "^18.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.9"
