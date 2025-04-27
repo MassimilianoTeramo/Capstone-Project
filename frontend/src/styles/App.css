@@ -1,4 +1,3 @@
-
 /* CARD PRODOTTO */
 .card {
   border: 2px solid #e1ae07;
@@ -62,7 +61,6 @@
   gap: 1rem;
   opacity: 0;
   transition: all 0.3s ease;
-  
 }
 
 .card:hover .card_data {
@@ -95,12 +93,11 @@
 }
 
 .btnOffcanvas {
-  color:rgb(208, 194, 114);
+  color: rgb(208, 194, 114);
 }
 .customCloseButton {
-  color:gold !important ;
+  color: gold !important ;
 }
-
 
 .animated-title {
   font-size: 50px;
@@ -109,7 +106,6 @@
 }
 
 .bannerWish {
-
   position: absolute;
   bottom: 4rem;
   left: 15%;
@@ -149,7 +145,6 @@
   font-size: 14px;
   z-index: 10;
 }
-
 
 .formLabel {
   color: #ffffffcc;

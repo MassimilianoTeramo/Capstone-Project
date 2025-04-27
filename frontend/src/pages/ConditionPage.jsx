@@ -8,6 +8,7 @@ import { Alert } from "react-bootstrap";
 import api from "../utils/api";
 import FilterComponent from "../components/FilterComponent";
 import { motion } from "framer-motion";
+import brandBg from "../uploads/b7.jpg";
 
 const ConditionPage = () => {
   const [products, setProducts] = useState([]);
@@ -16,7 +17,6 @@ const ConditionPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const { condition } = useParams();
-  console.log("Condition parameter:", condition); // Debugging log
   const { user } = useAuth();
   const userName = user ? `${user.firstName} ${user.lastName}` : "unknown";
   const navigate = useNavigate();
@@ -28,9 +28,6 @@ const ConditionPage = () => {
       const response = await api.get(
         `${process.env.REACT_APP_API_URL}/products/condition/${condition}`
       );
-      console.log("Response from API:", response.data); // Debugging log
-
-      console.log("Products fetched:", response.data); // Debugging log
       setProducts(response.data);
       setError(null);
       setLoading(false);
@@ -77,7 +74,19 @@ const ConditionPage = () => {
     );
 
   return (
-    <Container className="mt-4">
+       <div
+          style={{
+            backgroundImage: `url(${brandBg})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            backgroundBlendMode: "darken",
+            width: "auto",
+            height: "auto",
+            marginTop: "-10px",
+          }}
+        >
+    <Container className="pt-4">
       <div className="d-flex flex-row-reverse gap-3 mb-4 justify-content-between align-items-center">
         <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
           <Button variant="warning" onClick={handleShowFilter}>
@@ -146,6 +155,7 @@ const ConditionPage = () => {
         </Button>
       </div>
     </Container>
+    </div>
   );
 };
 

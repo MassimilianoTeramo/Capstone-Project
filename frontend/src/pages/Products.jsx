@@ -6,9 +6,8 @@ import ProductsCard from "../components/ProductsCard";
 import { useWish } from "../context/WishListContext";
 import { useDispatchWish } from "../context/WishListContext";
 import FilterComponent from "../components/FilterComponent";
-import {motion} from "framer-motion";
+import { motion } from "framer-motion";
 import brandBg from "../uploads/b7.jpg";
-
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -48,7 +47,9 @@ const Products = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `http://localhost:3002/products?page=${currentPage}${user ? `&userId=${user._id}` : ''}`
+          `http://localhost:3002/products?page=${currentPage}${
+            user ? `&userId=${user._id}` : ""
+          }`
         );
         setProducts(response.data.products);
         setAllProducts(response.data.products);
@@ -67,52 +68,63 @@ const Products = () => {
     fetchProducts();
   }, [user, currentPage]);
 
-
   useEffect(() => {
-   const itemsPerPage = 12; // Number of items per page
+    const itemsPerPage = 12; // Number of items per page
     // Update totalPages whenever products change
     setTotalPages(Math.ceil(products.length / itemsPerPage));
     // Reset currentPage to 1 if products change
-    if (products.length > 0 && currentPage > Math.ceil(products.length / itemsPerPage)) {
+    if (
+      products.length > 0 &&
+      currentPage > Math.ceil(products.length / itemsPerPage)
+    ) {
       setCurrentPage(1);
     }
   }, [products]);
 
   return (
     <div
-         style={{
-           backgroundImage: `url(${brandBg})`,
-           backgroundSize: "cover",
-           backgroundRepeat: "no-repeat",
-           backgroundPosition: "center",
-           backgroundBlendMode: "darken",
-           width: "auto",
-           height: "auto",
-           marginTop: "-10px",
-         }}
-       >
-            <Container className="pt-5">
+      style={{
+        backgroundImage: `url(${brandBg})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        backgroundBlendMode: "darken",
+        width: "auto",
+        height: "auto",
+        marginTop: "-10px",
+      }}
+    >
+      <Container className="pt-5">
         {loading && <p>Loading products...</p>}
         {error && <p>An error occurred: {error.message}</p>}
         <div className="d-flex gap-3 mb-4 justify-content-between">
-          
-        <motion.div
-             initial={{x:"-100vh", opacity:0}}
-             animate={{ fontSize: "50px", x: 0, opacity:1, color:"gold", letterSpacing:"5px" }}
-             transition={{duration: 3, type:"spring", stiffness: 50, mass:"2", dumpling:"6" }}
-             >
-                <h3>All Products</h3>
-            </motion.div>
+          <motion.div
+            initial={{ x: "-100vh", opacity: 0 }}
+            animate={{
+              fontSize: "50px",
+              x: 0,
+              opacity: 1,
+              color: "gold",
+              letterSpacing: "5px",
+            }}
+            transition={{
+              duration: 3,
+              type: "spring",
+              stiffness: 50,
+              mass: "2",
+              dumpling: "6",
+            }}
+          >
+            <h3>All Products</h3>
+          </motion.div>
 
-            <motion.div 
-             whileHover={{ scale: 1.1 }}
-             whileTap={{ scale: 0.9 }}>
+          <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
             <Button variant="warning" onClick={handleShowFilter}>
               Filter
             </Button>
-            </motion.div>
-          
-          <FilterComponent 
+          </motion.div>
+
+          <FilterComponent
             showFilter={showFilter}
             handleCloseFilter={handleCloseFilter}
             allProducts={allProducts}
@@ -136,7 +148,6 @@ const Products = () => {
               <Pagination.Prev
                 disabled={currentPage === 1}
                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                
               />
               {[...Array(totalPages)].map((_, index) => (
                 <Pagination.Item
@@ -157,8 +168,7 @@ const Products = () => {
           </div>
         )}
       </Container>
-      </div>
-
+    </div>
   );
 };
 

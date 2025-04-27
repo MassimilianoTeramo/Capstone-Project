@@ -222,7 +222,6 @@ const Home = () => {
                 onMouseEnter={() => handleMouseEnterUsed(setCard2State)}
                 onMouseLeave={() => handleMouseLeaveUsed(setCard2State)}
                 onMouseMove={(e) => handleMouseMoveUsed(e, setCard2State)}
-               
                 style={{
                   transformStyle: "preserve-3d",
                   perspective: "1000px",

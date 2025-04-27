@@ -106,234 +106,235 @@ const Profile = () => {
   };
 
   return (
-
-        <div
-          style={{
-            backgroundImage: `url(${bgform})`,
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
-            backgroundBlendMode: "darken",
-            width: "auto",
-            height: "auto",
-            marginTop: "-10px",
-          }}
+    <div
+      style={{
+        backgroundImage: `url(${bgform})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        backgroundBlendMode: "darken",
+        width: "auto",
+        height: "auto",
+        marginTop: "-10px",
+      }}
+    >
+      <Container className="mt-4 text-center">
+        <motion.h2
+          variants={TitleAn}
+          initial="initial"
+          animate="animate"
+          className="mb-4 titleProfile"
+          style={{ color: "#ffffffcc" }}
         >
-    <Container className="mt-4 text-center">
-      <motion.h2
-        variants={TitleAn}
-        initial="initial"
-        animate="animate"
-        className="mb-4 titleProfile"
-        style={{ color: "#ffffffcc" }}
-      >
-        Manage your Profile
-      </motion.h2>
+          Manage your Profile
+        </motion.h2>
 
-      {error && <Alert variant="danger">{error}</Alert>}
-      {success && <Alert variant="success">{success}</Alert>}
+        {error && <Alert variant="danger">{error}</Alert>}
+        {success && <Alert variant="success">{success}</Alert>}
 
-      <Row className="justify-content-md-center">
-        <Col md={6}>
-          <Form onSubmit={handleProfileUpdate} className="form-container">
-            <motion.div
-              variants={InputRight}
-              initial="hidden"
-              animate="visible"
-              transition={{
-                delay: 0.1,
-                duration: 0.1,
-                type: spring,
-                stiffness: 100,
-              }}
-            >
-              <Form.Group className="mb-3">
-                <Form.Label style={{ color: "#ffffffcc" }}>Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="firstName"
-                  onChange={handleChange}
-                  value={formData.firstName}
-                />
-              </Form.Group>
-            </motion.div>
-            <motion.div
-              variants={InputLeft}
-              initial="hidden"
-              animate="visible"
-              transition={{
-                delay: 0.4,
-                duration: 0.1,
-                type: spring,
-                stiffness: 100,
-              }}
-            >
-              <Form.Group className="mb-3">
-                <Form.Label style={{ color: "#ffffffcc" }}>Surname</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="lastName"
-                  onChange={handleChange}
-                  value={formData.lastName}
-                />
-              </Form.Group>
-            </motion.div>
-
-            <motion.div
-              variants={InputRight}
-              initial="hidden"
-              animate="visible"
-              transition={{
-                delay: 0.8,
-                duration: 0.1,
-                type: spring,
-                stiffness: 100,
-              }}
-            >
-              <Form.Group className="mb-3">
-                <Form.Label style={{ color: "#ffffffcc" }}>email</Form.Label>
-                <Form.Control
-                  type="email"
-                  name="email"
-                  onChange={handleChange}
-                  value={formData.email}
-                />
-              </Form.Group>
-            </motion.div>
-            <motion.div
-              variants={TitleAn}
-              initial="initial"
-              animate="animate"
-              transition={{
-                delay: 1.2,
-                duration: 0.1,
-                type: "spring",
-                stiffness: 50,
-              }}
-            >
-              <h4
-                className="form-label mt-5 mb-4"
-                style={{ fontSize: "20px", color: "gold" }}
-              >
-                Change Password
-              </h4>
-            </motion.div>
-
-            <motion.div
-              variants={InputLeft}
-              initial="hidden"
-              animate="visible"
-              transition={{
-                delay: 1.6,
-                duration: 0.1,
-                type: spring,
-                stiffness: 100,
-              }}
-            >
-              <Form.Group className="mb-3">
-                <Form.Label style={{ color: "#ffffffcc" }}>
-                  Current Password
-                </Form.Label>
-                <Form.Control
-                  type="password"
-                  name="currentPassword"
-                  onChange={handleChange}
-                  value={formData.currentPassword}
-                />
-              </Form.Group>
-            </motion.div>
-            <motion.div
-              variants={InputRight}
-              initial="hidden"
-              animate="visible"
-              transition={{
-                delay: 2,
-                duration: 0.1,
-                type: spring,
-                stiffness: 100,
-              }}
-            >
-              <Form.Group className="mb-3">
-                <Form.Label style={{ color: "#ffffffcc" }}>
-                  New Password
-                </Form.Label>
-                <Form.Control
-                  type="password"
-                  name="newPassword"
-                  onChange={handleChange}
-                  value={formData.newPassword}
-                />
-              </Form.Group>
-            </motion.div>
-            <motion.div
-              variants={InputLeft}
-              initial="hidden"
-              animate="visible"
-              transition={{
-                delay: 2.4,
-                duration: 0.1,
-                type: "spring",
-                stiffness: 100,
-              }}
-            >
-              <Form.Group className="mb-3">
-                <Form.Label style={{ color: "#ffffffcc" }}>
-                  Confirm New Password
-                </Form.Label>
-                <Form.Control
-                  type="password"
-                  name="confirmPassword"
-                  onChange={handleChange}
-                  value={formData.confirmPassword}
-                />
-              </Form.Group>
-            </motion.div>
-            <div className="d-flex justify-content-center gap-4">
+        <Row className="justify-content-md-center">
+          <Col md={6}>
+            <Form onSubmit={handleProfileUpdate} className="form-container">
               <motion.div
                 variants={InputRight}
                 initial="hidden"
                 animate="visible"
                 transition={{
-                  delay: 2.8,
+                  delay: 0.1,
                   duration: 0.1,
-                  type: "spring",
+                  type: spring,
                   stiffness: 100,
                 }}
               >
-                <Button
-                  className="submit-button my-4"
-                  variant="warning"
-                  type="submit"
-                >
-                  Submit
-                </Button>
+                <Form.Group className="mb-3">
+                  <Form.Label style={{ color: "#ffffffcc" }}>Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="firstName"
+                    onChange={handleChange}
+                    value={formData.firstName}
+                  />
+                </Form.Group>
               </motion.div>
               <motion.div
                 variants={InputLeft}
                 initial="hidden"
                 animate="visible"
                 transition={{
-                  delay: 3.2,
+                  delay: 0.4,
+                  duration: 0.1,
+                  type: spring,
+                  stiffness: 100,
+                }}
+              >
+                <Form.Group className="mb-3">
+                  <Form.Label style={{ color: "#ffffffcc" }}>
+                    Surname
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="lastName"
+                    onChange={handleChange}
+                    value={formData.lastName}
+                  />
+                </Form.Group>
+              </motion.div>
+
+              <motion.div
+                variants={InputRight}
+                initial="hidden"
+                animate="visible"
+                transition={{
+                  delay: 0.8,
+                  duration: 0.1,
+                  type: spring,
+                  stiffness: 100,
+                }}
+              >
+                <Form.Group className="mb-3">
+                  <Form.Label style={{ color: "#ffffffcc" }}>email</Form.Label>
+                  <Form.Control
+                    type="email"
+                    name="email"
+                    onChange={handleChange}
+                    value={formData.email}
+                  />
+                </Form.Group>
+              </motion.div>
+              <motion.div
+                variants={TitleAn}
+                initial="initial"
+                animate="animate"
+                transition={{
+                  delay: 1.2,
+                  duration: 0.1,
+                  type: "spring",
+                  stiffness: 50,
+                }}
+              >
+                <h4
+                  className="form-label mt-5 mb-4"
+                  style={{ fontSize: "20px", color: "gold" }}
+                >
+                  Change Password
+                </h4>
+              </motion.div>
+
+              <motion.div
+                variants={InputLeft}
+                initial="hidden"
+                animate="visible"
+                transition={{
+                  delay: 1.6,
+                  duration: 0.1,
+                  type: spring,
+                  stiffness: 100,
+                }}
+              >
+                <Form.Group className="mb-3">
+                  <Form.Label style={{ color: "#ffffffcc" }}>
+                    Current Password
+                  </Form.Label>
+                  <Form.Control
+                    type="password"
+                    name="currentPassword"
+                    onChange={handleChange}
+                    value={formData.currentPassword}
+                  />
+                </Form.Group>
+              </motion.div>
+              <motion.div
+                variants={InputRight}
+                initial="hidden"
+                animate="visible"
+                transition={{
+                  delay: 2,
+                  duration: 0.1,
+                  type: spring,
+                  stiffness: 100,
+                }}
+              >
+                <Form.Group className="mb-3">
+                  <Form.Label style={{ color: "#ffffffcc" }}>
+                    New Password
+                  </Form.Label>
+                  <Form.Control
+                    type="password"
+                    name="newPassword"
+                    onChange={handleChange}
+                    value={formData.newPassword}
+                  />
+                </Form.Group>
+              </motion.div>
+              <motion.div
+                variants={InputLeft}
+                initial="hidden"
+                animate="visible"
+                transition={{
+                  delay: 2.4,
                   duration: 0.1,
                   type: "spring",
                   stiffness: 100,
                 }}
               >
-                <div className="d-flex justify-content-center">
-                  <Button
-                    variant="warning"
-                    className="my-4"
-                    onClick={() => navigate("/")}
-                  >
-                    <FaHome style={{ fontSize: "25px" }} />
-                  </Button>
-                </div>
+                <Form.Group className="mb-3">
+                  <Form.Label style={{ color: "#ffffffcc" }}>
+                    Confirm New Password
+                  </Form.Label>
+                  <Form.Control
+                    type="password"
+                    name="confirmPassword"
+                    onChange={handleChange}
+                    value={formData.confirmPassword}
+                  />
+                </Form.Group>
               </motion.div>
-            </div>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+              <div className="d-flex justify-content-center gap-4">
+                <motion.div
+                  variants={InputRight}
+                  initial="hidden"
+                  animate="visible"
+                  transition={{
+                    delay: 2.8,
+                    duration: 0.1,
+                    type: "spring",
+                    stiffness: 100,
+                  }}
+                >
+                  <Button
+                    className="submit-button my-4"
+                    variant="warning"
+                    type="submit"
+                  >
+                    Submit
+                  </Button>
+                </motion.div>
+                <motion.div
+                  variants={InputLeft}
+                  initial="hidden"
+                  animate="visible"
+                  transition={{
+                    delay: 3.2,
+                    duration: 0.1,
+                    type: "spring",
+                    stiffness: 100,
+                  }}
+                >
+                  <div className="d-flex justify-content-center">
+                    <Button
+                      variant="warning"
+                      className="my-4"
+                      onClick={() => navigate("/")}
+                    >
+                      <FaHome style={{ fontSize: "25px" }} />
+                    </Button>
+                  </div>
+                </motion.div>
+              </div>
+            </Form>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 };

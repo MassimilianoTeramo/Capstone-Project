@@ -6,7 +6,6 @@
   border-radius: 15px;
   padding: 2rem;
   color: #fffffff3;
-  
 }
 
 .colDetails span {
@@ -14,7 +13,8 @@
   margin-right: 1rem;
 }
 
-.colDetails h1, h5 {
+.colDetails h1,
+h5 {
   color: rgb(255, 210, 46);
 }
 
@@ -153,9 +153,9 @@
   transition: 1s ease-in-out;
 }
 
-.imageDetail:hover::after{
-scale:1;
-transition: 1s ease-out;
+.imageDetail:hover::after {
+  scale: 1;
+  transition: 1s ease-out;
 }
 
 .colDetails span {
@@ -163,15 +163,15 @@ transition: 1s ease-out;
 }
 
 @media (max-width: 768px) {
-  .colDetails{
+  .colDetails {
     p {
-   font-size: 15px;
- }
-}
-.infosDetails {
-   display: flex;
-   flex-direction: row;
-   flex-wrap: wrap;
-   gap: 1rem;
-}
+      font-size: 15px;
+    }
+  }
+  .infosDetails {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
 }

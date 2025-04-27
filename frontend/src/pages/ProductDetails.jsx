@@ -8,6 +8,7 @@ import "../styles/pDetails.css";
 import Reviews from "../components/Reviews";
 import EditProduct from "../components/EditProduct";
 import { color, motion } from "framer-motion";
+import bgProDet from "../uploads/bgProDet.jpg";
 
 const ProductDetails = () => {
   const [product, setProduct] = useState({});
@@ -73,7 +74,19 @@ const ProductDetails = () => {
   };
 
   return (
-    <Container className="mt-5 mb-5">
+     <div
+          style={{
+            backgroundImage: `url(${bgProDet})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            backgroundBlendMode: "darken",
+            width: "auto",
+            height: "auto",
+            marginTop: "-10px",
+          }}
+        >
+    <Container className="pt-5 pb-5">
       {loading && <p>Loading products...</p>}
       {error && <p>An error occurred: {error.message}</p>}
       {!loading && !error && (
@@ -167,6 +180,7 @@ const ProductDetails = () => {
         </Row>
       )}
     </Container>
+    </div>
   );
 };
 export default ProductDetails;

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import api from "../utils/api";
 import { motion, spring } from "framer-motion";
+import bgform4 from "../uploads/bgform4.jpg";
 
 const TitleAn = {
   initial: { y: "-200vh", opacity: 0 },
@@ -99,6 +100,19 @@ const Register = () => {
     });
   };
   return (
+      <div
+          style={{
+            backgroundImage: `url(${bgform4})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            backgroundBlendMode: "darken",
+            width: "auto",
+            minHeight: "35rem",
+            marginTop: "-10px",
+          }}
+          className="py-5"
+        >
     <Container className="d-flex flex-column text-center my-5">
       <Row className="justify-content-center mt-5">
         <Col md={6} xs={12}>
@@ -262,6 +276,7 @@ const Register = () => {
         </Col>
       </Row>
     </Container>
+    </div>
   );
 };
 

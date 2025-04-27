@@ -59,4 +59,4 @@ export const handleFilter = (e, allProducts, setProducts) => {
     const filtered = allProducts.filter((item) => item.gender === "Kids");
     setProducts(filtered);
   }
-}; 
+};

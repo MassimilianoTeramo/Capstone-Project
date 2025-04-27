@@ -1,7 +1,7 @@
 import React from "react";
-import { Container, Row, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { FaFacebook, FaInstagram, FaEnvelope, FaGithub} from 'react-icons/fa';
+import { Container, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { FaFacebook, FaInstagram, FaEnvelope, FaGithub } from "react-icons/fa";
 import { IoFootball } from "react-icons/io5";
 
 const Footer = () => {
@@ -15,11 +15,11 @@ const Footer = () => {
               <h5 className="footer-title mb-0">FootballShop</h5>
             </div>
             <p className="footer-text">
-            Your one-stop store for all things soccer. 
-            High quality clothing, shoes and accessories for all fans.
+              Your one-stop store for all things soccer. High quality clothing,
+              shoes and accessories for all fans.
             </p>
           </Col>
-          
+
           <Col md={4} className="footer-section mb-4 mb-md-0 text-center">
             <h5 className="footer-title mb-3">Link Utili</h5>
             <ul className="footer-links list-unstyled">
@@ -45,7 +45,7 @@ const Footer = () => {
               </li>
             </ul>
           </Col>
-          
+
           <Col md={4} className="footer-section text-end">
             <h5 className="footer-title mb-3">Contacts</h5>
             <div className="d-flex justify-content-end align-items-center mb-3 footer-email">
@@ -55,26 +55,26 @@ const Footer = () => {
               </a>
             </div>
             <div className="social-links">
-              <a 
-                href="https://www.facebook.com/" 
+              <a
+                href="https://www.facebook.com/"
                 className="social-link me-3"
-                target="_blank" 
+                target="_blank"
                 rel="noopener noreferrer"
               >
                 <FaFacebook size={24} />
               </a>
-              <a 
-                href="https://www.instagram.com/" 
+              <a
+                href="https://www.instagram.com/"
                 className="social-link me-3"
-                target="_blank" 
+                target="_blank"
                 rel="noopener noreferrer"
               >
                 <FaInstagram size={24} />
               </a>
-              <a 
-                href="https://github.com/MassimilianoTeramo" 
+              <a
+                href="https://github.com/MassimilianoTeramo"
                 className="social-link"
-                target="_blank" 
+                target="_blank"
                 rel="noopener noreferrer"
               >
                 <FaGithub size={24} />
@@ -82,11 +82,12 @@ const Footer = () => {
             </div>
           </Col>
         </Row>
-        
+
         <Row>
           <Col className="text-center py-3 footer-bottom">
             <p className="mb-0">
-              © {new Date().getFullYear()} FootballShop - Capstone Project Epicode
+              © {new Date().getFullYear()} FootballShop - Capstone Project
+              Epicode
             </p>
           </Col>
         </Row>

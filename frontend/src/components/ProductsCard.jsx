@@ -82,7 +82,6 @@ const ProductsCard = ({ product, showActions }) => {
         const isProductLiked =
           likedProducts.find((p) => p?._id === product._id) !== undefined;
         setIsLiked(isProductLiked);
-        
       }
     };
     checkIfLiked();
@@ -91,12 +90,12 @@ const ProductsCard = ({ product, showActions }) => {
   const handleIconClick = () => {
     setShowWishMex(true);
     setTimeout(() => {
-        setShowWishMex(false);
+      setShowWishMex(false);
     }, 2000);
     if (!user) {
       return;
     }
-};
+  };
 
   const handleLike = async () => {
     if (!user) {
@@ -135,7 +134,10 @@ const ProductsCard = ({ product, showActions }) => {
             <Button
               variant="link"
               className="position-absolute p-1"
-              onClick={() => { handleLike(); handleIconClick(); }}
+              onClick={() => {
+                handleLike();
+                handleIconClick();
+              }}
               disabled={!user}
               style={{
                 zIndex: 4,
@@ -219,7 +221,6 @@ const ProductsCard = ({ product, showActions }) => {
                       exit="exit"
                       className="bannerCart"
                     >
-                      
                       Item added to your cart!
                     </motion.div>
                   )}

@@ -50,54 +50,54 @@ const WishList = () => {
   };
 
   return (
-      <div
-              style={{
-                backgroundImage: `url(${bgform2})`,
-                backgroundSize: "cover",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "center",
-                backgroundBlendMode: "darken",
-                width: "auto",
-                height: "100%",
-                marginTop: "-10px",
-              }}
-            >
-    <Container className="pt-5 mb-0 wishListContainer">
-      <h3
-        className="text-center text-warning"
-        style={{ fontFamily: "Anek Odia", fontSize: "40px" }}
-      >
-        My Wish List
-      </h3>
-      <Row className="text-center py-5 noShowsm">
-        <Col md={3}>
-          <strong>Product</strong>
-        </Col>
-        <Col md={2}>
-          <strong>Price</strong>
-        </Col>
-        <Col md={3}>
-          <strong>Go to Details</strong>
-        </Col>
-      </Row>
-      <Row className="pb-5">
-        {products.length > 0 ? (
-          products.map(
-            (product) =>
-              product && (
-                <Row
-                  key={product._id}
-                  className="d-flex align-items-center text-center mt-4"
-                >
-                  <Col md={3} className="mb-4">
-                    <Image src={product.image} style={{ width: "50%" }} />
-                  </Col>
-                  <Col md={2}>
-                    <span className="card_price">
-                      £ {product.price.toFixed(2)}
-                    </span>
-                  </Col>
-                
+    <div
+      style={{
+        backgroundImage: `url(${bgform2})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        backgroundBlendMode: "darken",
+        width: "auto",
+        height: "100%",
+        marginTop: "-10px",
+      }}
+    >
+      <Container className="pt-5 mb-0 wishListContainer">
+        <h3
+          className="text-center text-warning"
+          style={{ fontFamily: "Anek Odia", fontSize: "40px" }}
+        >
+          My Wish List
+        </h3>
+        <Row className="text-center py-5 noShowsm">
+          <Col md={3}>
+            <strong>Product</strong>
+          </Col>
+          <Col md={2}>
+            <strong>Price</strong>
+          </Col>
+          <Col md={3}>
+            <strong>Go to Details</strong>
+          </Col>
+        </Row>
+        <Row className="pb-5">
+          {products.length > 0 ? (
+            products.map(
+              (product) =>
+                product && (
+                  <Row
+                    key={product._id}
+                    className="d-flex align-items-center text-center mt-4"
+                  >
+                    <Col md={3} className="mb-4">
+                      <Image src={product.image} style={{ width: "50%" }} />
+                    </Col>
+                    <Col md={2}>
+                      <span className="card_price">
+                        £ {product.price.toFixed(2)}
+                      </span>
+                    </Col>
+
                     <Col md={3} className="mb-3">
                       <motion.div
                         whileHover={{ scale: 1.1 }}
@@ -147,18 +147,25 @@ const WishList = () => {
                         </Button>
                       </motion.div>
                     </Col>
-                  
-                  <hr className="noShowlg" style={{width:"80%", margin:"10px auto", color:"gold"}}></hr>
-                </Row>
-              )
-          )
-        ) : (
-          <Col>
-            <p>Your wish list is empty!</p>
-          </Col>
-        )}
-      </Row>
-    </Container>
+
+                    <hr
+                      className="noShowlg"
+                      style={{
+                        width: "80%",
+                        margin: "10px auto",
+                        color: "gold",
+                      }}
+                    ></hr>
+                  </Row>
+                )
+            )
+          ) : (
+            <Col>
+              <p>Your wish list is empty!</p>
+            </Col>
+          )}
+        </Row>
+      </Container>
     </div>
   );
 };

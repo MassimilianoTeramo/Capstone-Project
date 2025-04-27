@@ -7,7 +7,7 @@
   width: 100%;
   min-height: 80vh;
   column-gap: 0.5rem;
-  background-blend-mode: darken  !important;
+  background-blend-mode: darken !important;
   background-color: #0000006e;
 }
 
@@ -25,7 +25,7 @@
   -webkit-text-fill-color: transparent;
 }
 
-.swiper{
+.swiper {
   transform: translateX(2.7%);
 }
 
@@ -49,9 +49,7 @@
   display: flex;
   justify-content: center;
   margin-top: 5rem;
-
 }
-
 
 .slider-btn {
   display: inline-block;
@@ -85,7 +83,7 @@
   height: auto;
   background-color: transparent;
   box-sizing: border-box;
-margin-right:2.5rem;
+  margin-right: 2.5rem;
 }
 .myswiper-slider:hover {
   transform: scale(1.05); /* Effetto zoom al passaggio del mouse */
@@ -165,17 +163,15 @@ margin-right:2.5rem;
   box-shadow: 0 0 15px rgba(255, 210, 46, 0.5);
 }
 
-
-
 @media (max-width: 768px) {
   .carousel {
     display: flex;
     align-items: center;
   }
   .myswiper {
-   transform: translateX(-22%) !important;
+    transform: translateX(-22%) !important;
   }
   .SectionCarousel {
-   height: auto !important; 
+    height: auto !important;
   }
 }

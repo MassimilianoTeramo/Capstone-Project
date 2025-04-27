@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import ProductsCard from "../components/ProductsCard";
-import { Container, Alert, Row, Col, Pagination} from "react-bootstrap";
+import { Container, Alert, Row, Col, Pagination } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import api from "../utils/api"; // Assicurati di avere il percorso corretto per l'API
 import { motion } from "framer-motion";
@@ -65,80 +65,79 @@ const MyProducts = () => {
     );
 
   return (
-   <div
-         style={{
-           backgroundImage: `url(${brandBg})`,
-           backgroundSize: "cover",
-           backgroundRepeat: "no-repeat",
-           backgroundPosition: "center",
-           backgroundOpacity: "0.2",
-           backgroundBlendMode: "darken",
-           width: "auto",
-           height: "auto",
-           marginTop: "-10px",
-           
-         }}
-       >
-    <Container className="pt-4">
-      <motion.div
-        initial={{ x: "-100vh", opacity: 0 }}
-        animate={{
-          fontSize: "50px",
-          x: 0,
-          opacity: 1,
-          color: "gold",
-          letterSpacing: "5px",
-        }}
-        transition={{
-          duration: 3,
-          type: "spring",
-          stiffness: 50,
-          mass: "2",
-          dumpling: "6",
-        }}
-        className="my-5 fw-bold"
-      >
-        <h3 style={{ fontFamily: "Anek Odia" }}>MY PRODUCTS</h3>
-      </motion.div>
-      <Row>
-        {products.length > 0 ? (
-          products.map((product) => (
-            <Col key={product._id} lg={3} md={4} sm={12} className="mb-4">
-              <ProductsCard product={product} showActions={true} />
+    <div
+      style={{
+        backgroundImage: `url(${brandBg})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        backgroundOpacity: "0.2",
+        backgroundBlendMode: "darken",
+        width: "auto",
+        height: "auto",
+        marginTop: "-10px",
+      }}
+    >
+      <Container className="pt-4">
+        <motion.div
+          initial={{ x: "-100vh", opacity: 0 }}
+          animate={{
+            fontSize: "50px",
+            x: 0,
+            opacity: 1,
+            color: "gold",
+            letterSpacing: "5px",
+          }}
+          transition={{
+            duration: 3,
+            type: "spring",
+            stiffness: 50,
+            mass: "2",
+            dumpling: "6",
+          }}
+          className="my-5 fw-bold"
+        >
+          <h3 style={{ fontFamily: "Anek Odia" }}>MY PRODUCTS</h3>
+        </motion.div>
+        <Row>
+          {products.length > 0 ? (
+            products.map((product) => (
+              <Col key={product._id} lg={3} md={4} sm={12} className="mb-4">
+                <ProductsCard product={product} showActions={true} />
+              </Col>
+            ))
+          ) : (
+            <Col>
+              <p>You haven't advertised any product yet!</p>
             </Col>
-          ))
-        ) : (
-          <Col>
-            <p>You haven't advertised any product yet!</p>
-          </Col>
+          )}
+        </Row>
+        {totalPages > 1 && (
+          <div>
+            <Pagination className="justify-content-center gap-1">
+              <Pagination.Prev
+                disabled={currentPage === 1}
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              />
+              {[...Array(totalPages)].map((_, index) => (
+                <Pagination.Item
+                  key={index + 1}
+                  active={index + 1 === currentPage}
+                  onClick={() => setCurrentPage(index + 1)}
+                >
+                  {index + 1}
+                </Pagination.Item>
+              ))}
+              <Pagination.Next
+                disabled={currentPage === totalPages}
+                onClick={() =>
+                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                }
+              />
+            </Pagination>
+          </div>
         )}
-      </Row>
-      {totalPages > 1 && (
-        <div>
-          <Pagination className="justify-content-center gap-1">
-            <Pagination.Prev
-              disabled={currentPage === 1}
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            />
-            {[...Array(totalPages)].map((_, index) => (
-              <Pagination.Item
-                key={index + 1}
-                active={index + 1 === currentPage}
-                onClick={() => setCurrentPage(index + 1)}
-              >
-                {index + 1}
-              </Pagination.Item>
-            ))}
-            <Pagination.Next
-              disabled={currentPage === totalPages}
-              onClick={() =>
-                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-              }
-            />
-          </Pagination>
-        </div>
-      )}
-    </Container>
+      </Container>
     </div>
   );
 };
