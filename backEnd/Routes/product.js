@@ -42,6 +42,7 @@ router.get("/", loggedUser, async (req, res) => {
   }
 });
 
+
 // Create a new product
 router.post("/", authorization, upload.single("image"), async (req, res) => {
   try {

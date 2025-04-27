@@ -68,19 +68,6 @@ const Products = () => {
     fetchProducts();
   }, [user, currentPage]);
 
-  useEffect(() => {
-    const itemsPerPage = 12; // Number of items per page
-    // Update totalPages whenever products change
-    setTotalPages(Math.ceil(products.length / itemsPerPage));
-    // Reset currentPage to 1 if products change
-    if (
-      products.length > 0 &&
-      currentPage > Math.ceil(products.length / itemsPerPage)
-    ) {
-      setCurrentPage(1);
-    }
-  }, [products]);
-
   return (
     <div
       style={{
@@ -94,7 +81,7 @@ const Products = () => {
         marginTop: "-10px",
       }}
     >
-      <Container className="pt-5">
+      <Container className="py-5">
         {loading && <p>Loading products...</p>}
         {error && <p>An error occurred: {error.message}</p>}
         <div className="d-flex gap-3 mb-4 justify-content-between">
