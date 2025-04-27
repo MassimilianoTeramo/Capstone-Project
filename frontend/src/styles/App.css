@@ -1,0 +1,186 @@
+/* CARD PRODOTTO */
+.card {
+  border: 2px solid #e1ae07;
+  box-shadow: 0 0 5px rgb(255, 210, 46);
+  height: 400px;
+  background: rgba(21, 21, 21, 0.71);
+  border-radius: 1rem;
+  padding: 1rem;
+  overflow: hidden;
+  font-style: oblique;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.card_img {
+  width: 90%;
+  height: 15rem;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(5px 10px 15px rgba(8, 9, 13, 0.4));
+  z-index: 3;
+  transition: all 0.3s ease;
+}
+
+.card_data {
+  width: 100%;
+  text-align: center;
+  color: rgb(170, 167, 167);
+  transition: all 0.3s ease;
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.card_title {
+  font-size: 24px;
+  color: #e1ae07;
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+  transition: all 0.3s ease;
+}
+
+.card_price {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 500;
+  color: #e1ae07;
+  transition: all 0.3s ease;
+}
+
+.card_buttons {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1rem;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.card:hover .card_data {
+  opacity: 0;
+  transform: translateX(-50%) translateY(20px);
+}
+
+.card:hover .card_buttons {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.card_button {
+  background: transparent;
+  border: 2px solid #e1ae07;
+  border-radius: 5rem;
+  color: #e1ae07;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  padding: 0.5rem 1.5rem;
+}
+
+.card_button:hover {
+  background: #e1ae07;
+  color: #000000;
+  box-shadow: 0 0 15px rgba(255, 245, 46, 0.5);
+  border-color: gold;
+}
+
+.btnOffcanvas {
+  color: rgb(208, 194, 114);
+}
+.customCloseButton {
+  color: gold !important ;
+}
+
+.animated-title {
+  font-size: 50px;
+  color: gold;
+  letter-spacing: 5px;
+}
+
+.bannerWish {
+  position: absolute;
+  bottom: 4rem;
+  left: 15%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: gold;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: nowrap;
+  z-index: 1000;
+}
+
+.bannerCart {
+  position: absolute;
+  bottom: 2rem;
+  left: 10%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: gold;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: nowrap;
+  z-index: 1000;
+}
+
+.bannerOnMouse {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  z-index: 10;
+}
+
+.formLabel {
+  color: #ffffffcc;
+}
+
+/* Pagination Styling */
+.pagination {
+  margin-top: 2rem;
+}
+
+.pagination .page-item .page-link {
+  background-color: #1c1f22;
+  border: 1px solid #e1ae07;
+  color: #e1ae07;
+  margin: 0 0.2rem;
+  transition: all 0.3s ease;
+}
+
+.pagination .page-item .page-link:hover {
+  background-color: #e1ae07;
+  color: #000000;
+  box-shadow: 0 0 15px rgba(255, 203, 46, 0.5);
+  border-color: #e1ae07;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #e1ae07;
+  border-color: #e1ae07;
+  color: #000000;
+  box-shadow: 0 0 15px rgba(255, 203, 46, 0.5);
+}
+
+.pagination .page-item.disabled .page-link {
+  background-color: #1c1f22;
+  border-color: #495057;
+  color: #495057;
+}
+
+/* Fine Pagination Styling */

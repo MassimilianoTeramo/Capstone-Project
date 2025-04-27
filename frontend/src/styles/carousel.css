@@ -1,0 +1,177 @@
+/* Carousel */
+.carousel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  min-height: 80vh;
+  column-gap: 0.5rem;
+  background-blend-mode: darken !important;
+  background-color: #0000006e;
+}
+
+.carousel h3 {
+  color: gold;
+  text-shadow: 0 0 15px rgb(255, 221, 0);
+  letter-spacing: 1;
+  background-image: linear-gradient(
+    180deg,
+    rgb(234, 198, 80),
+    rgb(175, 137, 11)
+  );
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.swiper {
+  transform: translateX(2.7%);
+}
+
+.carousel-content span {
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.879);
+}
+
+.carousel-content p {
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.847);
+}
+.swiper-wrapper {
+  width: 100%; /* Imposta l'altezza al 100% del contenitore */
+}
+
+.swiper {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+}
+
+.slider-btn {
+  display: inline-block;
+  color: #ffd22e;
+  background: transparent;
+  border: 2px solid #ffd22e;
+  padding: 0.625rem 1.876rem;
+  margin-top: 2.125rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  border: 2px solid #c2c2c2;
+  border-radius: 3.125rem;
+  transition: 0.3s ease-in-out;
+}
+
+.slider-btn:hover {
+  border: 0.125rem solid #ffd22e;
+  color: #ffd22e;
+}
+
+.myswiper {
+  width: 100%;
+  padding-top: 4rem;
+  margin-left: 69rem;
+}
+
+.myswiper-slider {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centra le card */
+  height: auto;
+  background-color: transparent;
+  box-sizing: border-box;
+  margin-right: 2.5rem;
+}
+.myswiper-slider:hover {
+  transform: scale(1.05); /* Effetto zoom al passaggio del mouse */
+}
+
+.swiper-slide-active div {
+  display: flex;
+  flex-direction: column;
+  opacity: 4;
+  height: 100%;
+  background-color: transparent;
+}
+
+.swiper-slide-active div a {
+  align-self: flex-start;
+}
+
+.myswiper-slider h2 {
+  color: white;
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 1.4rem;
+  margin-bottom: 0.625rem;
+  padding: 0 0 0 1.562rem;
+  text-transform: uppercase;
+}
+
+.myswiper-slider p {
+  color: white;
+  font-weight: 400;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+.myswiper-slider a {
+  margin: 1.25rem 1.5rem 3.5rem;
+}
+
+.myswiper-slider a:hover {
+  color: #ffd22e;
+}
+
+.swiper-pagination-bullet,
+.swiper-pagination-bullet-active {
+  background: white;
+}
+
+/* Stile per il contenuto della card */
+
+.card-swiper {
+  border: 0.5px solid #ffd22e;
+  overflow: hidden;
+  min-height: 26rem; /* Imposta un'altezza minima maggiore per le card */
+  border-radius: 0.2rem; /* Angoli arrotondati */
+  opacity: 0.5;
+  border-radius: 20px;
+}
+.card-swiper:hover {
+  transform: scale(1.05); /* Effetto zoom al passaggio del mouse */
+  transition: transform 0.3s ease; /* Transizione fluida */
+}
+
+.swiper_button {
+  position: absolute;
+  bottom: 1rem;
+  right: 16%;
+  background-color: rgb(255, 210, 46);
+  color: black;
+  border: 1px solid rgb(255, 179, 0);
+  box-shadow: 0 0 5px rgb(255, 210, 46);
+  width: 10rem;
+}
+
+.swiper_button:hover {
+  background: #ffd22e;
+  color: black !important;
+  box-shadow: 0 0 15px rgba(255, 210, 46, 0.5);
+}
+
+@media (max-width: 768px) {
+  .carousel {
+    display: flex;
+    align-items: center;
+  }
+  .myswiper {
+    transform: translateX(-22%) !important;
+  }
+  .SectionCarousel {
+    height: auto !important;
+  }
+}

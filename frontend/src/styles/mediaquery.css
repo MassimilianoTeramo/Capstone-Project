@@ -1,0 +1,361 @@
+/*home page small devices - IPHONE 12 PRO */
+
+@media (max-width: 391px) {
+  .content {
+    padding-right: 0 !important;
+  }
+
+  .brand-text {
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+  }
+
+  .logo {
+    width: 45%;
+    padding-top: 5px;
+  }
+
+  .swiper {
+    scale: 0.8;
+    margin-top: 0;
+    padding-top: 0;
+    transform: translateX(0) !important;
+  }
+
+  #FirstSec {
+    min-height: 20rem;
+    background-position: center !important;
+    background-color: rgba(0, 0, 0, 0.7);
+    background-blend-mode: darken;
+    z-index: 4;
+    box-shadow: 0 0 200px rgba(0, 0, 0, 0.5);
+    opacity: 1;
+    position: relative !important;
+  }
+
+  .maintitle {
+    font-size: 30px !important;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 1rem;
+    line-height: 1.2;
+  }
+  .description {
+    display: none;
+  }
+  .noShowsm {
+    display: none;
+  }
+  .content {
+    height: 15rem;
+  }
+
+  .titleCategory {
+    font-size: 25px !important;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .titleNewUsed {
+    font-size: 1.8rem !important;
+  }
+
+  .cardNewUsed {
+    scale: 0.8;
+  }
+
+  .rowNewUsed {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem !important;
+    margin-top: 0rem;
+  }
+  .SectionNewUsed {
+    margin: 0 auto !important;
+    padding: 0 !important;
+  }
+  #NewUsed h3 {
+    margin-top: 0 !important;
+  }
+
+  .NUsec {
+    font-size: 0.9rem;
+  }
+
+  /* FOOTER */
+  .custom-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+    justify-content: center;
+    text-align: center !important;
+  }
+  .footer-first-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .footer-section {
+    text-align: center !important;
+  }
+
+  .social-links {
+    justify-content: center;
+  }
+
+  .footer-email {
+    display: flex;
+    justify-content: center !important;
+    align-items: center;
+  }
+}
+/*HOME PAGE MEDIUM DEVICES IPAD AIR*/
+
+@media (max-width: 1024px) {
+  .bg1 {
+    position: fixed;
+    top: 0;
+    z-index: -1;
+    opacity: 0.05;
+    object-fit: cover;
+    height: 100vh;
+    padding: 0;
+    width: 100%;
+  }
+
+  .container-fluid {
+    padding: 0;
+  }
+  .content {
+    padding-right: 2rem;
+  }
+
+  .SectionCarousel {
+    position: sticky;
+    top: 1rem;
+    height: 50rem;
+    scroll-margin-top: 10;
+    z-index: 1;
+    height: auto;
+  }
+
+  .noShowmd {
+    display: block;
+    height: auto;
+  }
+
+  .carousel-content {
+    margin-right: 0 !important;
+    height: 30rem !important;
+    width: 100%;
+    padding-top: 2rem;
+  }
+  .carousel-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  .description {
+    width: 64%;
+    margin: 0 auto;
+  }
+
+  #FirstSec {
+    height: 20rem;
+    background-position: center 0px;
+    background-color: rgba(0, 0, 0, 0.7);
+    background-blend-mode: darken;
+    position: sticky;
+    top: 0;
+    z-index: 4;
+    box-shadow: 0 0 200px rgba(0, 0, 0, 0.5);
+    opacity: 1;
+    scroll-margin-top: 0;
+  }
+  .carousel {
+    scale: 0.98;
+    margin-top: -10px;
+    padding: 0;
+    width: 100%;
+    height: auto;
+  }
+
+  .myswiper {
+    margin: 0 auto !important;
+    transform: translateX(0); /* Center the carousel */
+    width: 90%; /* Adjust width to fit better on smaller screens */
+  }
+
+  .myswiper-slider {
+    scale: 0.9;
+    margin: 0 auto; /* Center the slider */
+    height: 100%;
+  }
+  .card_img {
+    width: 100%;
+    height: 10rem;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    filter: drop-shadow(5px 10px 15px rgba(8, 9, 13, 0.4));
+    z-index: 3;
+    transition: all 0.3s ease;
+  }
+  .card_buttons {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1rem;
+    opacity: 0;
+    transition: all 0.3s ease;
+    flex-direction: column;
+  }
+  .bannerCart {
+    position: absolute;
+    bottom: 7rem;
+    left: -20%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: gold;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    white-space: nowrap;
+    z-index: 1000;
+  }
+
+  .bannerWish {
+    position: absolute;
+    bottom: 8rem;
+    left: -5%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: gold;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    white-space: nowrap;
+    z-index: 1000;
+  }
+
+  .titleCategory {
+    font-size: 2.5rem;
+  }
+
+  .card_New_data {
+    bottom: 5rem;
+    left: 10%;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    width: 80%;
+    text-align: center;
+    opacity: 1 !important;
+  }
+  .titleProfile {
+    font-size: 1rem;
+    margin-bottom: 10rem;
+  }
+
+  #NewUsed {
+    z-index: 5;
+    background-image: url(../uploads/b7.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 62rem;
+  }
+
+  .rowNewUsed {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    gap: 12rem;
+  }
+
+  .card {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+
+  /*PAG DETAILS*/
+
+  .imageDetail {
+    scale: 0.8;
+  }
+  .imageDetail:hover {
+    scale: none;
+  }
+  .colDetails {
+    scale: 0.9;
+  }
+
+  /*PAG Profile*/
+  .titleProfile {
+    font-size: 25px !important;
+    margin-bottom: 10rem;
+  }
+
+  /*PAG SELL PRODUCT*/
+  .animated-title {
+    font-size: 30px;
+  }
+  .genderCheckbox {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+
+  .nav-link-custom {
+    padding: 0.5rem 0;
+  }
+
+  .logout-btn {
+    margin: 1rem 0;
+    width: 100%;
+  }
+
+  .dropdown-item {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+  }
+  .cart-user {
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+  }
+  .user-dropdown {
+    display: flex;
+  }
+  .dropdown-menu {
+    margin-bottom: 1rem;
+  }
+}
+
+/* LARGER SCREENs*/
+
+@media (min-width: 1024px) {
+  .imageDetail:hover {
+    scale: 2;
+    transition: 1s ease-in-out;
+  }
+
+  .custom-footer {
+    z-index: 11;
+    opacity: 1;
+    background-color: rgb(0, 0, 0);
+    background-blend-mode: darken;
+  }
+
+  .titleCategory {
+    font-size: 3rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+}
