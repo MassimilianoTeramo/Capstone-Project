@@ -9,6 +9,7 @@ import Reviews from "../components/Reviews";
 import EditProduct from "../components/EditProduct";
 import { color, motion } from "framer-motion";
 import bgProDet from "../uploads/bgProDet.jpg";
+import { useDispatchCart } from "../context/CartContext"; //carrello
 
 const ProductDetails = () => {
   const [product, setProduct] = useState({});
@@ -16,12 +17,24 @@ const ProductDetails = () => {
   const [error, setError] = useState(null);
   const { id } = useParams();
   const { user } = useAuth();
+  const dispatch = useDispatchCart(); //carrello
+  const [showNotification, setShowNotification] = useState(false);
   const userName = user ? `${user.firstName} ${user.lastName}` : "unknown";
   const authorName = product.author
     ? `${product.author.firstName} ${product.author.lastName}`
     : "Unknown";
   const authorContact = product.contact ? `${product.contact}` : "Unknown";
   const navigate = useNavigate();
+
+    //carrello
+    const addToCart = (item) => {
+      dispatch({ type: "ADD", item });
+      setShowNotification(true);
+      setTimeout(() => {
+        setShowNotification(false);
+      }, 2000);
+    };
+  
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -175,6 +188,13 @@ const ProductDetails = () => {
                   </div>
                 </div>
               </>
+            )}
+            {user && user._id !== product.author._id && (
+              <div className="d-flex justify-content-center mt-3">
+                <Button variant="warning" onClick={() => addToCart(product)}>
+                  Add to Cart
+                </Button>
+              </div>
             )}
           </Col>
         </Row>

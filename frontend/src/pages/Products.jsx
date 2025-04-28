@@ -16,6 +16,7 @@ const Products = () => {
   const [error, setError] = useState(null);
   const [totalPages, setTotalPages] = useState(0);
   const [allProducts, setAllProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
   const [selectedGender, setSelectedGender] = useState(null);
   const [selectedPrice, setSelectedPrice] = useState(null);
@@ -32,6 +33,8 @@ const Products = () => {
     setSelectedCategory(null);
     setSelectedBrand(null);
     setProducts(allProducts);
+    setCurrentPage(1);
+    setFilteredProducts(allProducts);
   };
 
   // Resetta i filtri quando il componente viene montato
@@ -47,12 +50,14 @@ const Products = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `http://localhost:3002/products?page=${currentPage}${
+          `http://localhost:3002/products?${
             user ? `&userId=${user._id}` : ""
           }`
         );
         setProducts(response.data.products);
         setAllProducts(response.data.products);
+        setFilteredProducts(response.data.products); 
+        console.log(response.data.products);
         setTotalPages(response.data.totalPages);
         setError(null);
         if (response.data.products.length === 0)
@@ -60,13 +65,23 @@ const Products = () => {
       } catch (error) {
         setError(error);
         setProducts([]);
+        setAllProducts([]);
+        setFilteredProducts([]);
+
         console.error("Error fetching products", error);
       } finally {
         setLoading(false);
       }
     };
     fetchProducts();
-  }, [user, currentPage]);
+  }, [user]);
+
+  useEffect(() => {
+    const startIndex = (currentPage - 1) * 12;
+    const endIndex = startIndex + 12;
+    setProducts(products.slice(startIndex, endIndex));
+    setTotalPages(Math.ceil(filteredProducts.length / 12));
+  }, [filteredProducts, currentPage])
 
   return (
     <div
@@ -114,8 +129,10 @@ const Products = () => {
           <FilterComponent
             showFilter={showFilter}
             handleCloseFilter={handleCloseFilter}
+            setFilteredProducts={setFilteredProducts}
             allProducts={allProducts}
             setProducts={setProducts}
+            resetFilters={resetFilters}
           />
         </div>
         <Row>
