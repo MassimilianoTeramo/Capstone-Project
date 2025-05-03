@@ -73,7 +73,7 @@ const Profile = () => {
         return;
       }
       const response = await axios.put(
-        process.env.REACT_APP_API_BASE_URL + `/users/${user._id}`,
+        process.env.REACT_APP_API_URL + `/users/${user._id}`,
         {
           firstName: formData.firstName,
           lastName: formData.lastName,
